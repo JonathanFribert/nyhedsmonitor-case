@@ -34,12 +34,23 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
   Newsreader til overskrifter, IBM Plex Mono til etiketter og tal, lys/mørk
   via `prefers-color-scheme`. `og-image.png` (1200x630) er delekortet til
   LinkedIn m.m.; regenerér det hvis titel eller nøgletal ændres.
+- **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
+  Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
+  hero-eyebrow siger "Case 01" (flere cases kan komme til). Kontakt er
+  fribert6@gmail.com (primær, synlig i CTA og footer) plus GitHub; bevidst
+  ingen LinkedIn. Sektionen "Teknik" opsummerer sprog/værktøjer sandfærdigt
+  fra requirements.txt og driftsopsætningen; døgnrytme-diagrammet i "Opgaven"
+  viser overvågning 24/7, levering kl. 8-17, natkø og hastemails.
 
 ## Historik
 
 Bygget 12. juli 2026 i tre lag: Claude skrev første udgave (commit 313aa0b),
 Codex redesignede til det nuværende flade udtryk med beslutningstræ og
 takeaways, Claude bidrog med typografi-skala, sprogpas (jargon ud af
-hovedsporet), og:image/delekort og publicering. Kendt åbent designspørgsmål:
-sektionen "Løsningen" viser både en seks-trins kørsel OG et arkitekturdiagram,
-delvist overlappende; kan slankes hvis siden stadig føles tæt.
+hovedsporet), og:image/delekort og publicering. 12. juli (senere samme dag):
+det åbne designspørgsmål blev lukket ved at fjerne seks-trins-kørslen fra
+"Løsningen" (den overlappede arkitekturdiagrammet); de to unikke detaljer
+(X henter kun siden sidste kørsel; dedup på id/link/normaliseret titel) blev
+flyttet ind i den tekniske foldeboks. Tankestreger i brødteksten blev erstattet
+af kommaer (talintervaller som "kl. 8–17" og den ægte emnelinje med "—" er
+bevidst beholdt).
