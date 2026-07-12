@@ -58,4 +58,8 @@ lidt rodet ud": beslutningstræet fjernet (dubleret af døgnrytme-diagrammet),
 stats-labels og sektionsintroer forkortet, quick-head-sideteksten droppet, én
 hero-CTA, h2/intro/quote skaleret ned, journey-kortene ensrettet til
 accent/rød. Desuden GitHub profil-README oprettet (repo
-JonathanFribert/JonathanFribert) med link hertil.
+JonathanFribert/JonathanFribert) med link hertil. Tredje pas: diskret
+scroll-reveal (fade-op, staggered pr. søskendegruppe) og tragtsøjler/døgnbånd
+der vokser frem ved indsyn; alt gated bag `.js-reveal` på `<html>` (sat af JS)
+og `prefers-reduced-motion: no-preference`, så siden er fuldt synlig uden JS og
+uden bevægelse for følsomme brugere. Plus ::selection i accentfarve.

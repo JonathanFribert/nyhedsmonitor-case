@@ -85,6 +85,17 @@
     font-size: 0.86em;
   }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+
+  /* Scroll-reveal: aktiveres kun når JS sætter .js-reveal på <html>, så alt er synligt uden JS */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-reveal .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+    .js-reveal .retention span { transform: scaleX(0); transform-origin: left; transition: transform 0.7s cubic-bezier(0.25, 0.7, 0.3, 1); }
+    .js-reveal .in-view .retention span { transform: scaleX(1); }
+    .js-reveal .band-seg { opacity: 0; transform: scaleX(0.9); transform-origin: left; transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25, 0.7, 0.3, 1); }
+    .js-reveal .in-view .band-seg { opacity: 1; transform: scaleX(1); }
+  }
 
   .skip-link {
     position: fixed; z-index: 100; top: 0.7rem; left: 0.7rem;
@@ -909,6 +920,29 @@
     }
     updateProgress();
     window.addEventListener('scroll', updateProgress, { passive: true });
+
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('js-reveal');
+      var revealEls = Array.prototype.slice.call(document.querySelectorAll(
+        '.stat, .quick-step, .section-heading, figure, .delivery-grid > *, .incident, .role-card, .timeline-item, .takeaways li, .tech-facts > div, .cta-card'
+      ));
+      var siblingCount = [];
+      revealEls.forEach(function (el) {
+        el.classList.add('reveal');
+        var entry = siblingCount.filter(function (c) { return c.parent === el.parentElement; })[0];
+        if (!entry) { entry = { parent: el.parentElement, n: 0 }; siblingCount.push(entry); }
+        el.style.transitionDelay = Math.min(entry.n * 70, 350) + 'ms';
+        entry.n += 1;
+      });
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      revealEls.forEach(function (el) { revealObserver.observe(el); });
+    }
 
     if ('IntersectionObserver' in window) {
       var navObserver = new IntersectionObserver(function (entries) {
