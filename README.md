@@ -29,7 +29,11 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
   Ingen modtagernavne eller mailadresser må optræde på siden.
 - **Sprogniveau:** hovedsporet skrives til en ikke-teknisk læser; tekniske
   detaljer bor i den foldbare "Se præcis, hvad der sker teknisk". Terminologi:
-  "fund" bruges som fast begreb efter første, selvforklarende brug.
+  "fund" bruges som fast begreb efter første, selvforklarende brug. Udadtil
+  siges "alvorlige fund" (ikke det interne "høj alvor"), "uafhængig
+  overvågning" (ikke "driftsmonitor") og "alvorsgrad" som feltnavn; undgå
+  kancelli-vendinger og ordgentagelser (sprogpas 12. juli efter brugerens
+  feedback om spøjst sprog).
 - **Design:** fladt redaktionelt udtryk (ingen skygger/pills/hover-løft),
   Newsreader til overskrifter, IBM Plex Mono til etiketter og tal, lys/mørk
   via `prefers-color-scheme`. `og-image.png` (1200x630) er delekortet til

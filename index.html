@@ -567,7 +567,7 @@
       <div>
         <p class="eyebrow">Portfolio · Case 01 · juli 2026</p>
         <h1>Nyhedsovervågning til en medarbejder på standby i Statsministeriet</h1>
-        <p class="lead">En medarbejder i Statsministeriet skulle under en intensiv standbyuge kunne reagere hurtigt på nye offentlige udmeldinger om forholdet mellem USA og Kongeriget Danmark, særligt Grønland og Færøerne. Jeg byggede et personligt støtteværktøj, som overvåger nyhedsmedier og udvalgte konti, sorterer støjen fra og sender de relevante artikler og opslag på mail.</p>
+        <p class="lead">En medarbejder i Statsministeriet var på standby i en intensiv uge og skulle hurtigt kunne reagere på nye offentlige udmeldinger om forholdet mellem USA og Kongeriget Danmark, særligt Grønland og Færøerne. Jeg byggede et personligt værktøj, der overvåger nyhedsmedier og udvalgte konti, sorterer støjen fra og sender de relevante artikler og opslag som mail.</p>
         <div class="hero-actions">
           <a class="button" href="#kort-fortalt">Forstå løsningen ↓</a>
         </div>
@@ -578,7 +578,7 @@
           <div><dt>Bruger</dt><dd>En medarbejder i Statsministeriet</dd></div>
           <div><dt>Periode</dt><dd>Én intensiv uge på standby</dd></div>
           <div><dt>Fokus</dt><dd>USA og Kongeriget Danmark</dd></div>
-          <div><dt>Behov</dt><dd>Reagér hurtigt, men slip skærmen, når der er stille</dd></div>
+          <div><dt>Behov</dt><dd>Hurtig reaktion, uden at skulle hænge over skærmen</dd></div>
         </dl>
         <p class="case-disclaimer">Værktøjet blev bygget som personlig støtte til én medarbejders tidsafgrænsede standbyopgave. Det er ikke udviklet for eller på vegne af Statsministeriet, arbejder kun med offentligt tilgængelige oplysninger og træffer ingen myndighedsbeslutninger.</p>
       </aside>
@@ -588,7 +588,7 @@
       <div class="stat"><div class="stat-value">5 dage</div><div class="stat-label">fra første prototype til drift</div></div>
       <div class="stat"><div class="stat-value">42</div><div class="stat-label">X-konti håndtjekket for identitet</div></div>
       <div class="stat"><div class="stat-value">406</div><div class="stat-label">frasorteringer gennemgået manuelt</div></div>
-      <div class="stat"><div class="stat-value">1 fund</div><div class="stat-label">fejlagtigt frasorteret, fundet og rettet i efterkontrollen</div></div>
+      <div class="stat"><div class="stat-value">1 fejl</div><div class="stat-label">relevant historie frasorteret, fanget i efterkontrollen og rettet</div></div>
     </div>
   </div>
 </header>
@@ -604,7 +604,7 @@
           <article class="quick-step">
             <span class="quick-number">01</span>
             <h3>Finder nyt</h3>
-            <p>Den søger efter artikler via GDELT og Google News og læser opslag fra en fast liste på Truth Social og X.</p>
+            <p>Den søger efter artikler via GDELT og Google News og læser opslag fra faste konti på Truth Social og X.</p>
           </article>
           <article class="quick-step">
             <span class="quick-number">02</span>
@@ -613,8 +613,8 @@
           </article>
           <article class="quick-step">
             <span class="quick-number">03</span>
-            <h3>Sender den rette besked</h3>
-            <p>Relevante fund sendes som mail. Er noget alvorligt, sendes der straks en ekstra alarm; nattens øvrige fund venter til morgenmailen.</p>
+            <h3>Sender den rigtige mail</h3>
+            <p>Relevante fund sendes som mail. Alvorlige fund udløser straks en ekstra alarm, og nattens fund venter til morgenmailen.</p>
           </article>
         </div>
         <div class="quick-result"><b>Resultat for brugeren</b><span>Medarbejderen kan gå væk fra skærmen, når der er stille, uden selv at følge hele nyhedsstrømmen.</span></div>
@@ -624,12 +624,12 @@
   <section class="section" id="problem">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">Opgaven</p><h2>Kravet var høj dækning, få gentagelser og synlig drift</h2></div>
+        <div><p class="section-label">Opgaven</p><h2>Alt relevant med, ingen gentagelser, ingen tavse fejl</h2></div>
         <div>
-          <p class="intro">Standbyopgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Fordi en overset historie var værre end en ekstra besked, lod filtrene bevidst tvivlstilfælde gå videre.</p>
-          <p class="quote">Det vigtigste driftskrav var, at en stille indbakke skulle kunne forklares: Enten var der intet nyt, eller også skulle en teknisk fejl være synlig.</p>
+          <p class="intro">Opgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Og fordi en overset historie var værre end en ekstra mail, tager filtrene bevidst tvivlstilfælde med.</p>
+          <p class="quote">En stille indbakke skulle altid kunne forklares: Enten var der intet nyt, eller også var noget teknisk galt, og så skulle det kunne ses.</p>
           <div class="prose">
-            <p>Mellem kl. 8 og 17 sender monitoren relevante fund med det samme og ellers cirka én tom statusmail i timen. Stopper kørslerne, slår en uafhængig driftsmonitor alarm, så brugeren altid kan skelne en stille nyhedsstrøm fra en teknisk fejl.</p>
+            <p>Mellem kl. 8 og 17 sender monitoren relevante fund med det samme og ellers cirka én tom statusmail i timen. Hvis kørslerne stopper, slår en uafhængig overvågningstjeneste alarm. Brugeren kan derfor altid skelne en stille nyhedsstrøm fra en teknisk fejl.</p>
           </div>
         </div>
       </div>
@@ -653,10 +653,10 @@
           </div>
         </div>
         <div class="band-row">
-          <div class="band-label"><b>Hastemail</b><span>høj alvor</span></div>
+          <div class="band-label"><b>Hastemail</b><span>alvorlige fund</span></div>
           <div class="band-track"><span class="band-seg urgent" style="left:0;width:100%">Sendes straks, hele døgnet</span></div>
         </div>
-        <figcaption class="diagram-caption">Overvågningen kører hele døgnet. Almindelige fund leveres kl. 8–17; nattens fund samles i en natkø og står i den første morgenmail. Fund med høj alvor sendes straks, uanset tidspunkt.</figcaption>
+        <figcaption class="diagram-caption">Overvågningen kører hele døgnet. Almindelige fund leveres kl. 8–17; nattens fund samles i en natkø og står i den første morgenmail. Alvorlige fund sendes straks, uanset tidspunkt.</figcaption>
       </figure>
     </div>
   </section>
@@ -665,7 +665,7 @@
     <div class="shell">
       <div class="section-heading">
         <div><p class="section-label">Løsningen</p><h2>Sådan går en artikel eller et opslag fra kilde til mail</h2></div>
-        <p class="intro">Monitoren henter artikler fra GDELT og Google News og opslag fra Truth Social og 42 udvalgte X-konti. Alt kontrolleres for alder, gentagelser, emne og kilde, før en AI-model vurderer relevans og alvor og skriver et kort resumé på dansk.</p>
+        <p class="intro">Monitoren henter artikler fra GDELT og Google News og opslag fra Truth Social og 42 udvalgte X-konti. Alt kontrolleres for alder, gentagelser, emne og kilde, før en AI-model vurderer relevans og alvorsgrad og skriver et kort resumé på dansk.</p>
       </div>
 
       <h3 class="figure-title architecture-heading" id="architecture-title">Systemet set ovenfra</h3>
@@ -688,14 +688,14 @@
           <div class="flow-arrow" aria-hidden="true">→</div>
           <div class="node-stack">
             <div class="node output"><b>Samlet mail</b><span>Nye fund eller livstegn kl. 8–17</span></div>
-            <div class="node output"><b>Hastemail</b><span>Høj alvor, hele døgnet</span></div>
+            <div class="node output"><b>Hastemail</b><span>Alvorlige fund, hele døgnet</span></div>
             <div class="node output"><b>Natkø</b><span>Samles til morgenmailen</span></div>
           </div>
         </div>
         <div class="ops" aria-label="Systemets driftslag">
           <div class="node"><b>Ekstern tidsplan + GitHub Actions</b><span>Starter monitoren flere gange i timen. Ingen lokal computer behøver at være tændt.</span></div>
-          <div class="node"><b>Hukommelse og kontrollog</b><span>Systemet husker tidligere fund og natkøen og gemmer fravalg til efterkontrol.</span></div>
-          <div class="node"><b>Uafhængig driftsmonitor</b><span>Udebliver monitorens livstegn i 1,5 time, får jeg automatisk besked.</span></div>
+          <div class="node"><b>Hukommelse og kontrollog</b><span>Systemet husker tidligere fund, gemmer natkøen og logger alle fravalg til efterkontrol.</span></div>
+          <div class="node"><b>Uafhængig overvågning</b><span>Udebliver monitorens livstegn i 1,5 time, får jeg automatisk besked.</span></div>
         </div>
         <figcaption class="diagram-caption">Løsningen var tilpasset én intensiv uges drift: en planlagt kørsel henter nyt, filtrerer, leverer, gemmer sin tilstand og afslutter.</figcaption>
         <div class="legend" aria-label="Farveforklaring"><span><i></i>Data og filtrering</span><span><i class="delivery"></i>Levering</span><span><i class="alert-color"></i>Kræver opmærksomhed</span><span><i class="operations"></i>Drift og sikkerhedsnet</span></div>
@@ -706,7 +706,7 @@
         <div class="tech-grid">
           <div><h3>Kilder</h3><p>GDELT og Google News leverer artikler. Truth Social leverer Trumps opslag. X-kilden læser 42 manuelt identitetskontrollerede officielle og redaktionelle konti og henter kun opslag publiceret siden sidste kørsel. Der søges på både dansk og engelsk.</p></div>
           <div><h3>Filtrering + AI</h3><p>Gengangere genkendes på id, link og normaliseret titel. For nyheder læser modellen overskriften; for sociale opslag læser den op til 1.500 tegn af opslaget. En ukendt kilde kræver en lignende historie fra et godkendt medie inden for 48 timer. Hvis AI-kaldet fejler, beholdes fundet.</p></div>
-          <div><h3>Levering + tilstand</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten køes de til morgen. Høj alvor udløser desuden en hastemail med det samme. Tomme statusmails har mindst 50 minutter imellem sig. Set-lister og natkø gemmes; fravalg fra tids-, emne-, kilde- og AI-filteret logges med et loft på 200 pr. filtertrin og kørsel.</p></div>
+          <div><h3>Levering + tilstand</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten køes de til morgen. Alvorlige fund udløser desuden en hastemail med det samme. Tomme statusmails har mindst 50 minutter imellem sig. Set-lister og natkø gemmes; fravalg fra tids-, emne-, kilde- og AI-filteret logges med et loft på 200 pr. filtertrin og kørsel.</p></div>
         </div>
       </details>
     </div>
@@ -734,12 +734,12 @@
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card ai-item">
           <p class="journey-label">3 · AI-vurdering</p>
-          <dl class="ai-result"><dt>Relevant</dt><dd>Ja</dd><dt>Alvor</dt><dd>Høj</dd><dt>Part i sagen</dt><dd>USA</dd><dt>Resumé</dt><dd>USA varsler toldtiltag mod Danmark i en sag om Grønland</dd></dl>
+          <dl class="ai-result"><dt>Relevant</dt><dd>Ja</dd><dt>Alvorsgrad</dt><dd>Høj</dd><dt>Handler om</dt><dd>USA</dd><dt>Resumé</dt><dd>USA varsler toldtiltag mod Danmark i en sag om Grønland</dd></dl>
         </article>
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card delivery-item">
           <p class="journey-label">4 · Handling</p>
-          <div class="delivery-preview"><b>🔴 HASTER</b><span>En ekstra alarm sendes straks. Opslaget følger også den normale rute: i den samlede mail om dagen eller i morgenmailen efter natten.</span></div>
+          <div class="delivery-preview"><b>🔴 HASTER</b><span>En ekstra alarm sendes straks. Opslaget kommer også med i den næste samlede mail, om natten i den første morgenmail.</span></div>
         </article>
       </div>
       </figure>
@@ -751,7 +751,7 @@
     <div class="shell">
       <div class="section-heading">
         <div><p class="section-label">Målt på rigtige data</p><h2 id="filter-title">201 artikler og opslag blev til ét relevant fund</h2></div>
-        <p class="intro">Tallene stammer fra en faktisk kørsel i prøvedriften 7. juli kl. 16.25. De enkle kontroller fjernede det meste; AI-modellen vurderede de sidste 16 elementer og fandt ét relevant fund.</p>
+        <p class="intro">Tallene stammer fra en faktisk kørsel i prøvedriften 7. juli kl. 16.25. De enkle kontroller fjernede det meste; AI-modellen vurderede de sidste 16 og fandt ét relevant fund.</p>
       </div>
 
       <figure aria-labelledby="filter-title">
@@ -801,7 +801,7 @@
     <div class="shell">
       <div class="section-heading compact">
         <div><p class="section-label">Det brugeren modtog</p><h2>Mailen viser både fund og driftsstatus</h2></div>
-        <p class="intro">I dagtimerne sender monitoren enten relevante fund eller en tom statusmail; høj alvor udløser desuden en særskilt alarm. Kildestatus står nederst i hver mail, og kildefejl markeres også i emnelinjen.</p>
+        <p class="intro">I dagtimerne sender monitoren enten relevante fund eller en tom statusmail; alvorlige fund udløser desuden en særskilt alarm. Status for kilderne står nederst i hver mail, og svigter en kilde, markeres det også i emnelinjen.</p>
       </div>
       <div class="delivery-grid">
         <div class="mail" aria-label="Eksempel på en tom timemail">
@@ -817,9 +817,9 @@
           <div class="mail-footer">Kilder: GDELT: ok · Google News: ok · Google News (DA): ok · Truth Social: ok · X: ok (42/42)</div>
         </div>
         <div class="alert-stack" aria-label="Eksempler på tre typer emnelinjer">
-          <div class="alert high"><div class="alert-type">Høj alvor · ekstra alarm med det samme</div><div class="alert-subject">🔴 HASTER: 1 høj-prioritet (16:25)</div></div>
+          <div class="alert high"><div class="alert-type">Alvorligt fund · ekstra alarm med det samme</div><div class="alert-subject">🔴 HASTER: 1 høj-prioritet (16:25)</div></div>
           <div class="alert ok"><div class="alert-type">Relevante fund · i den samlede mail</div><div class="alert-subject">🔴 1 HØJ — Nyhedsmonitor: 3 nye</div></div>
-          <div class="alert warn"><div class="alert-type">Google News, Truth Social eller X svarede ikke normalt</div><div class="alert-subject">⚠ Ingen nye opdateringer (14:41)</div></div>
+          <div class="alert warn"><div class="alert-type">En af kilderne svarede ikke</div><div class="alert-subject">⚠ Ingen nye opdateringer (14:41)</div></div>
           <p class="diagram-caption">Alvorsgrad og systemstatus står forrest, så indbakken kan skimmes på få sekunder.</p>
         </div>
       </div>
@@ -844,28 +844,28 @@
           <div class="run-strip after" aria-hidden="true"></div>
           <div class="reliability-result good">Ekstern start hvert 30. minut</div>
         </div>
-        <figcaption class="diagram-caption">En ekstern tidsplan starter nu monitoren hvert 30. minut med GitHubs egen som backup, og en uafhængig driftsmonitor giver besked, hvis kørsler udebliver. Den nederste række viser den planlagte kadence, ikke en målt succesrate.</figcaption>
+        <figcaption class="diagram-caption">En ekstern tidsplan starter nu monitoren hvert 30. minut med GitHubs egen som backup, og en uafhængig overvågning giver besked, hvis kørsler udebliver. Den nederste række viser den planlagte kadence, ikke en målt succesrate.</figcaption>
       </figure>
 
       <div class="incident-grid">
         <article class="incident">
           <p class="incident-label">4,6 timer uden kørsel</p>
           <p>GitHubs gratis tidsplan sprang mange af de planlagte nattekørsler over.</p>
-          <p class="fix"><b>Løsning:</b> Ekstern tidsplan hvert 30. minut, GitHubs tidsplan som backup og fortsat uafhængig driftsmonitor.</p>
+          <p class="fix"><b>Løsning:</b> Ekstern tidsplan hvert 30. minut, GitHubs tidsplan som backup og fortsat uafhængig overvågning.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">De nøglebeskyttede tjenester afviste adgang</p>
-          <p>Adgangsnøglerne var ved en kommandofejl sat til tegnet “-”, selv om alt virkede lokalt.</p>
+          <p class="incident-label">Adgangsnøglerne virkede ikke i produktion</p>
+          <p>Nøglerne var ved en kommandofejl sat til tegnet “-”, selv om alt virkede lokalt.</p>
           <p class="fix"><b>Løsning:</b> Opsætningen blev automatiseret og kontrolleret i det samme miljø som produktionen.</p>
         </article>
         <article class="incident">
           <p class="incident-label">En Google News-søgning gav periodiske 404-fejl</p>
-          <p>En voksende søgning overskred Google News' praktiske længdegrænse og blev afvist sporadisk.</p>
+          <p>Søgningen var med tiden vokset sig for lang til Google News, som af og til afviste den.</p>
           <p class="fix"><b>Løsning:</b> Kort søgning mod Google, fuld filtrering i eget system og synlig kildestatus i hver mail.</p>
         </article>
         <article class="incident">
           <p class="incident-label">En relevant historie blev afvist af kildekontrollen</p>
-          <p>Kildekontrollen kunne ikke se en historie fra et nyhedsbureau, fordi den var kommet i en tidligere kørsel.</p>
+          <p>Historien kom fra et ukendt domæne, og bureau-versionen, der skulle bekræfte den, lå i en tidligere kørsel.</p>
           <p class="fix"><b>Løsning:</b> Rullende 48-timers titelvindue og separat leveringslog til efterprøvning.</p>
         </article>
       </div>
@@ -876,19 +876,19 @@
     <div class="shell">
       <div class="section-heading compact">
         <div><p class="section-label">Min rolle</p><h2>Jeg byggede, testede og satte løsningen i drift</h2></div>
-        <p class="intro">Jeg omsatte standbybehovet til konkrete regler, valgte og validerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og drift. Claude blev brugt som sparringspartner og til kodeudkast; jeg traf beslutningerne og gennemgik alle ændringer, før de kom i drift.</p>
+        <p class="intro">Jeg omsatte behovet til konkrete regler, valgte og validerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og drift. Claude blev brugt som sparringspartner og til kodeudkast; jeg traf beslutningerne og gennemgik alle ændringer, før de kom i drift.</p>
       </div>
       <div class="role-grid">
         <article class="role-card primary">
           <h3>Fra behov til fungerende drift</h3>
-          <p>Opgaven krævede mere end kode: behovet skulle omsættes til faste sikkerhedsregler, eksterne kilder valideres, fejl gennemgås og et system i drift overvåges tæt.</p>
+          <p>Opgaven krævede mere end kode: faste sikkerhedsregler, validerede kilder, systematisk gennemgang af fejl og tæt opsyn med et system i drift.</p>
           <div class="ownership">
             <span>Problemafklaring</span><span>Arkitektur</span><span>Implementering</span><span>Kildevalidering</span><span>Test og efterkontrol</span><span>Udrulning og drift</span>
           </div>
         </article>
         <article class="role-card">
           <h3>Det vigtigste valg</h3>
-          <p>En overset historie var værre end lidt ekstra støj. Derfor lader filtrene tvivlsomme fund gå videre, mens de loggede fravalg kan kontrolleres bagefter.</p>
+          <p>En overset historie var værre end lidt ekstra støj. Derfor tager filtrene tvivlstilfælde med, og alle fravalg logges, så de kan kontrolleres bagefter.</p>
         </article>
       </div>
 
@@ -910,7 +910,7 @@
       <ol class="takeaways">
         <li><span>01</span><div><h3>Prøvedrift er en del af produktudviklingen</h3><p>Manuel gennemgang af fire døgns drift fandt en relevant historie, som den daværende kildekontrol havde frasorteret.</p></div></li>
         <li><span>02</span><div><h3>Driftsfejl skal være synlige</h3><p>Statusmail, kildeoversigt og uafhængig overvågning gjorde det muligt at skelne stilhed fra nedbrud.</p></div></li>
-        <li><span>03</span><div><h3>AI bør være et sent, afgrænset trin</h3><p>Faste regler fjernede det meste støj først. Modellen løste kun den vurdering, reglerne ikke kunne klare alene.</p></div></li>
+        <li><span>03</span><div><h3>AI bør være et sent, afgrænset trin</h3><p>Faste regler fjernede det meste støj først. Modellen tog sig kun af den vurdering, som reglerne ikke kunne klare alene.</p></div></li>
       </ol>
     </div>
   </section>
