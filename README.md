@@ -42,9 +42,9 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
   hero-eyebrow siger "Case 01" (flere cases kan komme til). Kontakt er
   fribert6@gmail.com (primær, synlig i CTA og footer) plus GitHub; bevidst
-  ingen LinkedIn. Sektionen "Teknik" opsummerer sprog/værktøjer sandfærdigt
-  fra requirements.txt og driftsopsætningen; døgnrytme-diagrammet i "Opgaven"
-  viser overvågning 24/7, levering kl. 8-17, natkø og hastemails.
+  ingen LinkedIn. Den foldbare teknikblok samler sprog, værktøjer, kilder,
+  test og drift ét sted; døgnrytme-diagrammet i "Opgaven" viser overvågning
+  24/7, levering kl. 8-17, natkø og hastemails.
 
 ## Historik
 
@@ -74,3 +74,10 @@ ryddes valget, og siden følger systemet igen. Dark-variablerne findes derfor
 BÅDE i media-queryen (gated med `:not([data-theme="light"])`) og duplikeret
 under `[data-theme="dark"]` — hold de to blokke i sync ved farveændringer.
 Knappen opdaterer også begge theme-color-metatags.
+
+Femte pas samme dag: mobilnavigationen blev gjort ikke-scrollende med tre
+synlige links og en separat 44 x 44 px temaknap. Figurtekster blev hævet til
+mindst 14 px på mobil, scrollindikatoren blev fjernet, og scroll-reveal blev
+begrænset til fem hovedfigurer uden stagger. Den dobbelte teknikforklaring blev
+samlet i én foldbar blok, driftslaget i arkitekturfiguren blev forkortet, og
+projektstatus, mailadfærd, auditlog og økonomi blev beskrevet mere præcist.
