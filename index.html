@@ -67,8 +67,8 @@
       var(--ground);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 1.0625rem;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; }
@@ -89,8 +89,8 @@
   }
   .skip-link:focus { transform: none; }
 
-  .shell { width: min(72rem, calc(100% - 2.5rem)); margin-inline: auto; }
-  .reading { width: min(47rem, 100%); }
+  .shell { width: min(82rem, calc(100% - 4rem)); margin-inline: auto; }
+  .reading { width: min(52rem, 100%); }
 
   /* Navigation */
   .topbar {
@@ -119,17 +119,17 @@
 
   /* Hero */
   .hero { padding: clamp(3.5rem, 8vw, 7rem) 0 3rem; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(17rem, 0.7fr); gap: clamp(2rem, 6vw, 5.5rem); align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 0.68fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: center; }
   .eyebrow, .section-label {
     margin: 0 0 0.8rem; color: var(--accent); font-family: var(--mono);
     font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
   }
   h1, h2 { font-family: var(--serif); text-wrap: balance; }
   h1 {
-    max-width: 12ch; margin: 0; font-size: clamp(3rem, 7.5vw, 5.6rem);
+    max-width: 13ch; margin: 0; font-size: clamp(3rem, 7vw, 5.9rem);
     font-weight: 700; letter-spacing: -0.035em; line-height: 0.96;
   }
-  .lead { max-width: 42rem; margin: 1.5rem 0 0; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.25rem); line-height: 1.55; text-wrap: pretty; }
+  .lead { max-width: 47rem; margin: 1.5rem 0 0; color: var(--muted); font-size: clamp(1.12rem, 2vw, 1.3rem); line-height: 1.6; text-wrap: pretty; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.7rem; }
   .button {
     display: inline-flex; min-height: 2.8rem; align-items: center; justify-content: center;
@@ -161,22 +161,22 @@
     margin-top: clamp(2.7rem, 6vw, 4.5rem); border: 1px solid var(--line); border-radius: 14px;
     background: var(--line);
   }
-  .stat { min-width: 0; background: var(--surface); padding: 1rem; }
+  .stat { min-width: 0; background: var(--surface); padding: 1.15rem; }
   .stat-value { color: var(--accent); font-family: var(--mono); font-size: clamp(1.05rem, 2vw, 1.42rem); font-weight: 700; font-variant-numeric: tabular-nums; }
-  .stat-label { margin-top: 0.25rem; color: var(--muted); font-size: 0.75rem; line-height: 1.4; }
+  .stat-label { margin-top: 0.3rem; color: var(--muted); font-size: 0.79rem; line-height: 1.45; }
 
   /* Sections */
   .section { padding: clamp(4rem, 8vw, 7rem) 0; border-top: 1px solid var(--line); }
   .section.soft { background: color-mix(in srgb, var(--surface-soft) 45%, transparent); }
-  .section-heading { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: 2rem; align-items: start; }
+  .section-heading { display: grid; grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.45fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
   h2 { margin: 0; font-size: clamp(2.15rem, 4.5vw, 3.35rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.02; }
-  .intro { margin: 0; color: var(--muted); font-size: 1.08rem; text-wrap: pretty; }
+  .intro { max-width: 50rem; margin: 0; color: var(--muted); font-size: 1.14rem; line-height: 1.7; text-wrap: pretty; }
   .quote {
     max-width: 38rem; margin: 2.2rem 0 0; border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.2rem;
     font-family: var(--serif); font-size: clamp(1.35rem, 3vw, 1.75rem); font-style: italic; line-height: 1.35;
   }
   .prose { margin-top: 1.3rem; }
-  .prose p { max-width: 44rem; margin: 0 0 1rem; }
+  .prose p { max-width: 50rem; margin: 0 0 1rem; }
 
   /* Architecture */
   .architecture {
@@ -201,7 +201,7 @@
     border-top: 1px dashed var(--line); padding-top: 1rem;
   }
   .ops .node { background: transparent; border-style: dashed; }
-  .diagram-caption { max-width: 50rem; margin: 1rem 0 0; color: var(--muted); font-size: 0.82rem; }
+  .diagram-caption { max-width: 56rem; margin: 1rem 0 0; color: var(--muted); font-size: 0.86rem; }
 
   /* Filter flow */
   .filter-panel { overflow: hidden; margin-top: 2.5rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); }
@@ -312,6 +312,9 @@
     .ops { grid-template-columns: 1fr; }
     .principles { grid-template-columns: repeat(2, 1fr); }
   }
+  @media (max-width: 1100px) {
+    .shell { width: min(82rem, calc(100% - 2.5rem)); }
+  }
   @media (max-width: 720px) {
     .nav-links a:not(.nav-cta) { display: none; }
     .section-heading, .delivery-grid, .role-grid { grid-template-columns: 1fr; }
@@ -361,7 +364,7 @@
       <span class="brand-mark">NM</span><span class="brand-name">NYHEDSMONITOR</span>
     </a>
     <div class="nav-links">
-      <a href="#system">Systemet</a>
+      <a href="#system">Sådan virker den</a>
       <a href="#resultater">Resultater</a>
       <a href="#laering">Læring</a>
       <a class="nav-cta" href="#kontakt">Om Jonathan</a>
@@ -375,7 +378,7 @@
       <div>
         <p class="eyebrow">Case · juli 2026 · Python + AI i produktion</p>
         <h1>Fra konstant beredskab til kontrolleret overblik</h1>
-        <p class="lead">Jeg byggede en AI-assisteret nyhedsvagt, der følger nyheder og officielle udmeldinger, sorterer støjen fra og sender hastealarmer eller timelige statusmails til en bruger på standby.</p>
+        <p class="lead">Jeg byggede en automatisk nyhedsvagt, der følger nyheder og officielle udmeldinger, sorterer støjen fra med enkle regler og AI og sender besked, når noget kræver opmærksomhed.</p>
         <div class="hero-actions">
           <a class="button" href="#system">Se hvordan den virker ↓</a>
           <a class="button secondary" href="#rolle">Min rolle</a>
@@ -384,7 +387,7 @@
       <aside class="status-card" aria-label="Forenklet systemstatus">
         <div class="status-top"><span class="status-title">Systemstatus</span><span class="live">I drift</span></div>
         <div class="mini-flow">
-          <div class="mini-node"><b>3 databaner</b><span>201 fund</span></div>
+          <div class="mini-node"><b>3 typer kilder</b><span>201 fund</span></div>
           <div class="mini-arrow" aria-hidden="true"></div>
           <div class="mini-node"><b>6 filtertrin</b><span>1 relevant</span></div>
           <div class="mini-arrow" aria-hidden="true"></div>
@@ -396,7 +399,7 @@
 
     <div class="stats" aria-label="Projektets nøgletal">
       <div class="stat"><div class="stat-value">5 dage</div><div class="stat-label">fra idé til live drift</div></div>
-      <div class="stat"><div class="stat-value">3</div><div class="stat-label">databaner, tjekket flere gange i timen</div></div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">kildegrupper, tjekket flere gange i timen</div></div>
       <div class="stat"><div class="stat-value">42</div><div class="stat-label">håndverificerede officielle og redaktionelle X-konti</div></div>
       <div class="stat"><div class="stat-value">406</div><div class="stat-label">frasorterede fund auditeret manuelt</div></div>
       <div class="stat"><div class="stat-value">19/19</div><div class="stat-label">automatiske tests bestået</div></div>
@@ -425,24 +428,24 @@
   <section class="section soft reveal" id="system">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">02 · Arkitekturen</p><h2>Fra rå strøm til handling</h2></div>
-        <p class="intro">Tre databaner normaliseres til samme format og passerer de billige, mekaniske filtre før AI-vurderingen. Drift, hukommelse og overvågning ligger som et selvstændigt sikkerhedsnet omkring pipelinen.</p>
+        <div><p class="section-label">02 · Sådan virker den</p><h2>Nyheder ind. Relevant besked ud.</h2></div>
+        <p class="intro">Monitoren samler nyt fra tre typer kilder. Alt sættes i samme format og kontrolleres trin for trin. Først til sidst læser AI'en de få kandidater, der er tilbage, og vurderer, om brugeren skal have besked.</p>
       </div>
 
       <figure>
         <div class="architecture" role="img" aria-label="Dataflow fra fire kildetyper gennem seks filtertrin til timemail, hastemail eller natkø">
           <div class="node-stack">
-            <div class="node source"><b>GDELT + Google</b><span>Internationale og danske nyheder</span></div>
-            <div class="node source"><b>Truth Social</b><span>Trump i realtid</span></div>
-            <div class="node source"><b>X</b><span>42 kuraterede konti</span></div>
+            <div class="node source"><b>Nyhedsmedier</b><span>Internationale og danske artikler</span></div>
+            <div class="node source"><b>Truth Social</b><span>Trumps officielle opslag</span></div>
+            <div class="node source"><b>X</b><span>Aktører, bureauer og journalister</span></div>
           </div>
           <div class="flow-arrow" aria-hidden="true">→</div>
           <div class="pipeline-core">
             <h3>PYTHON-PIPELINE</h3>
             <div class="filters">
-              <span class="filter">01 Normalisér</span><span class="filter">02 Dedup</span>
-              <span class="filter">03 Tid</span><span class="filter">04 Søgeord</span>
-              <span class="filter">05 Kilder</span><span class="filter">06 AI-vurdering</span>
+              <span class="filter">01 Samme format</span><span class="filter">02 Set før?</span>
+              <span class="filter">03 Nyt nok?</span><span class="filter">04 Om emnet?</span>
+              <span class="filter">05 Troværdig?</span><span class="filter">06 AI-tjek</span>
             </div>
           </div>
           <div class="flow-arrow" aria-hidden="true">→</div>
@@ -453,11 +456,11 @@
           </div>
         </div>
         <div class="ops" aria-label="Systemets driftslag">
-          <div class="node"><b>cron-job.org + GitHub Actions</b><span>Starter flygtige kørsler flere gange i timen. Ingen lokal computer eller permanent server.</span></div>
-          <div class="node"><b>Git · state og audit</b><span>Dedup-hukommelse, natkø og auditlogs versioneres under den afgrænsede uges drift.</span></div>
-          <div class="node"><b>healthchecks.io</b><span>Uafhængigt livstegn. Udebliver det i 1,5 time, får byggeren automatisk besked.</span></div>
+          <div class="node"><b>Vækkeur + GitHub</b><span>Starter monitoren flere gange i timen. Ingen lokal computer behøver at være tændt.</span></div>
+          <div class="node"><b>Hukommelse + logbog</b><span>Systemet husker, hvad det har set, og gemmer både fravalg og leverede fund.</span></div>
+          <div class="node"><b>Ekstern vagthund</b><span>Udebliver monitorens livstegn i 1,5 time, får byggeren automatisk besked.</span></div>
         </div>
-        <figcaption class="diagram-caption">Arkitekturen er bevidst enkel og tilpasset en kort, intensiv driftsperiode: statsløs compute, versioneret hukommelse og synlige fejl.</figcaption>
+        <figcaption class="diagram-caption">Løsningen er bevidst enkel og tilpasset én intensiv uges drift: en maskine vågner, henter nyt, sender besked, gemmer sin hukommelse og lukker igen.</figcaption>
       </figure>
     </div>
   </section>
@@ -465,47 +468,47 @@
   <section class="section reveal" id="resultater">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">03 · Filtreringen</p><h2>En rigtig kørsel: 201 ind, 1 ud</h2></div>
-        <p class="intro">Tallene er fra 7. juli kl. 16.25. Hvert trin viser, hvor mange elementer der er tilbage. Først efter fem mekaniske kontroller får AI'en lov til at læse og vurdere de sidste kandidater.</p>
+        <div><p class="section-label">03 · Filtreringen</p><h2>Sådan blev 201 fund til én besked</h2></div>
+        <p class="intro">Tallene er fra en rigtig kørsel 7. juli kl. 16.25. De enkle kontroller fjerner først gengangere, gamle historier og uvedkommende indhold. AI'en bruges kun til den sidste vurdering.</p>
       </div>
 
       <div class="filter-panel" role="img" aria-label="201 hentede elementer blev reduceret til 1 relevant fund gennem dedup, tidsfilter, søgeord, kildekontrol og AI-vurdering">
-        <div class="filter-head"><span>Filtertrin</span><span>Andel tilbage</span><span>Antal</span></div>
+        <div class="filter-head"><span>Trin</span><span>Andel tilbage</span><span>Fund tilbage</span></div>
         <div class="filter-row">
           <div class="filter-stage"><b>HENTET</b><span>rå strøm</span></div>
           <div class="retention"><span style="width:100%"></span></div>
           <div class="filter-count"><strong>201</strong><small>&nbsp;</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>DEDUP</b><span>set før</span></div>
+          <div class="filter-stage"><b>NYT INDHOLD</b><span>set før?</span></div>
           <div class="retention"><span style="width:94%"></span></div>
           <div class="filter-count"><strong>189</strong><small>−12</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>TIDSFILTER</b><span>arkivstof</span></div>
+          <div class="filter-stage"><b>NYT NOK</b><span>gammelt stof?</span></div>
           <div class="retention"><span style="width:9%"></span></div>
           <div class="filter-count"><strong>18</strong><small>−171</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>SØGEORD</b><span>geo + tema</span></div>
+          <div class="filter-stage"><b>OM EMNET</b><span>relevant tema?</span></div>
           <div class="retention"><span style="width:8.5%"></span></div>
           <div class="filter-count"><strong>17</strong><small>−1</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>KILDER</b><span>troværdighed</span></div>
+          <div class="filter-stage"><b>TROVÆRDIGT</b><span>kendt kilde?</span></div>
           <div class="retention"><span style="width:8%"></span></div>
           <div class="filter-count"><strong>16</strong><small>−1</small></div>
         </div>
         <div class="filter-row final">
-          <div class="filter-stage"><b>AI-VURDERING</b><span>relevans</span></div>
+          <div class="filter-stage"><b>RELEVANT</b><span>sidste AI-tjek</span></div>
           <div class="retention"><span style="width:2%"></span></div>
           <div class="filter-count"><strong>1</strong><small>−15</small></div>
         </div>
       </div>
       <div class="filter-note">
-        <div class="note-card"><b>BILLIGT FØRST</b><p>Over 90 procent fjernes uden et modelkald. Det holder pris og latenstid nede.</p></div>
-        <div class="note-card"><b>FAIL-OPEN</b><p>Fejler AI-laget, beholdes kandidaten. Lidt ekstra støj er bedre end et overset fund.</p></div>
-        <div class="note-card"><b>EFTERPRØVBART</b><p>Alle frasorterede elementer logges, så fejlskøn kan findes under prøvedrift.</p></div>
+        <div class="note-card"><b>ENKLE TJEK FØRST</b><p>Over 90 procent fjernes, før AI'en bruges. Det gør løsningen hurtig og billig.</p></div>
+        <div class="note-card"><b>HELLERE ÉN FOR MEGET</b><p>Fejler AI'en, beholdes fundet. Lidt ekstra støj er bedre end en overset nyhed.</p></div>
+        <div class="note-card"><b>ALT KAN KONTROLLERES</b><p>Alle fravalg gemmes i en logbog, så fejl kan findes under prøvedriften.</p></div>
       </div>
     </div>
   </section>
@@ -542,8 +545,8 @@
   <section class="section reveal" id="laering">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">05 · Driftshærdning</p><h2>Fejlene gjorde systemet bedre</h2></div>
-        <p class="intro">Troværdigheden kommer ikke af en fejlfri demo, men af fire døgns prøvedrift, målbare fejl og konkrete rettelser. Det mest alvorlige problem lå ikke i AI'en, men i scheduleren.</p>
+        <div><p class="section-label">05 · Læring i drift</p><h2>Fire fejl. Fire konkrete forbedringer.</h2></div>
+        <p class="intro">Systemet blev ikke troværdigt af en fejlfri demo, men af fire døgns prøvedrift. Fejlene blev målt, forstået og rettet én ad gangen. Det største problem lå ikke i AI'en, men i det automatiske vækkeur.</p>
       </div>
 
       <div class="reliability" aria-label="Sammenligning af kørsler før og efter eksternt vækkeur">
@@ -605,7 +608,7 @@
         </article>
         <article class="role-card">
           <h3>Det vigtigste valg</h3>
-          <p>Recall blev prioriteret over precision: en overset historie var værre end lidt ekstra støj. Derfor fejler filtrene åbent, og alle fravalg kan efterprøves.</p>
+          <p>En overset historie var værre end lidt ekstra støj. Derfor lader filtrene tvivlsomme fund gå videre, og alle fravalg kan kontrolleres bagefter.</p>
         </article>
       </div>
 
@@ -621,13 +624,13 @@
   <section class="section reveal" id="principper">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">07 · Principper</p><h2>Seks valg, der bærer systemet</h2></div>
+        <div><p class="section-label">07 · Principper</p><h2>Seks enkle valg, der bærer systemet</h2></div>
         <p class="intro">Teknologien er udskiftelig. De vigtigste dele af løsningen er de produkt- og driftsprincipper, der gør den anvendelig for et menneske med noget på spil.</p>
       </div>
       <div class="principles">
-        <article class="principle"><h3>Recall over precision</h3><p>Grænser sættes rummeligt, og usikre kandidater beholdes frem for at forsvinde tavst.</p></article>
-        <article class="principle"><h3>Shadow først</h3><p>Fire døgns rigtige data beviste filteret, før den endelige modtager blev koblet på.</p></article>
-        <article class="principle"><h3>Støj ud før AI</h3><p>Mekaniske filtre fjerner over 90 procent af strømmen før det første modelkald.</p></article>
+        <article class="principle"><h3>Hellere én for meget</h3><p>Usikre fund beholdes frem for at risikere, at noget vigtigt forsvinder tavst.</p></article>
+        <article class="principle"><h3>Test på mig selv først</h3><p>Fire døgns rigtige data beviste filteret, før den endelige modtager blev koblet på.</p></article>
+        <article class="principle"><h3>Enkle filtre før AI</h3><p>Faste regler fjerner over 90 procent af strømmen, før AI'en skal læse noget.</p></article>
         <article class="principle"><h3>Livstegn i to lag</h3><p>Statusmail til brugeren og en uafhængig healthcheck til byggeren.</p></article>
         <article class="principle"><h3>Kuraterede kilder</h3><p>Kun verificerede konti og troværdige medier. Hvert leveret fund linker til originalen.</p></article>
         <article class="principle"><h3>Mennesket bestemmer</h3><p>Modtager, go-live og udadvendte skridt kræver eksplicit menneskelig godkendelse.</p></article>
