@@ -99,6 +99,8 @@
     background: color-mix(in srgb, var(--ground) 84%, transparent);
     -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
   }
+  .scroll-progress { position: absolute; right: 0; bottom: -1px; left: 0; height: 3px; pointer-events: none; }
+  .scroll-progress span { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.08s linear; }
   .nav {
     display: flex; min-height: 4.2rem; align-items: center; justify-content: space-between; gap: 1rem;
   }
@@ -112,6 +114,7 @@
   .nav-links { display: flex; align-items: center; gap: 1.35rem; }
   .nav-links a { color: var(--muted); font-size: 0.94rem; font-weight: 650; text-decoration: none; }
   .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); }
   .nav-cta {
     border: 1px solid var(--line); border-radius: 999px; padding: 0.38rem 0.76rem;
     background: var(--surface);
@@ -165,6 +168,35 @@
   .stat-value { color: var(--accent); font-family: var(--mono); font-size: clamp(1.25rem, 2vw, 1.65rem); font-weight: 700; font-variant-numeric: tabular-nums; }
   .stat-label { margin-top: 0.35rem; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
+  /* Quick explanation */
+  .quick { padding: 0 0 clamp(4rem, 7vw, 6rem); }
+  .quick-panel {
+    overflow: hidden; border: 1px solid var(--line); border-radius: 20px;
+    background: var(--surface); box-shadow: var(--shadow);
+  }
+  .quick-head {
+    display: flex; align-items: end; justify-content: space-between; gap: 2rem;
+    border-bottom: 1px solid var(--line); padding: 1.5rem 1.65rem;
+  }
+  .quick-head h2 { max-width: none; font-family: var(--sans); font-size: 1.45rem; letter-spacing: -0.01em; line-height: 1.2; }
+  .quick-head p { max-width: 42rem; margin: 0; color: var(--muted); font-size: 0.98rem; text-align: right; }
+  .quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .quick-step { position: relative; padding: 1.65rem; }
+  .quick-step + .quick-step { border-left: 1px solid var(--line); }
+  .quick-number {
+    display: grid; width: 2.25rem; height: 2.25rem; place-items: center; margin-bottom: 1rem;
+    border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+    font-family: var(--mono); font-size: 0.8rem; font-weight: 700;
+  }
+  .quick-step h3 { margin: 0 0 0.45rem; font-size: 1.12rem; }
+  .quick-step p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.6; }
+  .quick-result {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid var(--line); background: var(--accent-soft); padding: 1rem 1.65rem;
+  }
+  .quick-result b { font-family: var(--mono); font-size: 0.84rem; }
+  .quick-result span { color: var(--muted); font-size: 0.92rem; }
+
   /* Sections */
   .section { padding: clamp(4rem, 8vw, 7rem) 0; border-top: 1px solid var(--line); }
   .section.soft { background: color-mix(in srgb, var(--surface-soft) 45%, transparent); }
@@ -202,6 +234,41 @@
   }
   .ops .node { background: transparent; border-style: dashed; }
   .diagram-caption { max-width: 64rem; margin: 1.2rem 0 0; color: var(--muted); font-size: 0.98rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.25rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--muted); font-size: 0.86rem; }
+  .legend i { width: 0.7rem; height: 0.7rem; border-radius: 3px; background: var(--accent); }
+  .legend .delivery { background: var(--green); }
+  .legend .alert-color { background: var(--red); }
+  .legend .operations { border: 1px dashed var(--muted); background: transparent; }
+
+  /* One complete run */
+  .cycle-wrap { margin-top: 3rem; }
+  .figure-title { margin: 0 0 1rem; font-family: var(--serif); font-size: 1.65rem; line-height: 1.2; }
+  .cycle { display: grid; grid-template-columns: repeat(6, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+  .cycle-step { position: relative; min-width: 0; padding: 1.2rem; }
+  .cycle-step + .cycle-step { border-left: 1px solid var(--line); }
+  .cycle-step:not(:last-child)::after {
+    position: absolute; z-index: 2; top: 1.35rem; right: -0.55rem; display: grid;
+    width: 1.1rem; height: 1.1rem; place-items: center; border: 1px solid var(--line);
+    border-radius: 50%; background: var(--surface); color: var(--accent); content: "›";
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 700;
+  }
+  .cycle-num { color: var(--accent); font-family: var(--mono); font-size: 0.75rem; font-weight: 700; }
+  .cycle-step h3 { margin: 0.5rem 0 0.35rem; font-size: 0.98rem; }
+  .cycle-step p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.52; }
+
+  .tech-details { margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--surface) 78%, transparent); }
+  .tech-details summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 1rem 1.15rem; cursor: pointer; font-weight: 700; list-style: none;
+  }
+  .tech-details summary::-webkit-details-marker { display: none; }
+  .tech-details summary::after { color: var(--accent); content: "+"; font-family: var(--mono); font-size: 1.2rem; }
+  .tech-details[open] summary::after { content: "−"; }
+  .tech-details[open] summary { border-bottom: 1px solid var(--line); }
+  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; padding: 1.2rem; }
+  .tech-grid h3 { margin: 0 0 0.35rem; font-family: var(--mono); font-size: 0.82rem; }
+  .tech-grid p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
 
   /* Filter flow */
   .filter-panel { overflow: hidden; margin-top: 3rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); }
@@ -221,6 +288,39 @@
   .note-card { border-top: 2px solid var(--line); padding-top: 0.8rem; }
   .note-card b { font-family: var(--mono); font-size: 0.82rem; }
   .note-card p { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.96rem; line-height: 1.55; }
+
+  /* One item through the system */
+  .journey {
+    display: grid; grid-template-columns: minmax(14rem, 1fr) 2.2rem minmax(14rem, 1fr) 2.2rem minmax(14rem, 1fr) 2.2rem minmax(14rem, 1fr);
+    gap: 0.7rem; align-items: stretch; margin-top: 3rem;
+  }
+  .journey-arrow { display: grid; place-items: center; color: var(--accent); font-family: var(--mono); font-size: 1.5rem; }
+  .journey-card { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 1.2rem; }
+  .journey-card.source-item { border-top: 4px solid var(--accent); }
+  .journey-card.ai-item { border-top: 4px solid var(--amber); }
+  .journey-card.delivery-item { border-top: 4px solid var(--red); }
+  .journey-label { margin: 0 0 0.7rem; color: var(--accent); font-family: var(--mono); font-size: 0.84rem; font-weight: 700; letter-spacing: 0.06em; }
+  .journey-card h3 { margin: 0 0 0.5rem; font-size: 1.12rem; line-height: 1.4; }
+  .journey-meta { color: var(--muted); font-size: 0.9rem; }
+  .check-list { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+  .check-list li { display: flex; align-items: start; gap: 0.5rem; font-size: 0.98rem; }
+  .check-list li::before { color: var(--green); content: "✓"; font-weight: 800; }
+  .ai-result { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 0.75rem; margin: 0; }
+  .ai-result dt { color: var(--muted); font-size: 0.9rem; }
+  .ai-result dd { margin: 0; font-family: var(--mono); font-size: 0.9rem; font-weight: 700; }
+  .delivery-preview { border-radius: 9px; background: var(--red-soft); padding: 0.8rem; }
+  .delivery-preview b { display: block; color: var(--red); font-family: var(--mono); font-size: 0.84rem; }
+  .delivery-preview span { display: block; margin-top: 0.35rem; font-size: 0.96rem; line-height: 1.5; }
+  .example-note { margin: 1rem 0 0; color: var(--muted); font-size: 0.94rem; }
+
+  .route-title { margin: 3rem 0 1rem; font-family: var(--serif); font-size: 1.65rem; }
+  .route-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+  .route-card { position: relative; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 1.2rem; }
+  .route-card::before { display: block; margin-bottom: 0.6rem; color: var(--muted); content: attr(data-if); font-family: var(--mono); font-size: 0.82rem; font-weight: 700; }
+  .route-card h3 { margin: 0 0 0.4rem; font-size: 1.06rem; }
+  .route-card p { margin: 0; color: var(--muted); font-size: 0.96rem; line-height: 1.55; }
+  .route-card.urgent { border-color: color-mix(in srgb, var(--red) 45%, var(--line)); background: var(--red-soft); }
+  .route-card.deliver { border-color: color-mix(in srgb, var(--green) 35%, var(--line)); }
 
   /* Delivery */
   .delivery-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr); gap: 1.5rem; align-items: start; margin-top: 3rem; }
@@ -300,8 +400,10 @@
   footer { display: flex; justify-content: space-between; gap: 1rem; padding: 0 0 2.5rem; color: var(--muted); font-family: var(--mono); font-size: 0.76rem; line-height: 1.7; }
   footer a { color: var(--accent); text-decoration: none; }
 
-  .js .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.55s ease, transform 0.55s ease; }
-  .js .reveal.visible { opacity: 1; transform: none; }
+  @media (hover: hover) {
+    .quick-step, .journey-card, .route-card, .incident, .principle { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .quick-step:hover, .journey-card:hover, .route-card:hover, .incident:hover, .principle:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(18, 33, 42, 0.07); }
+  }
 
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
@@ -309,6 +411,12 @@
     .section-heading, .delivery-grid, .role-grid { grid-template-columns: 1fr; }
     .section-heading { gap: 1.25rem; }
     .principles { grid-template-columns: repeat(2, 1fr); }
+    .quick-head { align-items: start; flex-direction: column; gap: 0.5rem; }
+    .quick-head p { text-align: left; }
+    .quick-grid { grid-template-columns: 1fr; }
+    .quick-step + .quick-step { border-top: 1px solid var(--line); border-left: 0; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .nav-links a:not(.nav-cta) { display: none; }
   }
   @media (max-width: 1100px) {
     .shell { width: min(124rem, calc(100% - 2.5rem)); }
@@ -316,11 +424,16 @@
     .architecture { grid-template-columns: 1fr; }
     .flow-arrow { transform: rotate(90deg); }
     .ops { grid-template-columns: 1fr; }
+    .cycle { grid-template-columns: 1fr; }
+    .cycle-step + .cycle-step, .cycle-step:nth-child(4), .cycle-step:nth-child(5), .cycle-step:nth-child(6) { border-top: 1px solid var(--line); border-left: 0; }
+    .cycle-step:not(:last-child)::after { top: auto; right: 50%; bottom: -0.55rem; transform: translateX(50%) rotate(90deg); }
+    .journey { grid-template-columns: 1fr; }
+    .journey-arrow { transform: rotate(90deg); }
+    .route-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 720px) {
     html { font-size: 100%; }
     body { font-size: 1.0625rem; }
-    .nav-links a:not(.nav-cta) { display: none; }
     .section-heading, .delivery-grid, .role-grid { grid-template-columns: 1fr; }
     .section-heading { gap: 1rem; }
     .filter-note, .incident-grid { grid-template-columns: 1fr; }
@@ -328,6 +441,11 @@
     .principles { grid-template-columns: 1fr; }
     .cta-card { grid-template-columns: 1fr; }
     footer { flex-direction: column; }
+    .cycle { grid-template-columns: 1fr; }
+    .cycle-step + .cycle-step, .cycle-step:nth-child(4), .cycle-step:nth-child(5), .cycle-step:nth-child(6) { border-top: 1px solid var(--line); border-left: 0; }
+    .cycle-step:not(:last-child)::after { top: auto; right: 50%; bottom: -0.55rem; transform: translateX(50%) rotate(90deg); }
+    .route-grid { grid-template-columns: 1fr; }
+    .quick-result { align-items: start; flex-direction: column; gap: 0.25rem; }
   }
   @media (max-width: 520px) {
     .shell { width: min(100% - 1.5rem, 72rem); }
@@ -352,12 +470,10 @@
   }
   @media print {
     .topbar, .hero-actions { display: none; }
-    .js .reveal { opacity: 1 !important; transform: none !important; }
     body { background: white; color: #12212A; }
     .section { break-inside: avoid; }
   }
 </style>
-<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 <a class="skip-link" href="#indhold">Gå til indhold</a>
@@ -368,12 +484,14 @@
       <span class="brand-mark">NM</span><span class="brand-name">NYHEDSMONITOR</span>
     </a>
     <div class="nav-links">
+      <a href="#kort-fortalt">Kort fortalt</a>
       <a href="#system">Sådan virker den</a>
+      <a href="#eksempel">Eksempel</a>
       <a href="#resultater">Resultater</a>
-      <a href="#laering">Læring</a>
       <a class="nav-cta" href="#kontakt">Om Jonathan</a>
     </div>
   </div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
 </nav>
 
 <header class="hero" id="top">
@@ -384,7 +502,7 @@
         <h1>Fra konstant beredskab til kontrolleret overblik</h1>
         <p class="lead">Jeg byggede en automatisk nyhedsvagt, der følger nyheder og officielle udmeldinger, sorterer støjen fra med enkle regler og AI og sender besked, når noget kræver opmærksomhed.</p>
         <div class="hero-actions">
-          <a class="button" href="#system">Se hvordan den virker ↓</a>
+          <a class="button" href="#kort-fortalt">Forstå løsningen ↓</a>
           <a class="button secondary" href="#rolle">Min rolle</a>
         </div>
       </div>
@@ -405,7 +523,7 @@
       <div class="stat"><div class="stat-value">5 dage</div><div class="stat-label">fra idé til live drift</div></div>
       <div class="stat"><div class="stat-value">3</div><div class="stat-label">kildegrupper, tjekket flere gange i timen</div></div>
       <div class="stat"><div class="stat-value">42</div><div class="stat-label">håndverificerede officielle og redaktionelle X-konti</div></div>
-      <div class="stat"><div class="stat-value">406</div><div class="stat-label">frasorterede fund auditeret manuelt</div></div>
+      <div class="stat"><div class="stat-value">406</div><div class="stat-label">frasorterede fund gennemgået manuelt</div></div>
       <div class="stat"><div class="stat-value">19/19</div><div class="stat-label">automatiske tests bestået</div></div>
       <div class="stat"><div class="stat-value">&lt; 50 kr.</div><div class="stat-label">drift for hele ugen</div></div>
     </div>
@@ -413,6 +531,34 @@
 </header>
 
 <main id="indhold">
+  <section class="quick reveal" id="kort-fortalt">
+    <div class="shell">
+      <div class="quick-panel">
+        <div class="quick-head">
+          <h2>Hvad gør Nyhedsmonitoren — helt kort?</h2>
+          <p>Den overtager det gentagne overvågningsarbejde, men lader mennesket træffe alle beslutninger.</p>
+        </div>
+        <div class="quick-grid">
+          <article class="quick-step">
+            <span class="quick-number">01</span>
+            <h3>Den holder øje</h3>
+            <p>Flere gange i timen læser den nye artikler og opslag fra udvalgte nyhedsmedier og konti.</p>
+          </article>
+          <article class="quick-step">
+            <span class="quick-number">02</span>
+            <h3>Den sorterer</h3>
+            <p>Gengangere, gamle historier og uvedkommende stof fjernes. AI vurderer kun de få fund, der er tilbage.</p>
+          </article>
+          <article class="quick-step">
+            <span class="quick-number">03</span>
+            <h3>Den giver besked</h3>
+            <p>Vigtige fund sendes straks. Resten samles overskueligt, og en tom statusmail beviser, at systemet lever.</p>
+          </article>
+        </div>
+        <div class="quick-result"><b>RESULTAT FOR BRUGEREN</b><span>Brugeren skal kun forholde sig til mailen — ikke til hele nyhedsstrømmen.</span></div>
+      </div>
+    </div>
+  </section>
   <section class="section reveal" id="problem">
     <div class="shell">
       <div class="section-heading">
@@ -436,8 +582,20 @@
         <p class="intro">Monitoren samler nyt fra tre typer kilder. Alt sættes i samme format og kontrolleres trin for trin. Først til sidst læser AI'en de få kandidater, der er tilbage, og vurderer, om brugeren skal have besked.</p>
       </div>
 
+      <div class="cycle-wrap">
+        <h3 class="figure-title">Én komplet kørsel, trin for trin</h3>
+        <div class="cycle" role="img" aria-label="Seks trin i en kørsel: start, hent nyt, fjern gengangere, kontroller emne og kilde, AI-vurdering samt levering og livstegn">
+          <article class="cycle-step"><span class="cycle-num">01</span><h3>Startes</h3><p>Et eksternt vækkeur starter en GitHub-maskine automatisk.</p></article>
+          <article class="cycle-step"><span class="cycle-num">02</span><h3>Henter nyt</h3><p>Den læser kun det, der er kommet siden seneste kørsel.</p></article>
+          <article class="cycle-step"><span class="cycle-num">03</span><h3>Fjerner gentagelser</h3><p>ID, link, titel og tidspunkt sammenlignes med hukommelsen.</p></article>
+          <article class="cycle-step"><span class="cycle-num">04</span><h3>Kontrollerer</h3><p>Emne og kilde skal passe. Ukendte medier kræver bekræftelse.</p></article>
+          <article class="cycle-step"><span class="cycle-num">05</span><h3>AI vurderer</h3><p>Relevans, alvor, part og et kort dansk resumé fastsættes.</p></article>
+          <article class="cycle-step"><span class="cycle-num">06</span><h3>Handler</h3><p>Fund leveres eller køes. Tilstand gemmes, og systemet melder “jeg lever”.</p></article>
+        </div>
+      </div>
+
       <figure>
-        <div class="architecture" role="img" aria-label="Dataflow fra fire kildetyper gennem seks filtertrin til timemail, hastemail eller natkø">
+        <div class="architecture" role="img" aria-label="Dataflow fra tre kildetyper gennem seks filtertrin til timemail, hastemail eller natkø">
           <div class="node-stack">
             <div class="node source"><b>Nyhedsmedier</b><span>Internationale og danske artikler</span></div>
             <div class="node source"><b>Truth Social</b><span>Trumps officielle opslag</span></div>
@@ -454,7 +612,7 @@
           </div>
           <div class="flow-arrow" aria-hidden="true">→</div>
           <div class="node-stack">
-            <div class="node output"><b>Timemail</b><span>Digest eller livstegn kl. 8–17</span></div>
+            <div class="node output"><b>Samlet mail</b><span>Nye fund eller livstegn kl. 8–17</span></div>
             <div class="node output"><b>Hastemail</b><span>Høj alvor, hele døgnet</span></div>
             <div class="node output"><b>Natkø</b><span>Samles til morgenmailen</span></div>
           </div>
@@ -465,14 +623,67 @@
           <div class="node"><b>Ekstern vagthund</b><span>Udebliver monitorens livstegn i 1,5 time, får byggeren automatisk besked.</span></div>
         </div>
         <figcaption class="diagram-caption">Løsningen er bevidst enkel og tilpasset én intensiv uges drift: en maskine vågner, henter nyt, sender besked, gemmer sin hukommelse og lukker igen.</figcaption>
+        <div class="legend" aria-label="Farveforklaring"><span><i></i>Data og filtrering</span><span><i class="delivery"></i>Levering</span><span><i class="alert-color"></i>Kræver opmærksomhed</span><span><i class="operations"></i>Drift og sikkerhedsnet</span></div>
       </figure>
+
+      <details class="tech-details">
+        <summary>Se præcis, hvad der sker teknisk</summary>
+        <div class="tech-grid">
+          <div><h3>KILDER</h3><p>GDELT og Google News leverer artikler. Truth Social leverer Trumps opslag. X-banen læser 42 håndverificerede officielle og redaktionelle konti. Der søges på både dansk og engelsk.</p></div>
+          <div><h3>FILTRERING + AI</h3><p>Nyheder vurderes på overskriften; sociale opslag på hele teksten. En ukendt kilde kræver en lignende historie fra et godkendt medie inden for 48 timer. Fejler AI'en, beholdes fundet.</p></div>
+          <div><h3>LEVERING + HUKOMMELSE</h3><p>Nye fund sendes ved den aktuelle kørsel. Tomme statusmails begrænses til én i timen. Set-lister, natkø og kontrollog gemmes, før næste kørsel starter.</p></div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="section reveal" id="eksempel">
+    <div class="shell">
+      <div class="section-heading">
+        <div><p class="section-label">03 · Et konkret eksempel</p><h2>Følg ét fund fra opslag til mail</h2></div>
+        <p class="intro">Her er et illustrativt eksempel med de samme felter og regler som i produktion. Det viser både, hvad systemet ved, hvad AI'en vurderer, og hvorfor brugeren får en alarm.</p>
+      </div>
+
+      <div class="journey" role="img" aria-label="Et illustrativt X-opslag passerer mekaniske kontroller, bliver vurderet af AI og ender som en hastemail">
+        <article class="journey-card source-item">
+          <p class="journey-label">01 · RÅT FUND</p>
+          <h3>“NATO vil drøfte ny amerikansk udmelding om Grønland”</h3>
+          <p class="journey-meta">Officiel X-konto · publiceret for 9 minutter siden · link til originalen</p>
+        </article>
+        <div class="journey-arrow" aria-hidden="true">→</div>
+        <article class="journey-card">
+          <p class="journey-label">02 · FASTE KONTROLLER</p>
+          <ul class="check-list"><li>Ikke set før</li><li>Nyt nok</li><li>Handler om Grønland</li><li>Officiel afsender</li></ul>
+        </article>
+        <div class="journey-arrow" aria-hidden="true">→</div>
+        <article class="journey-card ai-item">
+          <p class="journey-label">03 · AI-SVAR</p>
+          <dl class="ai-result"><dt>Relevant</dt><dd>Ja</dd><dt>Alvor</dt><dd>Høj</dd><dt>Part</dt><dd>NATO</dd><dt>Resumé</dt><dd>NATO reagerer på ny udmelding om Grønland</dd></dl>
+        </article>
+        <div class="journey-arrow" aria-hidden="true">→</div>
+        <article class="journey-card delivery-item">
+          <p class="journey-label">04 · HANDLING</p>
+          <div class="delivery-preview"><b>🔴 HASTER</b><span>En separat alarm sendes straks. Fundet kommer også med i den samlede mail fra kørslen.</span></div>
+        </article>
+      </div>
+      <p class="example-note">Eksemplet er skrevet til siden og indeholder ingen oplysninger fra modtagerens virkelige mails.</p>
+
+      <h3 class="route-title">Sådan afgør systemet, hvad der sker bagefter</h3>
+      <div class="route-grid" aria-label="Seks mulige udfald for et hentet fund eller en kørsel">
+        <article class="route-card" data-if="HVIS IKKE RELEVANT"><h3>Gemmes i logbogen</h3><p>Fundet sendes ikke, men kan kontrolleres under efterkontrollen.</p></article>
+        <article class="route-card urgent" data-if="HVIS ALVOR = HØJ"><h3>Hastemail nu</h3><p>Sendes straks, også uden for tidsrummet kl. 8–17.</p></article>
+        <article class="route-card deliver" data-if="HVIS RELEVANT · KL. 8–17"><h3>Samlet mail nu</h3><p>Fundet leveres i mailen fra den aktuelle kørsel.</p></article>
+        <article class="route-card" data-if="HVIS RELEVANT · OM NATTEN"><h3>Lægges i natkø</h3><p>Leveres i den første samlede mail efter kl. 8.</p></article>
+        <article class="route-card deliver" data-if="HVIS INTET NYT · KL. 8–17"><h3>Sender livstegn</h3><p>Højst én tom statusmail i timen beviser, at vagten lever.</p></article>
+        <article class="route-card" data-if="HVIS EN KILDE FEJLER"><h3>Viser advarsel</h3><p>Mailens emne og kildeoversigt gør den delvise blindhed synlig.</p></article>
+      </div>
     </div>
   </section>
 
   <section class="section reveal" id="resultater">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">03 · Filtreringen</p><h2>Sådan blev 201 fund til én besked</h2></div>
+        <div><p class="section-label">04 · Filtreringen</p><h2>Sådan blev 201 fund til én besked</h2></div>
         <p class="intro">Tallene er fra en rigtig kørsel 7. juli kl. 16.25. De enkle kontroller fjerner først gengangere, gamle historier og uvedkommende indhold. AI'en bruges kun til den sidste vurdering.</p>
       </div>
 
@@ -520,7 +731,7 @@
   <section class="section soft reveal" id="levering">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">04 · Leveringen</p><h2>Mailen beviser, at vagten lever</h2></div>
+        <div><p class="section-label">05 · Leveringen</p><h2>Mailen beviser, at vagten lever</h2></div>
         <p class="intro">De fleste timer er der intet nyt. Den tomme mail er derfor en del af produktet, ikke støj: den fortæller brugeren, at systemet er aktivt og kilderne svarer normalt.</p>
       </div>
       <div class="delivery-grid">
@@ -532,13 +743,13 @@
           </div>
           <div class="mail-body">
             <p>Ingen nye relevante opdateringer siden sidste kørsel.</p>
-            <p>Denne mail er systemets dead-man's switch: udebliver den, er værktøjet nede — ikke verden stille.</p>
+            <p>Denne mail er systemets livstegn: udebliver den, er værktøjet nede — ikke verden stille.</p>
           </div>
           <div class="mail-footer">Kilder: GDELT: rate-limit · Google News: ok · Truth Social: ok · X: ok (42/42)</div>
         </div>
         <div class="alert-stack" aria-label="Eksempler på tre typer emnelinjer">
           <div class="alert high"><div class="alert-type">Alvorligt fund · sendt straks</div><div class="alert-subject">🔴 HASTER: 1 høj-prioritet (16:25)</div></div>
-          <div class="alert ok"><div class="alert-type">Fund i timen · samlet digest</div><div class="alert-subject">🔴 1 HØJ — Nyhedsmonitor: 3 nye</div></div>
+          <div class="alert ok"><div class="alert-type">Fund i timen · samlet mail</div><div class="alert-subject">🔴 1 HØJ — Nyhedsmonitor: 3 nye</div></div>
           <div class="alert warn"><div class="alert-type">Kilde svarer ikke normalt</div><div class="alert-subject">⚠ Ingen nye opdateringer (14:41)</div></div>
           <p class="diagram-caption">Alvorsgrad og systemstatus står forrest, så indbakken kan skimmes på få sekunder.</p>
         </div>
@@ -549,13 +760,13 @@
   <section class="section reveal" id="laering">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">05 · Læring i drift</p><h2>Fire fejl. Fire konkrete forbedringer.</h2></div>
+        <div><p class="section-label">06 · Læring i drift</p><h2>Fire fejl. Fire konkrete forbedringer.</h2></div>
         <p class="intro">Systemet blev ikke troværdigt af en fejlfri demo, men af fire døgns prøvedrift. Fejlene blev målt, forstået og rettet én ad gangen. Det største problem lå ikke i AI'en, men i det automatiske vækkeur.</p>
       </div>
 
       <div class="reliability" aria-label="Sammenligning af kørsler før og efter eksternt vækkeur">
         <div class="reliability-row">
-          <div class="reliability-label"><b>FØR</b><span>GitHub cron</span></div>
+          <div class="reliability-label"><b>FØR</b><span>GitHubs tidsplan</span></div>
           <div class="run-strip before"><div class="ticks" aria-hidden="true">
             <i class="tick missing"></i><i class="tick"></i><i class="tick missing"></i><i class="tick missing"></i><i class="tick"></i><i class="tick missing"></i><i class="tick"></i><i class="tick missing"></i><i class="tick"></i><i class="tick missing"></i><i class="tick missing"></i><i class="tick"></i><i class="tick"></i><i class="tick missing"></i><i class="tick"></i><i class="tick"></i>
           </div></div>
@@ -568,29 +779,29 @@
           </div></div>
           <div class="reliability-result good">ingen huller*</div>
         </div>
-        <p class="diagram-caption">*Ingen huller over alarmgrænsen i den efterfølgende observationsperiode. GitHubs egen scheduler blev beholdt som backup.</p>
+        <p class="diagram-caption">*Ingen huller over alarmgrænsen i den efterfølgende observationsperiode. GitHubs egen tidsplan blev beholdt som backup.</p>
       </div>
 
       <div class="incident-grid">
         <article class="incident">
           <p class="incident-label">4,6 TIMER UDEN KØRSEL</p>
-          <p>GitHubs gratis scheduler sprang størstedelen af de planlagte nattekørsler over.</p>
-          <p class="fix"><b>Fix:</b> Eksternt minutpræcist vækkeur, GitHub cron som backup og fortsat healthcheck.</p>
+          <p>GitHubs gratis tidsplan sprang størstedelen af de planlagte nattekørsler over.</p>
+          <p class="fix"><b>Løsning:</b> Eksternt minutpræcist vækkeur, GitHubs tidsplan som backup og fortsat ekstern vagthund.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">ALLE API'ER SVAREDE 401 I CI</p>
-          <p>Secrets var ved en CLI-fejl sat til den bogstavelige streng “-”, selv om alt virkede lokalt.</p>
-          <p class="fix"><b>Fix:</b> Opsætningen blev scriptet og verificeret i det samme miljø som produktionen.</p>
+          <p class="incident-label">ALLE KILDER AFVISTE ADGANG (401)</p>
+          <p>Adgangsnøglerne var ved en kommandofejl sat til tegnet “-”, selv om alt virkede lokalt.</p>
+          <p class="fix"><b>Løsning:</b> Opsætningen blev automatiseret og kontrolleret i det samme miljø som produktionen.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">NYHEDSBANEN DØDE MED 404</p>
-          <p>En voksende søgeforespørgsel rundede API'ets praktiske grænse og blev afvist sporadisk.</p>
-          <p class="fix"><b>Fix:</b> Kompakt fetch-query, fuldt filter lokalt og synlig kildestatus i hver mail.</p>
+          <p class="incident-label">NYHEDSKILDEN DØDE MED 404</p>
+          <p>En voksende søgning overskred Google News' praktiske længdegrænse og blev afvist sporadisk.</p>
+          <p class="fix"><b>Løsning:</b> Kort søgning mod Google, fuld filtrering i eget system og synlig kildestatus i hver mail.</p>
         </article>
         <article class="incident">
           <p class="incident-label">EN ÆGTE NYHED BLEV FRASORTERET</p>
-          <p>Krydsbekræftelsen kunne ikke se en bureauhistorie, der var kommet i en tidligere kørsel.</p>
-          <p class="fix"><b>Fix:</b> Rullende 48-timers titelvindue og separat leveringslog til efterprøvning.</p>
+          <p>Kildekontrollen kunne ikke se en historie fra et nyhedsbureau, fordi den var kommet i en tidligere kørsel.</p>
+          <p class="fix"><b>Løsning:</b> Rullende 48-timers titelvindue og separat leveringslog til efterprøvning.</p>
         </article>
       </div>
     </div>
@@ -599,15 +810,15 @@
   <section class="section soft reveal" id="rolle">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">06 · Min rolle</p><h2>Fra problem til produktion</h2></div>
-        <p class="intro">Jeg brugte Claude som udviklingspartner og ejede selv problemdefinition, arkitektur, kildevalg, validering, driftsbeslutninger og go-live. AI-genererede ændringer blev gennemgået og testet før deployment.</p>
+        <div><p class="section-label">07 · Min rolle</p><h2>Fra problem til produktion</h2></div>
+        <p class="intro">Jeg brugte Claude som udviklingspartner og ejede selv problemdefinition, arkitektur, kildevalg, validering, driftsbeslutninger og go-live. AI-genererede ændringer blev gennemgået og testet før udrulning.</p>
       </div>
       <div class="role-grid">
         <article class="role-card primary">
           <h3>Produkt, teknik og drift i ét forløb</h3>
-          <p>Opgaven krævede mere end kode: behovet skulle omsættes til guardrails, eksterne kilder valideres, fejl auditeres og et live-system overvåges tæt.</p>
+          <p>Opgaven krævede mere end kode: behovet skulle omsættes til faste sikkerhedsregler, eksterne kilder valideres, fejl gennemgås og et live-system overvåges tæt.</p>
           <div class="ownership">
-            <span>Problemafklaring</span><span>Arkitektur</span><span>Implementering</span><span>Kildevalidering</span><span>Test og audit</span><span>Deployment og drift</span>
+            <span>Problemafklaring</span><span>Arkitektur</span><span>Implementering</span><span>Kildevalidering</span><span>Test og efterkontrol</span><span>Udrulning og drift</span>
           </div>
         </article>
         <article class="role-card">
@@ -617,7 +828,7 @@
       </div>
 
       <div class="timeline" aria-label="Projektforløb fra 7. til 12. juli">
-        <div class="timeline-item"><div class="timeline-date">7. jul</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Bevis først, byg så</strong>Tre databaner bevist mod rigtige data. Pipeline, deployment og første shadow-mail samme dag.</div></div>
+        <div class="timeline-item"><div class="timeline-date">7. jul</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Bevis først, byg så</strong>Tre kildetyper bevist mod rigtige data. Hele systemet, udrulning og første testmail kun til mig selv samme dag.</div></div>
         <div class="timeline-item"><div class="timeline-date">8.–11.</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Fire døgns prøvedrift</strong>406 frasorterede fund gennemgået manuelt. Én reel fejl fundet og lukket.</div></div>
         <div class="timeline-item"><div class="timeline-date">11. jul</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Kontrolleret go-live</strong>Den rigtige modtager blev først koblet på efter eksplicit godkendelse.</div></div>
         <div class="timeline-item"><div class="timeline-date">12. jul</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Hærdning i drift</strong>Schedulerproblem løst, natkø tilføjet og leveringsvinduet tilpasset brugerens behov.</div></div>
@@ -628,14 +839,14 @@
   <section class="section reveal" id="principper">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">07 · Principper</p><h2>Seks enkle valg, der bærer systemet</h2></div>
+        <div><p class="section-label">08 · Principper</p><h2>Seks enkle valg, der bærer systemet</h2></div>
         <p class="intro">Teknologien er udskiftelig. De vigtigste dele af løsningen er de produkt- og driftsprincipper, der gør den anvendelig for et menneske med noget på spil.</p>
       </div>
       <div class="principles">
         <article class="principle"><h3>Hellere én for meget</h3><p>Usikre fund beholdes frem for at risikere, at noget vigtigt forsvinder tavst.</p></article>
         <article class="principle"><h3>Test på mig selv først</h3><p>Fire døgns rigtige data beviste filteret, før den endelige modtager blev koblet på.</p></article>
         <article class="principle"><h3>Enkle filtre før AI</h3><p>Faste regler fjerner over 90 procent af strømmen, før AI'en skal læse noget.</p></article>
-        <article class="principle"><h3>Livstegn i to lag</h3><p>Statusmail til brugeren og en uafhængig healthcheck til byggeren.</p></article>
+        <article class="principle"><h3>Livstegn i to lag</h3><p>Statusmail til brugeren og en uafhængig ekstern vagthund til byggeren.</p></article>
         <article class="principle"><h3>Kuraterede kilder</h3><p>Kun verificerede konti og troværdige medier. Hvert leveret fund linker til originalen.</p></article>
         <article class="principle"><h3>Mennesket bestemmer</h3><p>Modtager, go-live og udadvendte skridt kræver eksplicit menneskelig godkendelse.</p></article>
       </div>
@@ -653,7 +864,7 @@
     <div class="cta-card">
       <div>
         <p class="section-label" style="color:var(--accent)">Jonathan Fribert · case</p>
-        <h2>Vil du se arkitekturen eller auditforløbet tættere på?</h2>
+        <h2>Vil du se arkitekturen eller kontrolforløbet tættere på?</h2>
         <p>Kildekoden ligger privat af hensyn til opgavens karakter. Arkitektur, tests og driftshistorik kan gennemgås på forespørgsel.</p>
       </div>
       <a class="button" href="https://github.com/JonathanFribert" rel="me">Se min GitHub →</a>
@@ -668,20 +879,32 @@
 
 <script>
   (function () {
-    var elements = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      elements.forEach(function (element) { element.classList.add('visible'); });
-      return;
+    var progress = document.querySelector('.scroll-progress span');
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+    var sections = navLinks.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean);
+
+    function updateProgress() {
+      var height = document.documentElement.scrollHeight - window.innerHeight;
+      var value = height > 0 ? Math.min(100, Math.max(0, window.scrollY / height * 100)) : 0;
+      progress.style.width = value + '%';
     }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
-    elements.forEach(function (element) { observer.observe(element); });
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      var navObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach(function (link) {
+            var active = link.getAttribute('href') === '#' + entry.target.id;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function (section) { navObserver.observe(section); });
+    }
   }());
 </script>
 </body>
