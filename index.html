@@ -71,8 +71,7 @@
     -webkit-font-smoothing: antialiased;
   }
   .hero-grid > *, .section-heading > *, .quick-grid > *, .stats > *, .tech-grid > *,
-  .architecture > *, .ops > *, .journey > *, .decision-main > *,
-  .decision-routes > *, .decision-notes > *, .filter-note > *, .delivery-grid > *,
+  .architecture > *, .ops > *, .journey > *, .filter-note > *, .delivery-grid > *,
   .reliability-row > *, .incident-grid > *, .role-grid > *, .ownership > *,
   .takeaways li > *, .cta-card > * { min-width: 0; }
   a { color: inherit; }
@@ -168,7 +167,7 @@
   }
   .stat { min-width: 0; padding: 1.35rem 1.5rem; }
   .stat + .stat { border-left: 1px solid var(--line); }
-  .stat-value { color: var(--accent); font-family: var(--mono); font-size: clamp(1.25rem, 2vw, 1.65rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat-value { color: var(--accent); font-family: var(--mono); font-size: clamp(1.55rem, 2.4vw, 2.1rem); font-weight: 700; font-variant-numeric: tabular-nums; }
   .stat-label { margin-top: 0.35rem; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
   /* Quick explanation */
@@ -176,12 +175,8 @@
   .quick-panel {
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
   }
-  .quick-head {
-    display: flex; align-items: end; justify-content: space-between; gap: 2rem;
-    border-bottom: 1px solid var(--line); padding: 1.5rem 0;
-  }
+  .quick-head { border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
   .quick-head h2 { max-width: none; font-family: var(--sans); font-size: 1.45rem; letter-spacing: -0.01em; line-height: 1.2; }
-  .quick-head p { max-width: 42rem; margin: 0; color: var(--muted); font-size: 0.98rem; text-align: right; }
   .quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
   .quick-step { position: relative; padding: 1.65rem 1.65rem 1.65rem 0; }
   .quick-step + .quick-step { padding-left: 1.65rem; }
@@ -204,12 +199,11 @@
   .section { padding: clamp(4rem, 8vw, 7rem) 0; border-top: 1px solid var(--line); }
   .section.soft { background: color-mix(in srgb, var(--surface-soft) 45%, transparent); }
   .section-heading { display: grid; grid-template-columns: minmax(24rem, 0.8fr) minmax(0, 1.6fr); gap: clamp(3rem, 7vw, 7rem); align-items: start; }
-  h2 { margin: 0; font-size: clamp(2.2rem, 3.8vw, 3.4rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
-  .section-heading.compact h2 { font-size: clamp(2.25rem, 3.5vw, 3.3rem); }
-  .intro { max-width: 60rem; margin: 0; color: var(--muted); font-size: 1.25rem; line-height: 1.72; text-wrap: pretty; }
+  h2 { margin: 0; font-size: clamp(2rem, 3.3vw, 2.9rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
+  .intro { max-width: 60rem; margin: 0; color: var(--muted); font-size: 1.15rem; line-height: 1.7; text-wrap: pretty; }
   .quote {
     max-width: 48rem; margin: 2.2rem 0 0; border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.35rem;
-    font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); font-style: italic; line-height: 1.35;
+    font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 1.7rem); font-style: italic; line-height: 1.4;
   }
   .prose { margin-top: 1.3rem; }
   .prose p { max-width: 58rem; margin: 0 0 1rem; }
@@ -312,7 +306,7 @@
   .journey-arrow { display: grid; place-items: center; color: var(--accent); font-family: var(--mono); font-size: 1.5rem; }
   .journey-card { border-top: 1px solid var(--line); padding: 1.1rem 0; }
   .journey-card.source-item { border-top: 4px solid var(--accent); }
-  .journey-card.ai-item { border-top: 4px solid var(--amber); }
+  .journey-card.ai-item { border-top: 4px solid var(--accent); }
   .journey-card.delivery-item { border-top: 4px solid var(--red); }
   .journey-label { margin: 0 0 0.7rem; color: var(--accent); font-family: var(--mono); font-size: 0.84rem; font-weight: 700; letter-spacing: 0.06em; }
   .journey-card h3 { margin: 0 0 0.5rem; font-size: 1.12rem; line-height: 1.4; }
@@ -326,21 +320,6 @@
   .delivery-preview { border-left: 3px solid var(--red); background: var(--red-soft); padding: 0.8rem; }
   .delivery-preview b { display: block; color: var(--red); font-family: var(--mono); font-size: 0.84rem; }
   .delivery-preview span { display: block; margin-top: 0.35rem; font-size: 0.96rem; line-height: 1.5; }
-  .example-note { margin: 1rem 0 0; color: var(--muted); font-size: 0.94rem; }
-
-  .route-title { margin: 3rem 0 1rem; font-family: var(--serif); font-size: 1.65rem; }
-  .decision-tree { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
-  .decision-root { width: max-content; max-width: 100%; border-bottom: 3px solid var(--accent); padding: 0 0 0.55rem; font-family: var(--serif); font-size: 1.25rem; font-weight: 700; }
-  .decision-main { display: grid; grid-template-columns: 0.65fr 2.35fr; gap: 2rem; margin-top: 1.4rem; }
-  .decision-path { border-top: 1px solid var(--line); padding-top: 0.9rem; }
-  .decision-answer { color: var(--accent); font-family: var(--mono); font-size: 0.78rem; font-weight: 700; }
-  .decision-path h3, .decision-routes h3 { margin: 0.4rem 0 0.25rem; font-size: 1rem; }
-  .decision-path p, .decision-routes p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
-  .decision-routes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .decision-routes > div { border-top: 2px solid var(--green); padding-top: 0.65rem; }
-  .decision-routes .urgent { border-color: var(--red); }
-  .decision-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; border-top: 1px dashed var(--line); padding-top: 1rem; }
-  .decision-notes p { margin: 0; color: var(--muted); font-size: 0.88rem; }
 
   /* Delivery */
   .delivery-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr); gap: 1.5rem; align-items: start; margin-top: 3rem; }
@@ -436,13 +415,10 @@
     .case-brief { max-width: 40rem; }
     .section-heading, .delivery-grid, .role-grid { grid-template-columns: minmax(0, 1fr); }
     .section-heading { gap: 1.25rem; }
-    .quick-head { align-items: start; flex-direction: column; gap: 0.5rem; }
-    .quick-head p { text-align: left; }
     .quick-grid { grid-template-columns: minmax(0, 1fr); }
     .quick-step, .quick-step + .quick-step { border-top: 0; border-left: 0; padding: 1.4rem 0; }
     .quick-step + .quick-step { border-top: 1px solid var(--line); }
     .tech-grid { grid-template-columns: minmax(0, 1fr); }
-    .decision-main { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 1100px) {
     .shell { width: min(124rem, calc(100% - 2.5rem)); }
@@ -465,7 +441,6 @@
     .filter-head, .filter-row { grid-template-columns: 7.4rem 1fr 3.7rem; gap: 0.65rem; }
     .cta-card { grid-template-columns: 1fr; }
     footer { flex-direction: column; }
-    .decision-routes, .decision-notes { grid-template-columns: minmax(0, 1fr); }
     .reliability-row { grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
     .band-row { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; }
     .band-axis-row > div:first-child { display: none; }
@@ -532,12 +507,11 @@
   <div class="shell">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">Portfolio · Case 01 · juli 2026 · sat i drift på fem kalenderdage</p>
+        <p class="eyebrow">Portfolio · Case 01 · juli 2026</p>
         <h1>Nyhedsovervågning til en medarbejder på standby i Statsministeriet</h1>
         <p class="lead">En medarbejder i Statsministeriet skulle under en intensiv standbyuge kunne reagere hurtigt på nye offentlige udmeldinger om forholdet mellem USA og Kongeriget Danmark, særligt Grønland og Færøerne. Jeg byggede et personligt støtteværktøj, som overvåger nyhedsmedier og udvalgte konti, sorterer støjen fra og sender de relevante artikler og opslag på mail.</p>
         <div class="hero-actions">
           <a class="button" href="#kort-fortalt">Forstå løsningen ↓</a>
-          <a class="button secondary" href="#rolle">Min rolle</a>
         </div>
       </div>
       <aside class="case-brief" aria-label="Opgavens rammer">
@@ -553,10 +527,10 @@
     </div>
 
     <div class="stats" aria-label="Projektets nøgletal">
-      <div class="stat"><div class="stat-value">5 dage</div><div class="stat-label">fra første prototype til løsningen blev sat i drift</div></div>
-      <div class="stat"><div class="stat-value">42</div><div class="stat-label">X-konti tjekket manuelt for korrekt identitet</div></div>
-      <div class="stat"><div class="stat-value">406</div><div class="stat-label">frasorterede artikler og opslag gennemgået manuelt</div></div>
-      <div class="stat"><div class="stat-value">1 fund</div><div class="stat-label">fejlagtigt frasorteret, fanget i efterkontrollen og brugt til at rette kildefilteret</div></div>
+      <div class="stat"><div class="stat-value">5 dage</div><div class="stat-label">fra første prototype til drift</div></div>
+      <div class="stat"><div class="stat-value">42</div><div class="stat-label">X-konti håndtjekket for identitet</div></div>
+      <div class="stat"><div class="stat-value">406</div><div class="stat-label">frasorteringer gennemgået manuelt</div></div>
+      <div class="stat"><div class="stat-value">1 fund</div><div class="stat-label">fejlagtigt frasorteret, fundet og rettet i efterkontrollen</div></div>
     </div>
   </div>
 </header>
@@ -567,7 +541,6 @@
       <div class="quick-panel">
         <div class="quick-head">
           <h2>Hvad løsningen gør for brugeren</h2>
-          <p>Monitoren automatiserer overvågningen. Medarbejderen vurderer selv, hvordan oplysningerne skal håndteres.</p>
         </div>
         <div class="quick-grid">
           <article class="quick-step">
@@ -598,8 +571,7 @@
           <p class="intro">Standbyopgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Fordi en overset historie var værre end en ekstra besked, lod filtrene bevidst tvivlstilfælde gå videre.</p>
           <p class="quote">Det vigtigste driftskrav var, at en stille indbakke skulle kunne forklares: Enten var der intet nyt, eller også skulle en teknisk fejl være synlig.</p>
           <div class="prose">
-          <p>Mellem kl. 8 og 17 sender monitoren relevante fund med det samme og ellers cirka én tom statusmail i timen.</p>
-            <p>Stopper de planlagte kørsler, sender en uafhængig driftsmonitor en alarm til mig. Brugeren kan dermed skelne mellem en stille nyhedsstrøm og en teknisk fejl.</p>
+            <p>Mellem kl. 8 og 17 sender monitoren relevante fund med det samme og ellers cirka én tom statusmail i timen. Stopper kørslerne, slår en uafhængig driftsmonitor alarm, så brugeren altid kan skelne en stille nyhedsstrøm fra en teknisk fejl.</p>
           </div>
         </div>
       </div>
@@ -635,7 +607,7 @@
     <div class="shell">
       <div class="section-heading">
         <div><p class="section-label">Løsningen</p><h2>Sådan går en artikel eller et opslag fra kilde til mail</h2></div>
-        <p class="intro">Monitoren henter artikler fra GDELT og Google News og opslag fra Truth Social og 42 udvalgte X-konti. Artikler og opslag samles i samme dataformat og kontrolleres for alder, gentagelser, emne og kilde. Til sidst vurderer en AI-model relevans og alvor og skriver et kort resumé på dansk.</p>
+        <p class="intro">Monitoren henter artikler fra GDELT og Google News og opslag fra Truth Social og 42 udvalgte X-konti. Alt kontrolleres for alder, gentagelser, emne og kilde, før en AI-model vurderer relevans og alvor og skriver et kort resumé på dansk.</p>
       </div>
 
       <h3 class="figure-title architecture-heading" id="architecture-title">Systemet set ovenfra</h3>
@@ -686,7 +658,7 @@
     <div class="shell">
       <div class="section-heading compact">
         <div><p class="section-label">Ét fund gennem systemet</p><h2 id="journey-title">Sådan bliver et nyt opslag vurderet</h2></div>
-        <p class="intro">Eksemplet er konstrueret, men følger de samme regler og datafelter som systemet i drift. Det viser tydeligt, hvorfor netop dette fund udløser en særskilt alarm.</p>
+        <p class="intro">Eksemplet er konstrueret og indeholder ingen oplysninger fra modtagerens virkelige mails, men det følger systemets regler og datafelter.</p>
       </div>
 
       <figure aria-labelledby="journey-title">
@@ -712,25 +684,8 @@
           <div class="delivery-preview"><b>🔴 HASTER</b><span>En ekstra alarm sendes straks. Opslaget følger også den normale rute: i den samlede mail om dagen eller i morgenmailen efter natten.</span></div>
         </article>
       </div>
-      <figcaption class="example-note">Eksemplet indeholder ingen oplysninger fra modtagerens virkelige mails.</figcaption>
       </figure>
 
-      <h3 class="route-title">Hvad sker der efter vurderingen?</h3>
-      <div class="decision-tree" aria-label="Beslutningstræ for relevans, alvor og tidspunkt">
-        <div class="decision-root"><span>Er artiklen eller opslaget relevant?</span></div>
-        <div class="decision-main">
-          <div class="decision-path no"><span class="decision-answer">Nej</span><h3>Sendes ikke</h3><p>Det gemmes i kontrolloggen, så fravalget kan efterprøves.</p></div>
-          <div class="decision-path yes">
-            <span class="decision-answer">Ja</span>
-            <div class="decision-routes">
-              <div><h3>Kl. 8–17</h3><p>Fundet sendes i mailen fra den aktuelle kørsel.</p></div>
-              <div><h3>Kl. 17–8</h3><p>Fundet gemmes og leveres i den første morgenmail.</p></div>
-              <div class="urgent"><h3>Ved høj alvor</h3><p>En ekstra hastemail sendes straks, uanset tidspunkt.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="decision-notes"><p><b>Hvis intet nyt:</b> Cirka én tom statusmail i timen mellem kl. 8 og 17.</p><p><b>Kildestatus:</b> Vises nederst i samlede mails og tomme statusmails. Fejl i Google News, Truth Social eller X giver også en tydelig ⚠-advarsel.</p></div>
-      </div>
     </div>
   </section>
 
@@ -738,7 +693,7 @@
     <div class="shell">
       <div class="section-heading">
         <div><p class="section-label">Målt på rigtige data</p><h2 id="filter-title">201 artikler og opslag blev til ét relevant fund</h2></div>
-        <p class="intro">Tallene stammer fra en faktisk kørsel i prøvedriften 7. juli kl. 16.25. Først blev gengangere og ældre indhold fjernet. Derefter blev emne og kilde kontrolleret. AI-modellen vurderede de sidste 16 elementer og fandt ét relevant fund.</p>
+        <p class="intro">Tallene stammer fra en faktisk kørsel i prøvedriften 7. juli kl. 16.25. De enkle kontroller fjernede det meste; AI-modellen vurderede de sidste 16 elementer og fandt ét relevant fund.</p>
       </div>
 
       <figure aria-labelledby="filter-title">
@@ -788,7 +743,7 @@
     <div class="shell">
       <div class="section-heading compact">
         <div><p class="section-label">Det brugeren modtog</p><h2>Mailen viser både fund og driftsstatus</h2></div>
-        <p class="intro">I dagtimerne sender monitoren enten relevante fund eller en tom statusmail. Høj alvor udløser desuden en særskilt alarm. Kildestatus vises nederst i de almindelige mails, og fejl i Google News, Truth Social eller X markeres også i emnelinjen.</p>
+        <p class="intro">I dagtimerne sender monitoren enten relevante fund eller en tom statusmail; høj alvor udløser desuden en særskilt alarm. Kildestatus står nederst i hver mail, og kildefejl markeres også i emnelinjen.</p>
       </div>
       <div class="delivery-grid">
         <div class="mail" aria-label="Eksempel på en tom timemail">
@@ -831,7 +786,7 @@
           <div class="run-strip after" aria-hidden="true"></div>
           <div class="reliability-result good">Ekstern start hvert 30. minut</div>
         </div>
-        <figcaption class="diagram-caption">GitHubs tidsplan blev beholdt som backup. En ekstern tidsplan starter nu monitoren hvert 30. minut, og en uafhængig driftsmonitor giver besked, hvis kørsler udebliver. Den nederste række viser den nye planlagte kadence, ikke en målt succesrate.</figcaption>
+        <figcaption class="diagram-caption">En ekstern tidsplan starter nu monitoren hvert 30. minut med GitHubs egen som backup, og en uafhængig driftsmonitor giver besked, hvis kørsler udebliver. Den nederste række viser den planlagte kadence, ikke en målt succesrate.</figcaption>
       </figure>
 
       <div class="incident-grid">
@@ -863,7 +818,7 @@
     <div class="shell">
       <div class="section-heading compact">
         <div><p class="section-label">Min rolle</p><h2>Jeg byggede, testede og satte løsningen i drift</h2></div>
-        <p class="intro">Jeg omsatte standbybehovet til konkrete regler, valgte og validerede kilderne, byggede monitoren og fulgte den tæt gennem fire døgns prøvedrift. Jeg gennemgik de frasorterede fund manuelt og stod også for idriftsættelse og drift. Claude blev brugt som sparringspartner og til kodeudkast; jeg traf beslutningerne og gennemgik de ændringer, der blev sat i drift.</p>
+        <p class="intro">Jeg omsatte standbybehovet til konkrete regler, valgte og validerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og drift. Claude blev brugt som sparringspartner og til kodeudkast; jeg traf beslutningerne og gennemgik alle ændringer, før de kom i drift.</p>
       </div>
       <div class="role-grid">
         <article class="role-card primary">

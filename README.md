@@ -53,4 +53,9 @@ det åbne designspørgsmål blev lukket ved at fjerne seks-trins-kørslen fra
 (X henter kun siden sidste kørsel; dedup på id/link/normaliseret titel) blev
 flyttet ind i den tekniske foldeboks. Tankestreger i brødteksten blev erstattet
 af kommaer (talintervaller som "kl. 8–17" og den ægte emnelinje med "—" er
-bevidst beholdt).
+bevidst beholdt). Senere samme dag, oprydningspas efter brugerens "siden ser
+lidt rodet ud": beslutningstræet fjernet (dubleret af døgnrytme-diagrammet),
+stats-labels og sektionsintroer forkortet, quick-head-sideteksten droppet, én
+hero-CTA, h2/intro/quote skaleret ned, journey-kortene ensrettet til
+accent/rød. Desuden GitHub profil-README oprettet (repo
+JonathanFribert/JonathanFribert) med link hertil.
