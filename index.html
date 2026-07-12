@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nyhedsmonitor — fra idé til døgnvagt på fem dage</title>
+<meta name="description" content="Case: et AI-drevet nyhedsovervågningssystem for USA-Danmark/Grønland-relationen, bygget og sat i drift på fem dage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --grund: #F6F9FA;
+    --flade: #FFFFFF;
+    --linje: #D8E2E6;
+    --blaek: #14212A;
+    --daempet: #5A6B75;
+    --accent: #0E7490;        /* UI: etiketter, markeringer */
+    --accent-blid: #E3F1F4;
+    --data: #0891B2;          /* datamarkeringer, valideret mod lys flade */
+    --roed: #BE3B2E;
+    --roed-blid: rgba(190, 59, 46, 0.14);
+    --rav: #B9770E;
+    --groen: #1E8449;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --sans: -apple-system, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --grund: #0D1319; --flade: #141C24; --linje: #263440; --blaek: #E6EDF3;
+      --daempet: #93A6B2; --accent: #4FB3C9; --accent-blid: #12242C;
+      --data: #1FA3C9;
+      --roed: #E0766A; --roed-blid: rgba(224, 118, 106, 0.16);
+      --rav: #D9A441; --groen: #6FBF8F;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--grund);
+    color: var(--blaek);
+    font-family: var(--sans);
+    font-size: 1.02rem;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .ramme { max-width: 47rem; margin: 0 auto; padding: 0 1.25rem; }
+  code { font-family: var(--mono); font-size: 0.86em; background: var(--accent-blid); padding: 0.08em 0.35em; border-radius: 4px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 4rem 0 2.6rem; border-bottom: 1px solid var(--linje); }
+  .stempel {
+    font-family: var(--mono); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: -0.015em;
+    margin: 0 0 1.1rem; text-wrap: balance;
+  }
+  .hero .under { font-size: 1.16rem; color: var(--daempet); max-width: 40rem; margin: 0; text-wrap: pretty; }
+
+  .statgitter {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--linje);
+    border: 1px solid var(--linje); border-radius: 12px; overflow: hidden;
+    margin: 2.3rem 0 0;
+  }
+  @media (max-width: 560px) { .statgitter { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--flade); padding: 1.05rem 1.15rem; }
+  .stat .tal { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stat .navn { font-size: 0.8rem; color: var(--daempet); margin-top: 0.2rem; line-height: 1.4; }
+
+  /* ---------- Sektioner ---------- */
+  section { padding: 3rem 0 0; }
+  .maerke {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+  h2 {
+    font-family: var(--serif); font-size: 1.75rem; font-weight: 700;
+    letter-spacing: -0.01em; margin: 0 0 0.9rem; text-wrap: balance; line-height: 1.15;
+  }
+  h2 + p, p { margin: 0 0 1rem; max-width: 43rem; text-wrap: pretty; }
+
+  .citat {
+    font-family: var(--serif); font-size: 1.4rem; font-style: italic; font-weight: 500;
+    line-height: 1.4; border-left: 3px solid var(--accent);
+    padding: 0.35rem 0 0.35rem 1.2rem; margin: 1.7rem 0; text-wrap: balance;
+  }
+
+  figure { margin: 1.7rem 0 0; }
+  figcaption { font-size: 0.83rem; color: var(--daempet); margin-top: 0.7rem; max-width: 40rem; line-height: 1.5; }
+
+  /* ---------- Systemdiagram ---------- */
+  .system { display: grid; gap: 0; margin-top: 1.7rem; }
+  .sys-raekke { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+  @media (max-width: 620px) { .sys-raekke { grid-template-columns: 1fr; gap: 0.5rem; } }
+  .sys-boks {
+    background: var(--flade); border: 1px solid var(--linje); border-radius: 10px;
+    padding: 0.85rem 1.05rem;
+  }
+  .sys-boks .titel { font-family: var(--mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .sys-boks .rolle { font-size: 0.88rem; color: var(--daempet); margin-top: 0.2rem; line-height: 1.45; }
+  .sys-side {
+    border-style: dashed; background: transparent; align-self: center;
+  }
+  .sys-side .titel { color: var(--accent); }
+  .sys-pil {
+    grid-column: 1; justify-self: center; text-align: center;
+    color: var(--daempet); font-family: var(--mono); font-size: 0.74rem;
+    padding: 0.35rem 0; line-height: 1.3;
+  }
+  .sys-pil::before { content: "↓"; display: block; font-size: 1rem; color: var(--accent); }
+  @media (max-width: 620px) { .sys-pil { grid-column: auto; } }
+
+  /* ---------- Tragt ---------- */
+  .tragt { display: grid; gap: 1.05rem; margin-top: 1.7rem; }
+  .trin .linje1 { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .trin .navn { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; }
+  .trin .antal { font-family: var(--mono); font-size: 0.95rem; font-weight: 700; color: var(--blaek); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .trin .spor { margin-top: 0.35rem; height: 14px; border-radius: 4px; background: transparent; }
+  .trin .bar { height: 100%; min-width: 4px; border-radius: 4px; background: var(--data); transition: opacity 0.15s; }
+  .trin:hover .bar { opacity: 0.75; }
+  .trin .bar.slut { background: var(--roed); }
+  .trin .forklar { font-size: 0.88rem; color: var(--daempet); margin-top: 0.35rem; max-width: 40rem; line-height: 1.5; }
+
+  /* ---------- Mail-mock ---------- */
+  .mail {
+    background: var(--flade); border: 1px solid var(--linje); border-radius: 12px;
+    overflow: hidden; margin-top: 1.7rem; max-width: 37rem;
+  }
+  .mail .hoved { padding: 0.85rem 1.15rem; border-bottom: 1px solid var(--linje); display: grid; gap: 0.15rem; }
+  .mail .felt { font-size: 0.82rem; color: var(--daempet); }
+  .mail .felt b { color: var(--blaek); font-weight: 600; }
+  .mail .krop { padding: 1rem 1.15rem; font-size: 0.92rem; line-height: 1.55; }
+  .mail .krop p { margin: 0 0 0.8rem; }
+  .mail .fod {
+    padding: 0.7rem 1.15rem; border-top: 1px dashed var(--linje);
+    font-family: var(--mono); font-size: 0.72rem; color: var(--daempet); line-height: 1.6;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .emnelinjer { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: 0.45rem; max-width: 37rem; }
+  .emnelinjer li {
+    font-family: var(--mono); font-size: 0.78rem; line-height: 1.5;
+    padding: 0.5rem 0.9rem; background: var(--flade);
+    border: 1px solid var(--linje); border-radius: 8px;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .emnelinjer .hvad { color: var(--daempet); font-family: var(--sans); font-size: 0.78rem; }
+
+  /* ---------- Døgnstrip ---------- */
+  .strip-svg { width: 100%; height: auto; display: block; margin-top: 1.5rem; }
+
+  /* ---------- Hændelser ---------- */
+  .haendelse {
+    background: var(--flade); border: 1px solid var(--linje);
+    border-left: 3px solid var(--roed); border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem; margin: 0.95rem 0 0;
+  }
+  .haendelse .symptom { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--roed); margin: 0 0 0.4rem; letter-spacing: 0.03em; }
+  .haendelse p { font-size: 0.94rem; margin: 0; max-width: 42rem; }
+  .haendelse .fix { color: var(--daempet); margin-top: 0.35rem; }
+  .haendelse .fix b { color: var(--groen); font-weight: 650; }
+
+  /* ---------- Dagbog ---------- */
+  .dagbog { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: 1.15rem; }
+  .dagbog li { display: grid; grid-template-columns: 5.4rem 1fr; gap: 1.1rem; }
+  .dagbog .dato { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--accent); padding-top: 0.2rem; white-space: nowrap; }
+  .dagbog .hvad { font-size: 0.97rem; max-width: 38rem; }
+  .dagbog .hvad strong { font-weight: 650; }
+
+  /* ---------- Principper ---------- */
+  .kortgitter { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 1.6rem 0 0; }
+  @media (max-width: 640px) { .kortgitter { grid-template-columns: 1fr; } }
+  .kort { background: var(--flade); border: 1px solid var(--linje); border-radius: 10px; padding: 1.05rem 1.15rem; }
+  .kort h3 { font-size: 0.98rem; font-weight: 700; margin: 0 0 0.4rem; }
+  .kort p { font-size: 0.92rem; color: var(--daempet); margin: 0; }
+
+  /* ---------- Stack ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+  .chips li {
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 700;
+    padding: 0.38rem 0.8rem; background: var(--accent-blid); color: var(--accent);
+    border-radius: 999px;
+  }
+
+  footer {
+    margin-top: 3.4rem; padding: 1.5rem 0 3rem; border-top: 1px solid var(--linje);
+    font-family: var(--mono); font-size: 0.76rem; color: var(--daempet); line-height: 1.8;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.synlig { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="ramme">
+
+  <header class="hero">
+    <p class="stempel">Case · juli 2026 · Python + AI i produktion</p>
+    <h1>En døgnvagt for Grønlands&shy;krisen, bygget på fem dage</h1>
+    <p class="under">Sommeren 2026: forholdet mellem USA og Danmark om Grønland spidser til, og en medarbejder i den danske centraladministration skal kunne reagere på minutter, døgnet rundt, i en uge. Nyhedsmonitoren tog vagten: den læser nyhedsmedier, Truth Social og X hele døgnet, sorterer med AI og sender kun det, der betyder noget.</p>
+    <div class="statgitter">
+      <div class="stat"><div class="tal">5 dage</div><div class="navn">fra første idé til live drift hos modtageren</div></div>
+      <div class="stat"><div class="tal">3</div><div class="navn">databaner, aflæst hvert kvarter</div></div>
+      <div class="stat"><div class="tal">42</div><div class="navn">håndverificerede officielle konti på X</div></div>
+      <div class="stat"><div class="tal">406</div><div class="navn">frasorterede nyheder håndauditeret for fejl</div></div>
+      <div class="stat"><div class="tal">19</div><div class="navn">unit-tests, alle grønne</div></div>
+      <div class="stat"><div class="tal">&lt; 50 kr</div><div class="navn">samlet driftsomkostning for hele ugen</div></div>
+    </div>
+  </header>
+
+  <section class="reveal">
+    <p class="maerke">01 · Problemet</p>
+    <h2>Standby uden at stå standby</h2>
+    <p>Opgaven lød enkel: hold øje med alt, hvad USA's og rigsfællesskabets topfolk siger om Grønland, og giv besked med det samme. Men "hold øje" betyder i praksis hundredvis af artikler og opslag i døgnet, hvoraf næsten intet er relevant. Kravene, der formede systemet: <strong>intet relevant må glippe, intet må gentages, og støj er forbudt</strong>. Og så det krav, der formede arkitekturen mest af alle:</p>
+    <p class="citat">Udebliver mailen, er værktøjet nede — ikke verden stille.</p>
+    <p>Et overvågningssystem, der fejler i stilhed, er farligere end intet system, for modtageren tror sig dækket. Derfor sender monitoren altid livstegn: mindst én mail i timen i dagtimerne, også når der intet er sket. Og bag den står en uafhængig vagthund, der automatisk slår alarm, hvis kørslerne udebliver. Stilhed kan aldrig forveksles med nedbrud.</p>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">02 · Systemet</p>
+    <h2>Sådan hænger det sammen</h2>
+    <p>Ingen server at passe, ingen computer der skal stå tændt. Et eksternt vækkeur starter en gratis GitHub-maskine hver halve time; den kører pipelinen, sender mail og melder "jeg lever", inden den forsvinder igen. Al hukommelse gemmes som versionerede filer i git.</p>
+    <div class="system">
+      <div class="sys-raekke">
+        <div class="sys-boks"><div class="titel">cron-job.org · eksternt vækkeur</div><div class="rolle">Kalder GitHub minutpræcist hver 30. minut. Valgt efter at GitHubs egen scheduler blev målt til at springe halvdelen af timerne over.</div></div>
+      </div>
+      <div class="sys-raekke"><div class="sys-pil">starter kørsel</div></div>
+      <div class="sys-raekke">
+        <div class="sys-boks"><div class="titel">GitHub Actions · flygtig maskine</div><div class="rolle">Klargør Python, kører én kørsel (ca. 2 minutter) og lukker ned. Hemmeligheder ligger krypteret som secrets, aldrig i koden.</div></div>
+        <div class="sys-boks sys-side"><div class="titel">healthchecks.io · vagthund</div><div class="rolle">Modtager et "jeg lever"-ping efter hver vellykket kørsel. Udebliver pinget i over 1,5 time, sendes automatisk alarm til byggeren.</div></div>
+      </div>
+      <div class="sys-raekke"><div class="sys-pil">henter og filtrerer</div></div>
+      <div class="sys-raekke">
+        <div class="sys-boks"><div class="titel">Pipeline · seks filtre</div><div class="rolle">GDELT, Google News (engelsk + dansk), Truth Social og 42 X-konti ind; dedup, tidsfilter, søgeord, kildekontrol og AI-læsning; kun det relevante ud. Detaljer i næste afsnit.</div></div>
+        <div class="sys-boks sys-side"><div class="titel">git · hukommelse</div><div class="rolle">Set-lister, natkø og audit-log committes tilbage efter hver kørsel. Intet gentages, og hele forløbet kan efterprøves bagefter.</div></div>
+      </div>
+      <div class="sys-raekke"><div class="sys-pil">leverer</div></div>
+      <div class="sys-raekke">
+        <div class="sys-boks"><div class="titel">Gmail → modtageren</div><div class="rolle">Digest i dagtimerne (kl. 8–17, nattens fund køes til morgenmailen), øjeblikkelig hastemail hele døgnet ved alvorlige fund. Byggeren er Cc på alt.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">03 · Filtreringen</p>
+    <h2>En rigtig time, fra 201 til 1</h2>
+    <p>Tallene herunder er fra en faktisk kørsel (7. juli kl. 16:25). Princippet: de billige, mekaniske filtre skærer det meste væk, før den dyre AI læser resten. Det er derfor, en uges drift koster under 50 kroner.</p>
+    <div class="tragt" role="img" aria-label="Filtreringstragt: 201 rå elementer blev til 1 relevant gennem fem filtre">
+      <div class="trin" title="201 elementer hentet fra alle kilder">
+        <div class="linje1"><span class="navn">HENTET</span><span class="antal">201</span></div>
+        <div class="spor"><div class="bar" style="width:100%"></div></div>
+        <div class="forklar">Alt fra nyhedssøgninger, Truth Social og de 42 X-konti, rå og ufiltreret.</div>
+      </div>
+      <div class="trin" title="189 var nye; 12 var set før">
+        <div class="linje1"><span class="navn">NYE (DEDUP)</span><span class="antal">189</span></div>
+        <div class="spor"><div class="bar" style="width:94%"></div></div>
+        <div class="forklar">Alt, der er set i en tidligere kørsel, fjernes: URL-hash, opslags-id og normaliseret titel på tværs af kilder.</div>
+      </div>
+      <div class="trin" title="18 var ferske; 171 var arkivstof">
+        <div class="linje1"><span class="navn">FERSKE (TIDSFILTER)</span><span class="antal">18</span></div>
+        <div class="spor"><div class="bar" style="width:9%"></div></div>
+        <div class="forklar">Søge-API'er genudspyr gamle artikler som "nye". Alt, der er ældre end sidste kørsel minus 24 timers nåde, droppes.</div>
+      </div>
+      <div class="trin" title="17 matchede geografi + tema">
+        <div class="linje1"><span class="navn">SØGEORD (PREFILTER)</span><span class="antal">17</span></div>
+        <div class="spor"><div class="bar" style="width:8.5%"></div></div>
+        <div class="forklar">Nyheder skal nævne både geografien (Grønland, Danmark, Færøerne ...) og et tema (suverænitet, told, anneksion ...). Officielle konti er fritaget, så skrå formuleringer som "It will be ours" ikke tabes.</div>
+      </div>
+      <div class="trin" title="16 kom fra eller blev bekræftet af troværdige medier">
+        <div class="linje1"><span class="navn">TROVÆRDIGE (ALLOWLIST)</span><span class="antal">16</span></div>
+        <div class="spor"><div class="bar" style="width:8%"></div></div>
+        <div class="forklar">Ukendte hjemmesider kommer kun med, hvis et anerkendt medie dækker samme historie, tjekket mod et rullende 48-timers vindue. Holder clickbait og konspirationssider ude.</div>
+      </div>
+      <div class="trin" title="1 relevant fund, alvorsgrad høj, sendt som hastemail">
+        <div class="linje1"><span class="navn">RELEVANT (AI-LÆSNING)</span><span class="antal">1 · 🔴 høj</span></div>
+        <div class="spor"><div class="bar slut" style="width:2%"></div></div>
+        <div class="forklar">Claude Haiku læser hvert element og vurderer relevans, alvorsgrad og part, og skriver et dansk resumé på én linje. Dette ene fund udløste en øjeblikkelig hastemail. Fejler AI'en, beholdes elementet: hellere lidt støj end en overset nyhed.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">04 · Leveringen</p>
+    <h2>Mailen, der beviser at vagten lever</h2>
+    <p>De fleste timer er der intet nyt, og netop dét er information. Den tomme mail er systemets dead-man's switch, og dens kildefod gør tavse fejl synlige: svarer en kilde ikke, står det sort på hvidt i hver eneste mail.</p>
+    <div class="mail" aria-label="Eksempel på systemets tomme timemail">
+      <div class="hoved">
+        <div class="felt"><b>Fra:</b> Nyhedsmonitor</div>
+        <div class="felt"><b>Emne:</b> Ingen nye opdateringer (11-07-2026 15:24)</div>
+      </div>
+      <div class="krop">
+        <p>Ingen nye relevante opdateringer siden sidste kørsel.</p>
+        <p>(Denne mail er systemets dead-man's switch: udebliver den, er værktøjet nede — ikke verden stille.)</p>
+      </div>
+      <div class="fod">Kilder: GDELT: rate-limit · Google News: ok · Google News (DA): ok · Truth Social: ok · X: ok (42/42)</div>
+    </div>
+    <ul class="emnelinjer">
+      <li><span class="hvad">Fund i timen →</span> 🔴 1 HØJ — Nyhedsmonitor: 3 nye (07-07-2026 16:25)</li>
+      <li><span class="hvad">Alvorligt fund, sendt straks →</span> 🔴 HASTER: 1 høj-prioritet (07-07-2026 16:25)</li>
+      <li><span class="hvad">Kilde nede →</span> ⚠ Ingen nye opdateringer (07-07-2026 14:41)</li>
+    </ul>
+    <figure><figcaption>Emnelinjer fra rigtige kørsler. Alvorsgraden står forrest, så indbakken kan skimmes på et sekund.</figcaption></figure>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">05 · Hændelser</p>
+    <h2>Det, der gik galt — og hvad det lærte os</h2>
+    <p>Et system, der skal kunne stoles på i en krise, bliver kun troværdigt af at få sine fejl frem i lyset. De fire vigtigste:</p>
+
+    <div class="haendelse">
+      <p class="symptom">INGEN MAIL I 4,6 TIMER</p>
+      <p>GitHubs gratis scheduler viste sig at springe planlagte kørsler over, værst om natten. Målingen herunder er fra den 10. juli: 9 kørsler fyrede af 24 planlagte. De røde bånd er perioder uden kørsel længere end alarmgrænsen på 1,5 time.</p>
+      <svg class="strip-svg" viewBox="0 0 720 92" role="img" aria-label="Tidslinje over den 10. juli: kun 9 af 24 planlagte kørsler fyrede, med huller på op til 4,6 timer">
+        <!-- røde bånd: huller > 1,5 t mellem kørsler -->
+        <g fill="var(--roed-blid)">
+          <rect x="0"     y="40" width="125.4" height="18" rx="3"/>
+          <rect x="125.4" y="40" width="109.5" height="18" rx="3"/>
+          <rect x="234.9" y="40" width="103.5" height="18" rx="3"/>
+          <rect x="338.4" y="40" width="61.5"  height="18" rx="3"/>
+          <rect x="399.9" y="40" width="96.6"  height="18" rx="3"/>
+          <rect x="496.5" y="40" width="65.1"  height="18" rx="3"/>
+          <rect x="561.6" y="40" width="58.8"  height="18" rx="3"/>
+          <rect x="620.4" y="40" width="46.5"  height="18" rx="3"/>
+        </g>
+        <text x="62" y="30" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="var(--roed)" text-anchor="middle">4,6 timers hul</text>
+        <line x1="62" y1="34" x2="62" y2="44" stroke="var(--roed)" stroke-width="1.5"/>
+        <!-- akse -->
+        <line x1="0" y1="49" x2="720" y2="49" stroke="var(--linje)" stroke-width="1.5"/>
+        <!-- kørsler -->
+        <g fill="var(--data)" stroke="var(--grund)" stroke-width="2">
+          <circle cx="125.4" cy="49" r="5.5"><title>Kørsel 04:11 UTC</title></circle>
+          <circle cx="234.9" cy="49" r="5.5"><title>Kørsel 07:50 UTC</title></circle>
+          <circle cx="338.4" cy="49" r="5.5"><title>Kørsel 11:17 UTC</title></circle>
+          <circle cx="399.9" cy="49" r="5.5"><title>Kørsel 13:19 UTC</title></circle>
+          <circle cx="496.5" cy="49" r="5.5"><title>Kørsel 16:33 UTC</title></circle>
+          <circle cx="561.6" cy="49" r="5.5"><title>Kørsel 18:43 UTC</title></circle>
+          <circle cx="620.4" cy="49" r="5.5"><title>Kørsel 20:41 UTC</title></circle>
+          <circle cx="666.9" cy="49" r="5.5"><title>Kørsel 22:14 UTC</title></circle>
+          <circle cx="696.0" cy="49" r="5.5"><title>Kørsel 23:12 UTC</title></circle>
+        </g>
+        <!-- ticks -->
+        <g font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--daempet)">
+          <text x="0" y="78">00</text>
+          <text x="180" y="78" text-anchor="middle">06</text>
+          <text x="360" y="78" text-anchor="middle">12</text>
+          <text x="540" y="78" text-anchor="middle">18</text>
+          <text x="714" y="78" text-anchor="end">24</text>
+        </g>
+      </svg>
+      <p class="fix"><b>Fix i tre trin:</b> først skævt cron-minut (hjalp ikke, målt), så 4 planlagte kørsler i timen (hjalp om dagen, ikke om natten, målt), så eksternt minutpræcist vækkeur. Hver løsning blev verificeret mod data, før den næste blev bygget. Vagthundens uptime-graf dokumenterede hele forløbet: 94,85 % oppetid før, ingen huller efter.</p>
+    </div>
+
+    <div class="haendelse">
+      <p class="symptom">ALLE API'ER SVAREDE 401 — MEN KUN I CI</p>
+      <p>Alle nøgler virkede lokalt og fejlede i skyen. Årsagen: <code>gh secret set --body -</code> havde sat hver eneste secret til den bogstavelige streng "-".</p>
+      <p class="fix"><b>Fix:</b> secrets sættes via stdin, og opsætningen blev scriptet, så den kan gentages uden håndfejl. Lære: infrastruktur skal verificeres med samme grundighed som kode.</p>
+    </div>
+
+    <div class="haendelse">
+      <p class="symptom">NYHEDSBANEN DØDE STILLE MED 404</p>
+      <p>Som søgeordslisten voksede, rundede forespørgslen til Google News 1.200 tegn, og API'et begyndte at afvise den, men kun nogle gange, så det lignede tilfældig støj.</p>
+      <p class="fix"><b>Fix:</b> hentning og filtrering blev afkoblet: en kompakt, robust søgning mod API'et, den fulde liste i eget filter bagefter. Og kildefoden i hver mail sikrer, at en død bane aldrig igen kan gemme sig.</p>
+    </div>
+
+    <div class="haendelse">
+      <p class="symptom">EN ÆGTE NYHED BLEV SORTERET FRA</p>
+      <p>"NATO Chief Rutte Urges US To Work Together On Greenland" døde i kildekontrollen: bureauversionen af historien var kommet en time tidligere og var allerede markeret som set, så krydsbekræftelsen fandt intet match i kørslen.</p>
+      <p class="fix"><b>Fix:</b> krydsbekræftelse mod et rullende 48-timers vindue af sete titler, plus en leverings-log, så begge sider af filteret kan efterprøves. Fejlen blev overhovedet kun fundet, fordi alt frasorteret logges og blev håndauditeret under prøvedriften.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">06 · Forløbet</p>
+    <h2>Byggedagbog</h2>
+    <ul class="dagbog">
+      <li><span class="dato">7. jul</span><div class="hvad"><strong>Bevis først, byg så.</strong> Alle tre databaner bevist mod rigtige data, hele pipelinen bygget, deployet og første mail sendt, samme dag. I shadow-tilstand: alt gik kun til byggeren selv.</div></li>
+      <li><span class="dato">8.–11. jul</span><div class="hvad"><strong>Fire døgns prøvedrift.</strong> Alt frasorteret blev logget og gennemgået i hånden: 406 elementer, én ægte fejl fundet og lukket. Filtre tunet mod virkeligheden i stedet for antagelser.</div></li>
+      <li><span class="dato">11. jul</span><div class="hvad"><strong>Go-live.</strong> Den rigtige modtager koblet på, først efter eksplicit godkendelse. Byggeren som Cc på alt, og automatisk tilbagefald til prøvetilstand hvis modtageren fjernes.</div></li>
+      <li><span class="dato">12. jul</span><div class="hvad"><strong>Hærdning i drift.</strong> Scheduler-problemet målt og løst med eksternt vækkeur. Leveringsvindue kl. 8–17 tilføjet på modtagerens ønske, med natkø så intet går tabt, og hastemails der stadig kan vække.</div></li>
+    </ul>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">07 · Principper</p>
+    <h2>Seks valg, der bærer systemet</h2>
+    <div class="kortgitter">
+      <div class="kort"><h3>Recall over precision</h3><p>En overset nyhed er langt værre end lidt støj. Filtre fejler åbent, grænser sættes rummeligt, og alt frasorteret logges, så fejlskøn kan opdages.</p></div>
+      <div class="kort"><h3>Shadow først</h3><p>Systemet sendte kun til byggeren, indtil fire døgns rigtige data havde bevist filteret. Et utunet filter sættes aldrig foran en, hvis arbejde afhænger af det.</p></div>
+      <div class="kort"><h3>Støj ud før AI</h3><p>Mekaniske filtre fjerner over 90 % af strømmen, før AI'en læser resten. Derfor koster en uges døgndrift mindre end en frokost.</p></div>
+      <div class="kort"><h3>Dead-man's switch i to lag</h3><p>Den tomme mail beviser liv over for mennesket; en uafhængig vagthund alarmerer automatisk, hvis maskinen går i stå. Stilhed kan aldrig fejlfortolkes.</p></div>
+      <div class="kort"><h3>Kun verificerede kilder</h3><p>Social-banen læser udelukkende håndverificerede officielle konti. Systemet opfinder aldrig noget: hver linje i hver mail har et link til originalen.</p></div>
+      <div class="kort"><h3>Mennesket bestemmer</h3><p>Modtager, go-live og alle udadvendte skridt kræver eksplicit menneskelig godkendelse. Guardrails ligger i koden, ikke i gode intentioner.</p></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <p class="maerke">08 · Værktøjer</p>
+    <h2>Stakken</h2>
+    <ul class="chips">
+      <li>Python</li><li>GitHub Actions</li><li>Claude Haiku · structured outputs</li>
+      <li>GDELT DOC API</li><li>Google News RSS</li><li>ScrapeCreators</li>
+      <li>twitterapi.io</li><li>Gmail SMTP</li><li>healthchecks.io</li>
+      <li>cron-job.org</li><li>state i git</li><li>unittest</li>
+    </ul>
+    <p style="margin-top:1.3rem">Projektet er udviklet i par med Claude som AI-medbygger: mennesket satte retning og krav, godkendte hvert udadvendt skridt og traf produktbeslutningerne; agenten byggede, testede, målte og overvågede driften. Al tilstand versioneres i git, så hvert skridt i forløbet kan efterprøves.</p>
+  </section>
+
+  <footer>
+    NYHEDSMONITOR · JULI 2026 · BYGGET AF JONATHAN FRIBERT<br>
+    Kildekoden ligger i et privat repository af hensyn til opgavens karakter. Arkitektur, audit-forløb og driftshistorik er dokumenteret og kan gennemgås på forespørgsel.
+  </footer>
+</div>
+
+<script>
+  (function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("synlig"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (poster) {
+      poster.forEach(function (p) {
+        if (p.isIntersecting) { p.target.classList.add("synlig"); io.unobserve(p.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
