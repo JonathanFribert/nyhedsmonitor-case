@@ -62,4 +62,11 @@ JonathanFribert/JonathanFribert) med link hertil. Tredje pas: diskret
 scroll-reveal (fade-op, staggered pr. søskendegruppe) og tragtsøjler/døgnbånd
 der vokser frem ved indsyn; alt gated bag `.js-reveal` på `<html>` (sat af JS)
 og `prefers-reduced-motion: no-preference`, så siden er fuldt synlig uden JS og
-uden bevægelse for følsomme brugere. Plus ::selection i accentfarve.
+uden bevægelse for følsomme brugere. Plus ::selection i accentfarve. Fjerde pas: manuel lys/mørk-knap i topbaren.
+Mekanik: uden valg følger siden systemet (media query); et klik sætter
+`data-theme` på `<html>` og gemmer i localStorage (læses af et lille
+head-script før første maling, så intet blink); vælges systemets eget tema,
+ryddes valget, og siden følger systemet igen. Dark-variablerne findes derfor
+BÅDE i media-queryen (gated med `:not([data-theme="light"])`) og duplikeret
+under `[data-theme="dark"]` — hold de to blokke i sync ved farveændringer.
+Knappen opdaterer også begge theme-color-metatags.
