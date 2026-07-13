@@ -1,24 +1,25 @@
 <!doctype html>
-<html lang="da" class="no-js">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jonathan Fribert | Case: Nyhedsmonitor</title>
-<meta name="description" content="Projektcase om en nyhedsmonitor, der hjalp en medarbejder i Statsministeriet med hurtigt at opdage relevante offentlige udmeldinger, mens medarbejderen var på standby i en intensiv uge. Bygget af Jonathan Fribert og dokumenteret med faktiske driftstal.">
+<title>Jonathan Fribert | Case Study: Nyhedsmonitor</title>
+<meta name="description" content="A case study of a news monitor that helped an employee at the Danish Prime Minister's Office quickly identify relevant public statements while on standby during a demanding week. Built by Jonathan Fribert and documented with real operational data.">
 <meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Jonathan Fribert | Case: Nyhedsmonitor">
-<meta property="og:description" content="En nyhedsmonitor, der hjalp en medarbejder i Statsministeriet med hurtigt at opdage relevante offentlige udmeldinger, mens medarbejderen var på standby i en intensiv uge.">
+<meta property="og:title" content="Jonathan Fribert | Case Study: Nyhedsmonitor">
+<meta property="og:description" content="A news monitor that helped an employee at the Danish Prime Minister's Office quickly identify relevant public statements while on standby during a demanding week.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://jonathanfribert.github.io/nyhedsmonitor-case/">
-<meta property="og:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://jonathanfribert.github.io/nyhedsmonitor-case/en.html">
+<meta property="og:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Delekort: Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet">
+<meta property="og:image:alt" content="Share image: I built a news monitor for an employee at the Danish Prime Minister's Office">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
-<meta name="twitter:image:alt" content="Delekort: Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet">
-<link rel="canonical" href="https://jonathanfribert.github.io/nyhedsmonitor-case/">
+<meta name="twitter:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image-en.png">
+<meta name="twitter:image:alt" content="Share image: I built a news monitor for an employee at the Danish Prime Minister's Office">
+<link rel="canonical" href="https://jonathanfribert.github.io/nyhedsmonitor-case/en.html">
 <link rel="alternate" hreflang="da" href="https://jonathanfribert.github.io/nyhedsmonitor-case/">
 <link rel="alternate" hreflang="en" href="https://jonathanfribert.github.io/nyhedsmonitor-case/en.html">
 <link rel="alternate" hreflang="x-default" href="https://jonathanfribert.github.io/nyhedsmonitor-case/">
@@ -116,7 +117,7 @@
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
   ::selection { background: var(--accent-soft); color: var(--ink); }
 
-  /* Papirkorn: statisk avispapir-tekstur over hele siden. */
+  /* Paper grain: a static newsprint texture across the page. */
   body::before {
     content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -124,7 +125,7 @@
     mix-blend-mode: var(--grain-blend); opacity: var(--grain-o);
   }
 
-  /* Diskret bevægelse på få hovedfigurer. Alt er synligt uden JavaScript. */
+  /* Subtle motion on selected figures. Everything remains visible without JavaScript. */
   @media (prefers-reduced-motion: no-preference) {
     .js-reveal .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
     .js-reveal .reveal.in-view { opacity: 1; transform: none; }
@@ -147,15 +148,15 @@
     .js-reveal #resultater .filter-row:nth-child(7) .retention span { transition-delay: 0.25s; }
     .js-reveal #resultater .filter-row.final.counted { animation: final-flash 0.9s ease-out 1; }
     @keyframes final-flash { 0% { background: var(--red-soft); } 100% { background: transparent; } }
-    /* Temaskiftet breder sig som en cirkel ud fra temaknappen. */
+    /* The theme transition expands in a circle from the theme button. */
     ::view-transition-old(root) { animation: none; }
     ::view-transition-new(root) { animation: vt-iris 0.5s ease-in-out both; }
     @keyframes vt-iris {
       from { clip-path: circle(0 at var(--vt-x, 100%) var(--vt-y, 0%)); }
       to { clip-path: circle(140vmax at var(--vt-x, 100%) var(--vt-y, 0%)); }
     }
-    /* Avishovedet folder ind i topbaren: navnet i topbaren viser sig foerst,
-       naar udgavelinjen er scrollet ud af syne. */
+    /* The masthead folds into the top bar: the name appears in the top bar
+       once the edition line has scrolled out of view. */
     .js-fold .brand-name { opacity: 0; transform: translateY(0.3rem); transition: opacity 0.25s ease, transform 0.25s ease; }
     .js-fold.masthead-passed .brand-name { opacity: 1; transform: none; }
   }
@@ -667,24 +668,24 @@
 </script>
 </head>
 <body>
-<a class="skip-link" href="#indhold">Gå til indhold</a>
+<a class="skip-link" href="#indhold">Skip to content</a>
 
-<nav class="topbar" aria-label="Primær navigation">
+<nav class="topbar" aria-label="Primary navigation">
   <div class="shell nav">
-    <a class="brand" href="#top" aria-label="Jonathan Fribert, til toppen">
+    <a class="brand" href="#top" aria-label="Jonathan Fribert, back to top">
       <span class="brand-mark">JF</span><span class="brand-name">JONATHAN FRIBERT</span>
     </a>
     <div class="nav-actions">
       <div class="nav-links">
-        <a href="#problem">Opgaven</a>
-        <a href="#system">Løsningen</a>
-        <a class="nav-secondary" href="#resultater">Resultater</a>
-        <a class="nav-secondary" href="#rolle">Min rolle</a>
-        <a class="nav-contact" href="#kontakt">Kontakt</a>
+        <a href="#problem">The brief</a>
+        <a href="#system">The solution</a>
+        <a class="nav-secondary" href="#resultater">Results</a>
+        <a class="nav-secondary" href="#rolle">My role</a>
+        <a class="nav-contact" href="#kontakt">Contact</a>
       </div>
       <a class="nav-cta" href="https://github.com/JonathanFribert" rel="me">GitHub</a>
-      <a class="language-switch" href="en.html" lang="en" hreflang="en" aria-label="Read this case in English">EN</a>
-      <button class="theme-toggle" type="button" aria-label="Skift til mørkt tema" aria-pressed="false">
+      <a class="language-switch" href="./" lang="da" hreflang="da" aria-label="Read this page in Danish">DA</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
         <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
         <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       </button>
@@ -696,36 +697,36 @@
 <header class="hero" id="top">
   <div class="shell">
     <div class="masthead">
-      <p class="masthead-line"><span>Jonathan Fribert</span><span class="masthead-mid">Projektcase</span><span>Juli 2026</span></p>
+      <p class="masthead-line"><span>Jonathan Fribert</span><span class="masthead-mid">Case study</span><span>July 2026</span></p>
       <div class="masthead-rule" aria-hidden="true"></div>
     </div>
     <div class="hero-grid">
       <div>
-        <h1>Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet</h1>
-        <p class="lead">En medarbejder i Statsministeriet var på standby i en intensiv uge og skulle hurtigt opdage nye offentlige udmeldinger om relationen mellem USA og Kongeriget Danmark med særligt fokus på Grønland og Færøerne. Jeg byggede derfor et personligt hjælpeværktøj, der overvåger nyhedsmedier og udvalgte konti, fjerner irrelevant stof og gentagelser og sender relevante artikler og opslag på mail. Så kunne medarbejderen arbejde videre med andre opgaver uden selv at følge hele nyhedsstrømmen.</p>
+        <h1>I built a news monitor for an employee at the Danish Prime Minister's Office</h1>
+        <p class="lead">An employee at the Danish Prime Minister's Office was on standby during a demanding week and needed to quickly identify new public statements about relations between the United States and the Kingdom of Denmark, particularly those involving Greenland or the Faroe Islands. I built a purpose-built monitoring tool that follows news outlets and selected accounts, removes irrelevant content and duplicates, and delivers relevant articles and posts by email. This allowed the employee to focus on other work without personally following the entire news stream.</p>
         <div class="hero-actions">
-          <a class="button" href="#kort-fortalt">Forstå løsningen ↓</a>
-          <a class="button secondary" href="#rolle">Se min rolle</a>
+          <a class="button" href="#kort-fortalt">Explore the solution ↓</a>
+          <a class="button secondary" href="#rolle">See my role</a>
         </div>
       </div>
-      <aside class="case-brief" aria-label="Opgavens rammer">
-        <p class="case-brief-title">Opgavens rammer</p>
+      <aside class="case-brief" aria-label="Project parameters">
+        <p class="case-brief-title">Project parameters</p>
         <dl>
-          <div><dt>Bruger</dt><dd>En medarbejder i Statsministeriet</dd></div>
-          <div><dt>Periode</dt><dd>Én intensiv uge på standby</dd></div>
-          <div><dt>Status</dt><dd>Sat i drift 11. juli 2026, tidsafgrænset til projektugen</dd></div>
-          <div><dt>Fokus</dt><dd>USA og Kongeriget Danmark</dd></div>
-          <div><dt>Behov</dt><dd>Hurtig reaktion uden selv at overvåge nyhedsstrømmen hele tiden</dd></div>
+          <div><dt>User</dt><dd>An employee at the Danish Prime Minister's Office</dd></div>
+          <div><dt>Period</dt><dd>One demanding week on standby</dd></div>
+          <div><dt>Status</dt><dd>Deployed on 11 July 2026; limited to the project week</dd></div>
+          <div><dt>Focus</dt><dd>The United States and the Kingdom of Denmark</dd></div>
+          <div><dt>Need</dt><dd>Quick detection without having to monitor the news continuously</dd></div>
         </dl>
-        <p class="case-disclaimer">Værktøjet blev bygget som et personligt hjælpemiddel til én medarbejder, der var på standby i en afgrænset periode. Det er ikke et officielt system fra Statsministeriet og er ikke udviklet på ministeriets vegne. Det bruger kun offentligt tilgængelige oplysninger og skaber alene overblik; det træffer ingen beslutninger og anbefaler ingen handlinger.</p>
+        <p class="case-disclaimer">The tool was built as a personal aid for one employee who was on standby for a limited period. It is not an official Danish Prime Minister's Office system and was not developed on behalf of the Office. It uses only publicly available information and serves solely to provide an overview; it neither makes decisions nor recommends actions.</p>
       </aside>
     </div>
 
-    <div class="stats" aria-label="Projektets nøgletal">
-      <div class="stat"><div class="stat-value">5 kalenderdage</div><div class="stat-label">Fra den første prototype den 7. juli til idriftsættelsen den 11. juli.</div></div>
-      <div class="stat"><div class="stat-value">42 X-konti</div><div class="stat-label">Afsenderen bag hver konto blev kontrolleret manuelt.</div></div>
-      <div class="stat"><div class="stat-value">406 artikler og opslag</div><div class="stat-label">Jeg gennemgik manuelt det indhold, monitoren sorterede fra under fire døgns prøvedrift.</div></div>
-      <div class="stat"><div class="stat-value">1 fejlsorteret historie</div><div class="stat-label">Den manuelle kontrol fangede historien, og kildekontrollen blev rettet før idriftsættelsen.</div></div>
+    <div class="stats" aria-label="Key project figures">
+      <div class="stat"><div class="stat-value">5 calendar days</div><div class="stat-label">From the first prototype on 7 July to deployment on 11 July.</div></div>
+      <div class="stat"><div class="stat-value">42 X accounts</div><div class="stat-label">The person or organisation behind each account was verified manually.</div></div>
+      <div class="stat"><div class="stat-value">406 articles and posts</div><div class="stat-label">I manually reviewed the content filtered out during a four-day pre-deployment trial.</div></div>
+      <div class="stat"><div class="stat-value">1 incorrectly filtered story</div><div class="stat-label">The manual review caught the story, and the source check was corrected before deployment.</div></div>
     </div>
   </div>
 </header>
@@ -735,65 +736,65 @@
     <div class="shell">
       <div class="quick-panel">
         <div class="quick-head">
-          <h2>Sådan hjælper løsningen brugeren</h2>
+          <h2>How the solution helps the user</h2>
         </div>
         <div class="quick-grid">
           <article class="quick-step">
             <span class="quick-number">01</span>
-            <h3>Finder nye historier</h3>
-            <p>Den søger i internationale og danske nyhedskilder og følger en fast liste over konti på Truth Social og X.</p>
+            <h3>Finds new stories</h3>
+            <p>It searches international and Danish news sources and follows a fixed list of accounts on Truth Social and X.</p>
           </article>
           <article class="quick-step">
             <span class="quick-number">02</span>
-            <h3>Kontrollerer relevansen</h3>
-            <p>Den fjerner gengangere og for gammelt indhold, sorterer stof uden for emnet fra og kontrollerer nyhedsartiklernes kilder. Til sidst vurderer en AI-model relevansen.</p>
+            <h3>Checks relevance</h3>
+            <p>It removes duplicates and outdated content, filters out off-topic material and checks the sources of news articles. An AI model then assesses relevance.</p>
           </article>
           <article class="quick-step">
             <span class="quick-number">03</span>
-            <h3>Leverer på det rette tidspunkt</h3>
-            <p>Relevante fund sendes på mail. Når monitoren finder et alvorligt fund, sender den straks en særskilt hastemail. Relevante fund fra natten gemmes til den første morgenmail.</p>
+            <h3>Delivers at the right time</h3>
+            <p>Relevant findings are sent by email. When the monitor identifies a high-severity finding, it immediately sends a separate urgent alert. Relevant findings from overnight are held for the first morning email.</p>
           </article>
         </div>
-        <div class="quick-result"><b>Resultat for brugeren</b><span>Medarbejderen kan arbejde videre med andre opgaver uden selv at følge hele nyhedsstrømmen.</span></div>
+        <div class="quick-result"><b>Outcome for the user</b><span>The employee can focus on other work without personally following the entire news stream.</span></div>
       </div>
     </div>
   </section>
   <section class="section" id="problem">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">01 · Opgaven</p><h2>Målet: hurtigt overblik uden gentagelser eller skjulte driftsfejl</h2></div>
+        <div><p class="section-label">01 · The brief</p><h2>The goal: a rapid overview without duplicates or hidden operational failures</h2></div>
         <div>
-          <p class="intro">Opgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Systemet tog hellere lidt ældre indhold med end at risikere at overse noget. Hvis AI-modellen ikke kunne gennemføre sin vurdering, blev indholdet taget med for en sikkerheds skyld.</p>
-          <p class="quote">Stilhed måtte ikke kunne forveksles med et nedbrud.</p>
+          <p class="intro">The brief set three practical requirements: new statements had to be identified quickly, the inbox could not be filled with duplicates, and technical failures had to be visible. The tool was designed solely to provide an overview—never to make government decisions or recommend actions. The system would rather include slightly older content than risk missing something. If the AI model could not complete an assessment, the content was included as a precaution.</p>
+          <p class="quote">Silence must never be mistaken for a system failure.</p>
           <div class="prose">
-            <p>I tidsrummet kl. 8–17 sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen som bekræftelse på, at monitoren har kørt. Hvis monitoren ikke har kørt i 1,5 time, får jeg som driftsansvarlig automatisk besked om, at den muligvis er stoppet.</p>
+            <p>Between 8:00 and 17:00, relevant findings are sent immediately. If there is nothing new, a status email arrives approximately once an hour to confirm that the monitor has run. As the person responsible for operations, I am automatically notified if the monitor has not run for 90 minutes and may have stopped.</p>
           </div>
         </div>
       </div>
 
       <figure class="day-band" aria-labelledby="dayband-title">
-        <h3 class="figure-title" id="dayband-title">Døgnet, som brugeren oplever det</h3>
+        <h3 class="figure-title" id="dayband-title">The day as experienced by the user</h3>
         <div class="band-row band-axis-row" aria-hidden="true">
           <div></div>
-          <div class="band-axis"><span style="left:0">kl. 0</span><span style="left:33.333%">8</span><span style="left:70.833%">17</span><span style="left:100%">24</span></div>
+          <div class="band-axis"><span style="left:0">00:00</span><span style="left:33.333%">08:00</span><span style="left:70.833%">17:00</span><span style="left:100%">24:00</span></div>
         </div>
         <div class="band-row">
-          <div class="band-label"><b>Overvågning</b><span>alle kilder</span></div>
-          <div class="band-track"><span class="band-seg watch" style="left:0;width:100%">Hele døgnet</span></div>
+          <div class="band-label"><b>Monitoring</b><span>all sources</span></div>
+          <div class="band-track"><span class="band-seg watch" style="left:0;width:100%">Around the clock</span></div>
         </div>
         <div class="band-row">
-          <div class="band-label"><b>Relevante fund</b><span>mails og status</span></div>
+          <div class="band-label"><b>Relevant findings</b><span>emails and status</span></div>
           <div class="band-track">
-            <span class="band-seg queue" style="left:0;width:calc(33.333% - 2px)"><span class="segment-copy-full">Til morgenmailen</span><span class="segment-copy-short">Morgen</span></span>
-            <span class="band-seg deliver" style="left:calc(33.333% + 1px);width:calc(37.5% - 2px)"><span class="segment-copy-full">Mail kl. 8–17</span><span class="segment-copy-short">Mail 8–17</span></span>
-            <span class="band-seg queue" style="left:calc(70.833% + 1px);width:calc(29.167% - 1px)"><span class="segment-copy-full">Til morgenmailen</span><span class="segment-copy-short">Morgen</span></span>
+            <span class="band-seg queue" style="left:0;width:calc(33.333% - 2px)"><span class="segment-copy-full">Held for morning email</span><span class="segment-copy-short">Morning</span></span>
+            <span class="band-seg deliver" style="left:calc(33.333% + 1px);width:calc(37.5% - 2px)"><span class="segment-copy-full">Email 08:00–17:00</span><span class="segment-copy-short">Email 8–17</span></span>
+            <span class="band-seg queue" style="left:calc(70.833% + 1px);width:calc(29.167% - 1px)"><span class="segment-copy-full">Held for morning email</span><span class="segment-copy-short">Morning</span></span>
           </div>
         </div>
         <div class="band-row">
-          <div class="band-label"><b>Hastemail</b><span>alvorlige fund</span></div>
-          <div class="band-track"><span class="band-seg urgent" style="left:0;width:100%"><span class="segment-copy-full">Hastemail ved alvorlige fund, hele døgnet</span><span class="segment-copy-short">Hastemail hele døgnet</span></span></div>
+          <div class="band-label"><b>Urgent alert</b><span>high-severity findings</span></div>
+          <div class="band-track"><span class="band-seg urgent" style="left:0;width:100%"><span class="segment-copy-full">Urgent alerts for high-severity findings, around the clock</span><span class="segment-copy-short">Urgent alert 24/7</span></span></div>
         </div>
-        <figcaption class="diagram-caption">Overvågningen kører hele døgnet. Relevante fund leveres kl. 8–17, og fund fra natten gemmes til den første morgenmail. Når monitoren finder et alvorligt fund, sender den straks en særskilt hastemail, også om natten.</figcaption>
+        <figcaption class="diagram-caption">Monitoring runs around the clock. Relevant findings are delivered between 08:00 and 17:00, while overnight findings are held for the first morning email. When the monitor identifies a high-severity finding, it immediately sends a separate urgent alert, including at night.</figcaption>
       </figure>
     </div>
   </section>
@@ -801,57 +802,57 @@
   <section class="section soft" id="system">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">02 · Løsningen</p><h2>Sådan går en artikel eller et opslag fra kilde til mail</h2></div>
-        <p class="intro">Monitoren søger efter danske og internationale artikler via Google News, herunder i en særskilt Google News-søgning afgrænset til nato.int, og følger Truth Social samt 42 udvalgte X-konti. Alle fund kontrolleres for alder, gentagelser og emne. Nyhedsartikler kontrolleres desuden for kilde, før en AI-model vurderer relevansen, angiver hvor alvorligt fundet er og skriver et kort resumé på dansk.</p>
+        <div><p class="section-label">02 · The solution</p><h2>How an article or post moves from source to inbox</h2></div>
+        <p class="intro">The monitor searches for Danish and international articles through Google News, including a separate Google News search restricted to the nato.int domain, and follows Truth Social along with 42 selected X accounts. Every finding is checked for age, duplication and subject matter. News articles also undergo a source check before an AI model assesses relevance, assigns a severity level and writes a short summary in Danish.</p>
       </div>
 
-      <h3 class="figure-title architecture-heading" id="architecture-title">Sådan hænger systemet sammen</h3>
+      <h3 class="figure-title architecture-heading" id="architecture-title">How the system fits together</h3>
       <figure aria-labelledby="architecture-title">
         <div class="architecture">
           <div class="node-stack">
-            <div class="node source"><b>Nyhedsmedier</b><span>Internationale og danske artikler</span></div>
-            <div class="node source"><b>Truth Social</b><span>Trumps officielle opslag</span></div>
-            <div class="node source"><b>X</b><span>Aktører, bureauer og journalister</span></div>
+            <div class="node source"><b>News outlets</b><span>International and Danish articles</span></div>
+            <div class="node source"><b>Truth Social</b><span>Trump's official posts</span></div>
+            <div class="node source"><b>X</b><span>Public figures, agencies and journalists</span></div>
           </div>
           <div class="flow-arrow" aria-hidden="true">→</div>
           <div class="pipeline-core">
-            <h3>Filtrering</h3>
+            <h3>Filtering</h3>
             <div class="filters">
-              <span class="filter">01 Ensartet format</span><span class="filter">02 Set før?</span>
-              <span class="filter">03 Nyt nok?</span><span class="filter">04 Om emnet?</span>
-              <span class="filter">05 Godkendt kilde?</span><span class="filter">06 AI-vurdering</span>
+              <span class="filter">01 Standardised format</span><span class="filter">02 Seen before?</span>
+              <span class="filter">03 Recent enough?</span><span class="filter">04 On topic?</span>
+              <span class="filter">05 Approved source?</span><span class="filter">06 AI assessment</span>
             </div>
           </div>
           <div class="flow-arrow" aria-hidden="true">→</div>
           <div class="node-stack">
-            <div class="node output"><b>Samlet mail</b><span>Nye fund eller status kl. 8–17</span></div>
-            <div class="node output"><b>Hastemail</b><span>Alvorlige fund, hele døgnet</span></div>
-            <div class="node output"><b>Venter til morgen</b><span>Gemmes til morgenmailen</span></div>
+            <div class="node output"><b>Digest email</b><span>New findings or status from 08:00 to 17:00</span></div>
+            <div class="node output"><b>Urgent alert</b><span>High-severity findings, around the clock</span></div>
+            <div class="node output"><b>Held until morning</b><span>Queued for the morning email</span></div>
           </div>
         </div>
-        <div class="ops" aria-label="Systemets driftslag">
+        <div class="ops" aria-label="System operations layer">
           <div class="node operations-node">
-            <b>Drift og kontrol</b>
+            <b>Operations and control</b>
             <ul>
-              <li>En ekstern tidsplan starter monitoren automatisk, så ingen lokal computer skal være tændt.</li>
-              <li>Systemet husker tidligere fund, gemmer nattens fund til morgen og registrerer det indhold, filtrene frasorterer.</li>
-              <li>Hvis monitoren ikke har kørt i 1,5 time, får jeg som driftsansvarlig automatisk besked om, at den muligvis er stoppet.</li>
+              <li>An external scheduler starts the monitor automatically, so no local computer needs to remain switched on.</li>
+              <li>The system remembers previous findings, holds overnight findings until morning and records content rejected by the filters.</li>
+              <li>As the person responsible for operations, I am automatically notified if the monitor has not run for 90 minutes and may have stopped.</li>
             </ul>
           </div>
         </div>
-        <figcaption class="diagram-caption">Løsningen var tilpasset én intensiv uges drift. Hver gang programmet starter, henter og filtrerer det nyt indhold. Derefter sender det relevante fund eller gemmer dem til morgenmailen og husker, hvad det allerede har behandlet.</figcaption>
-        <div class="legend" aria-label="Farveforklaring"><span><i></i>Data og filtrering</span><span><i class="delivery"></i>Levering</span><span><i class="alert-color"></i>Kræver opmærksomhed</span><span><i class="operations"></i>Drift og sikkerhedsnet</span></div>
+        <figcaption class="diagram-caption">The solution was designed for one demanding week of operation. Each time the program starts, it retrieves and filters new content. It then delivers relevant findings or holds them for the morning email, while remembering what it has already processed.</figcaption>
+        <div class="legend" aria-label="Colour key"><span><i></i>Data and filtering</span><span><i class="delivery"></i>Delivery</span><span><i class="alert-color"></i>Requires attention</span><span><i class="operations"></i>Operations and safeguards</span></div>
       </figure>
 
       <details class="tech-details" id="teknik">
-        <summary>Se de tekniske detaljer</summary>
+        <summary>View the technical details</summary>
         <div class="tech-grid">
-          <div><h3>Kilder</h3><p>Google News leverer danske og internationale artikler. En særskilt Google News-søgning er afgrænset til domænet nato.int. Truth Social leverer opslag fra Donald Trumps konto. På X fulgte monitoren 42 udvalgte konti fra politiske aktører, myndigheder, nyhedsbureauer, medier og journalister. Afsendernes identitet er kontrolleret manuelt. Fra X hentede monitoren kun opslag, der var publiceret siden den forrige kørsel. GDELT blev afprøvet, men slået fra den 13. juli efter 15 kørsler uden brugbare svar.</p></div>
-          <div><h3>Filtrering og AI</h3><p>Sociale opslag genkendes på opslagets unikke id. Hvis et opslag citerer eller deler et andet opslag, læser monitoren også teksten fra det citerede eller delte opslag samt tilgængelige linkforhåndsvisninger, før relevansen vurderes. Nyhedsartikler genkendes på deres link og en forenklet version af overskriften. En artikel fra en ukendt kilde slipper kun igennem, hvis et godkendt medie har bragt en lignende historie inden for 48 timer. Hvis AI-modellen ikke kan gennemføre vurderingen af et fund, der har bestået de faste kontroller, bliver fundet alligevel leveret.</p></div>
-          <div><h3>Levering og hukommelse</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten lægges de i kø til den første morgenmail. Når en kørsel finder et alvorligt fund, sendes desuden en hastemail med det samme. En statusmail uden nye fund sendes kun, når der er gået mindst 50 minutter siden den seneste almindelige mail. Ved hver kørsel gemmes op til 200 eksempler på indhold, som hvert filter sorterede fra: tid, emne, kilde og AI. Hvis der er flere, registreres kun det samlede antal for resten.</p></div>
-          <div><h3>Kode og data</h3><p>Et lille Python-program bruger requests, PyYAML, python-dotenv og Anthropics officielle programbibliotek. Systemets hukommelse og oplysninger om det frasorterede indhold gemmes i enkle tekstfiler i JSON-format; løsningen kræver hverken database eller egen server.</p></div>
-          <div><h3>Drift og adgangsnøgler</h3><p>I projektugen kørte monitoren via GitHub Actions. Tjenesten cron-job.org startede programmet hvert 30. minut. GitHubs egen tidsplan kørte én gang i timen som reserve på et andet tidspunkt, og healthchecks.io holdt uafhængigt øje med, om kørslerne blev gennemført. I GitHub Actions lå adgangsnøglerne som krypterede variabler. Lokalt blev de læst fra en .env-fil, som ikke bliver gemt i Git.</p></div>
-          <div><h3>Test og økonomi</h3><p>Efter de sidste driftsændringer bestod løsningen alle 26 automatiske test med Pythons indbyggede testværktøj. Det anslåede API- og tjenesteforbrug for projektugen var under 50 kr.</p></div>
+          <div><h3>Sources</h3><p>Google News supplies Danish and international articles. A separate Google News search is restricted to the nato.int domain. Truth Social supplies posts from Donald Trump's account. On X, the monitor followed 42 selected accounts belonging to political figures, public authorities, news agencies, media outlets and journalists. The account holders' identities were checked manually. From X, the monitor retrieved only posts published since the previous run. GDELT was tested but disabled on 13 July after 15 runs without a usable response.</p></div>
+          <div><h3>Filtering and AI</h3><p>Social posts are identified by their unique post ID. If a post quotes or shares another post, the monitor also reads the text of the quoted or shared post and any available link previews before assessing relevance. News articles are identified by their link and a simplified version of the headline. An article from an unknown source passes only if an approved outlet has published a similar story within the previous 48 hours. If the AI model cannot assess a finding that has passed the rule-based checks, the finding is delivered anyway.</p></div>
+          <div><h3>Delivery and memory</h3><p>Between 08:00 and 17:00, new findings from the current run are emailed; overnight, they are queued for the first morning email. When a run identifies a high-severity finding, an urgent alert is also sent immediately. A status email without new findings is sent only when at least 50 minutes have passed since the most recent regular email. On every run, the system stores up to 200 examples from each filtering stage: recency, subject, source and AI assessment. If a stage rejects more, only the number of additional items is recorded.</p></div>
+          <div><h3>Code and data</h3><p>A small Python program uses requests, PyYAML, python-dotenv and Anthropic's official Python SDK. The system's memory and information about rejected content are stored in simple JSON text files; the solution requires neither a database nor a dedicated server.</p></div>
+          <div><h3>Operations and credentials</h3><p>During the project week, the monitor ran through GitHub Actions. cron-job.org started the program every 30 minutes. GitHub's own scheduler ran once an hour as a fallback at a staggered time, while healthchecks.io independently monitored whether runs completed. Credentials were stored securely as GitHub Actions secrets. Locally, they were read from a .env file that is not committed to Git.</p></div>
+          <div><h3>Testing and cost</h3><p>After the final operational changes, the solution passed all 26 automated tests using Python's built-in test framework. Estimated API and service costs for the project week were below DKK 50.</p></div>
         </div>
       </details>
     </div>
@@ -860,31 +861,31 @@
   <section class="section" id="eksempel">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">03 · Ét fund gennem systemet</p><h2 id="journey-title">Sådan bliver et nyt opslag vurderet</h2></div>
-        <p class="intro">Eksemplet er konstrueret og indeholder ingen oplysninger fra de faktiske mails til modtageren, men følger de samme regler og datafelter som driftsløsningen.</p>
+        <div><p class="section-label">03 · One finding through the system</p><h2 id="journey-title">How a new post is assessed</h2></div>
+        <p class="intro">This is a constructed example. It contains no information from the actual emails sent to the recipient, but follows the same rules and data fields as the production solution.</p>
       </div>
 
       <figure aria-labelledby="journey-title">
       <div class="journey">
         <article class="journey-card source-item">
-          <p class="journey-label">1 · Opslag fra kilden</p>
-          <h3>Illustrativt opslag: USA varsler told mod Danmark i forbindelse med Grønland</h3>
-          <p class="journey-meta">Konstrueret amerikansk myndighedsopslag · 9 minutter gammelt · ville normalt indeholde et link til originalen</p>
+          <p class="journey-label">1 · Source post</p>
+          <h3>Illustrative post: United States announces tariffs on Denmark over Greenland</h3>
+          <p class="journey-meta">Constructed US government post · 9 minutes old · would normally include a link to the original</p>
         </article>
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card">
-          <p class="journey-label">2 · Faste kontroller</p>
-          <ul class="check-list"><li>Ikke set før</li><li>Nyt nok</li><li>Handler om Grønland</li><li>Officiel afsender</li></ul>
+          <p class="journey-label">2 · Rule-based checks</p>
+          <ul class="check-list"><li>Not seen before</li><li>Recent enough</li><li>Concerns Greenland</li><li>Official source</li></ul>
         </article>
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card ai-item">
-          <p class="journey-label">3 · AI-vurdering</p>
-          <dl class="ai-result"><dt>Relevant</dt><dd>Ja</dd><dt>Alvorsgrad</dt><dd>Høj</dd><dt>Handler om</dt><dd>USA</dd><dt>Resumé</dt><dd>USA varsler toldtiltag mod Danmark i en sag om Grønland</dd></dl>
+          <p class="journey-label">3 · AI assessment</p>
+          <dl class="ai-result"><dt>Relevant</dt><dd>Yes</dd><dt>Severity</dt><dd>High</dd><dt>Subject</dt><dd>United States</dd><dt>Summary</dt><dd>United States announces tariff measures against Denmark over Greenland</dd></dl>
         </article>
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card delivery-item">
-          <p class="journey-label">4 · Handling</p>
-          <div class="delivery-preview"><b>🔴 HASTER</b><span>En særskilt hastemail sendes, så snart monitoren har vurderet opslaget. I dagtimerne indgår opslaget også i den almindelige mail; om natten lægges det i kø til den første morgenmail.</span></div>
+          <p class="journey-label">4 · Action</p>
+          <div class="delivery-preview"><b>🔴 URGENT</b><span>A separate urgent alert is sent as soon as the monitor has assessed the post. During the day, the post is also included in the regular email; at night, it is queued for the first morning email.</span></div>
         </article>
       </div>
       </figure>
@@ -895,30 +896,30 @@
   <section class="section soft" id="levering">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">04 · Det brugeren modtog</p><h2>Mailen viser både relevante historier og om monitoren kører</h2></div>
+        <div><p class="section-label">04 · What the user received</p><h2>The email shows both relevant stories and whether the monitor is running</h2></div>
         <div class="intro delivery-intro">
-          <p>I dagtimerne sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen. Fund, som AI-modellen vurderer som alvorlige, udløser desuden en særskilt hastemail, også om natten.</p>
-          <p><strong>Kildestatus:</strong> Nederst i de almindelige mails fremgår status for hver kilde. Hvis Google News, Truth Social eller X ikke svarer normalt, vises ⚠ i emnefeltet. GDELT udløser ikke alene en advarsel. Kilden gav ingen brugbare svar i 15 kontrollerede kørsler og blev derfor slået fra den 13. juli. Den historiske mail nedenfor viser et af de 14 svar med en begrænsning på antal forespørgsler.</p>
+          <p>During the day, relevant findings are sent immediately. If there is nothing new, a status email arrives approximately once an hour. Findings that the AI model assesses as high severity also trigger a separate urgent alert, including at night.</p>
+          <p><strong>Source status:</strong> The bottom of each regular email shows the status of every source. If Google News, Truth Social or X does not respond normally, the subject line is marked with ⚠. GDELT did not trigger a warning on its own. It produced no usable responses in 15 checked runs and was therefore disabled on 13 July. The historical email below shows one of the 14 rate-limited responses.</p>
         </div>
       </div>
       <div class="delivery-grid">
-        <div class="mail" aria-label="Eksempel på en statusmail uden nye fund">
+        <div class="mail" aria-label="Example of a status email with no new findings">
           <div class="mail-bar" aria-hidden="true"><span class="mail-dot"></span><span class="mail-dot"></span><span class="mail-dot"></span></div>
           <div class="mail-head">
-            <div class="mail-field"><b>Fra:</b> Nyhedsmonitor</div>
-            <div class="mail-field"><b>Emne:</b> Ingen nye opdateringer (11-07-2026 15:24)</div>
+            <div class="mail-field"><b>From:</b> Nyhedsmonitor</div>
+            <div class="mail-field"><b>Subject:</b> No new updates (11-07-2026 15:24)</div>
           </div>
           <div class="mail-body">
-            <p>Ingen nye relevante opdateringer siden sidste kørsel.</p>
-            <p>Statusmailen bekræfter, at monitoren har kørt, også når der ikke er nye relevante fund.</p>
+            <p>No new relevant updates since the previous run.</p>
+            <p>The status email confirms that the monitor has run, even when there are no new relevant findings.</p>
           </div>
-          <div class="mail-footer">Kilder: GDELT: rate-limit · Google News: ok · Google News (DA): ok · Truth Social: ok · X: ok (42/42)</div>
+          <div class="mail-footer">Sources: GDELT: rate limited · Google News: ok · Google News (Danish): ok · Truth Social: ok · X: ok (42/42)</div>
         </div>
-        <div class="alert-stack" aria-label="Forenklede eksempler på tre typer emnelinjer">
-          <div class="alert high"><div class="alert-type">Alvorligt fund · forenklet eksempel</div><div class="alert-subject">🔴 HASTER: 1 fund med høj prioritet (11-07-2026 16:25)</div></div>
-          <div class="alert ok"><div class="alert-type">Relevante fund · forenklet eksempel</div><div class="alert-subject">🔴 3 nye fund · 1 med høj prioritet (11-07-2026 16:25)</div></div>
-          <div class="alert warn"><div class="alert-type">Kildefejl · forenklet eksempel</div><div class="alert-subject">⚠ Ingen nye opdateringer (11-07-2026 14:41)</div></div>
-          <p class="diagram-caption">Eksemplerne er gjort lettere at læse på casesiden. Alvorsgrad, antal fund og driftsstatus står stadig forrest, så indbakken kan skimmes på få sekunder.</p>
+        <div class="alert-stack" aria-label="Simplified examples of three subject-line types">
+          <div class="alert high"><div class="alert-type">High-severity finding · simplified example</div><div class="alert-subject">🔴 URGENT: 1 high-priority finding (11-07-2026 16:25)</div></div>
+          <div class="alert ok"><div class="alert-type">Relevant findings · simplified example</div><div class="alert-subject">🔴 3 new findings · 1 high priority (11-07-2026 16:25)</div></div>
+          <div class="alert warn"><div class="alert-type">Source failure · simplified example</div><div class="alert-subject">⚠ No new updates (11-07-2026 14:41)</div></div>
+          <p class="diagram-caption">The examples have been simplified for readability on the case-study page. Severity, number of findings and operational status still appear first, so the inbox can be scanned in seconds.</p>
         </div>
       </div>
     </div>
@@ -927,48 +928,48 @@
   <section class="section" id="resultater">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">05 · Målt på faktiske data</p><h2 id="filter-title">Kun ét af 201 fund blev vurderet som relevant</h2></div>
-        <p class="intro">Tallene stammer fra en faktisk kørsel under prøvedriften den 7. juli kl. 16.25. De faste kontroller fjernede det meste; AI-modellen vurderede de resterende 16 og markerede ét fund som relevant.</p>
+        <div><p class="section-label">05 · Measured using real data</p><h2 id="filter-title">Only one of 201 findings was assessed as relevant</h2></div>
+        <p class="intro">These figures come from an actual test run on 7 July at 16:25. The rule-based checks removed most of the material; the AI model assessed the remaining 16 findings and marked one as relevant.</p>
       </div>
 
       <figure aria-labelledby="filter-title">
       <div class="filter-panel">
-        <div class="filter-head"><span>Trin</span><span>Andel tilbage</span><span>Fund tilbage</span></div>
+        <div class="filter-head"><span>Stage</span><span>Remaining share</span><span>Findings left</span></div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Hentet</b><span>før filtrering</span></div>
+          <div class="filter-stage"><b>Retrieved</b><span>before filtering</span></div>
           <div class="retention"><span style="width:100%"></span></div>
           <div class="filter-count"><strong>201</strong><small>&nbsp;</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Ikke set før</b><span>gentagelser fjernet</span></div>
+          <div class="filter-stage"><b>Not seen before</b><span>duplicates removed</span></div>
           <div class="retention"><span style="width:94%"></span></div>
           <div class="filter-count"><strong>189</strong><small>−12</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Nyt nok</b><span>gamle fund fjernet</span></div>
+          <div class="filter-stage"><b>Recent enough</b><span>old findings removed</span></div>
           <div class="retention"><span style="width:9%"></span></div>
           <div class="filter-count"><strong>18</strong><small>−171</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Om emnet</b><span>emnet kontrolleret</span></div>
+          <div class="filter-stage"><b>On topic</b><span>subject checked</span></div>
           <div class="retention"><span style="width:8.5%"></span></div>
           <div class="filter-count"><strong>17</strong><small>−1</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Troværdig kilde</b><span>kilden kontrolleret</span></div>
+          <div class="filter-stage"><b>Approved source</b><span>source checked</span></div>
           <div class="retention"><span style="width:8%"></span></div>
           <div class="filter-count"><strong>16</strong><small>−1</small></div>
         </div>
         <div class="filter-row final">
-          <div class="filter-stage"><b>Relevant</b><span>sidste AI-vurdering</span></div>
+          <div class="filter-stage"><b>Relevant</b><span>final AI assessment</span></div>
           <div class="retention"><span style="width:2%"></span></div>
           <div class="filter-count"><strong>1</strong><small>−15</small></div>
         </div>
       </div>
       <div class="filter-note">
-        <div class="note-card"><b>Enkle tjek først</b><p>Over 90 procent fjernes, før AI-modellen bruges. Det gør løsningen hurtig og billig.</p></div>
-        <div class="note-card"><b>Hellere én for meget</b><p>Hvis AI-modellen ikke kan gennemføre vurderingen efter de faste kontroller, bliver indholdet taget med. Lidt ekstra støj er bedre end en overset nyhed.</p></div>
-        <div class="note-card"><b>Det frasorterede kan kontrolleres</b><p>Systemet gemmer eksempler på det, der sorteres fra, så fejl kan opdages og undersøges både under prøvedriften og efter idriftsættelsen.</p></div>
+        <div class="note-card"><b>Simple checks first</b><p>More than 90 per cent of the items are removed before the AI model is used, keeping the solution fast and inexpensive.</p></div>
+        <div class="note-card"><b>Better to include one too many</b><p>If the AI model cannot complete its assessment after the rule-based checks, the content is included. A little extra noise is better than a missed story.</p></div>
+        <div class="note-card"><b>Rejected content can still be reviewed</b><p>The system stores examples of what it filters out, allowing errors to be identified and investigated both during the pre-deployment trial and after deployment.</p></div>
       </div>
       </figure>
     </div>
@@ -977,28 +978,28 @@
   <section class="section soft" id="rolle">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">06 · Min rolle</p><h2>Jeg byggede, testede og satte løsningen i drift</h2></div>
-        <p class="intro">Jeg omsatte medarbejderens behov til konkrete regler, valgte og kontrollerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og overvågning. Jeg brugte Claude til sparring og til at udarbejde udkast til dele af koden. Jeg traf selv beslutningerne og gennemgik og testede alle ændringer, før de blev sat i drift.</p>
+        <div><p class="section-label">06 · My role</p><h2>I built, tested and deployed the solution</h2></div>
+        <p class="intro">I translated the employee's needs into concrete rules, selected and verified the sources, built the monitor, and managed testing, deployment and operational monitoring. I used Claude as a sounding board and to draft parts of the code. I remained responsible for every decision and reviewed and tested every change before deployment.</p>
       </div>
       <div class="role-grid">
         <article class="role-card primary">
-          <h3>Fra behov til fungerende drift</h3>
-          <p>Opgaven krævede mere end kode: behovet skulle afgrænses, kilderne kontrolleres, det frasorterede indhold gennemgås, og driften overvåges efter idriftsættelsen.</p>
+          <h3>From user need to deployed service</h3>
+          <p>The project required more than code: the need had to be scoped, sources verified, rejected content reviewed and operations monitored after deployment.</p>
           <div class="ownership">
-            <span>Afgrænsning af behovet</span><span>Arkitektur</span><span>Udvikling</span><span>Kontrol af kilder</span><span>Test og efterkontrol</span><span>Idriftsættelse og drift</span>
+            <span>Scoping the need</span><span>Architecture</span><span>Development</span><span>Source verification</span><span>Testing and review</span><span>Deployment and operations</span>
           </div>
         </article>
         <article class="role-card">
-          <h3>Det vigtigste valg</h3>
-          <p>Jeg prioriterede bevidst lidt ekstra støj frem for risikoen for at overse en relevant historie. Derfor blev det frasorterede indhold registreret og gennemgået manuelt, og usikre AI-vurderinger blev sendt videre i stedet for at blive skjult.</p>
+          <h3>The most important decision</h3>
+          <p>I deliberately prioritised a little extra noise over the risk of missing a relevant story. Rejected content was therefore recorded and reviewed manually, while uncertain AI assessments were delivered for human review rather than discarded.</p>
         </article>
       </div>
 
-      <div class="timeline" aria-label="Projektforløb fra 7. til 13. juli">
-        <div class="timeline-item"><div class="timeline-date">7. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Kilder og første prototype</strong>Tre kildetyper blev afprøvet med faktiske data. Samme dag blev systemet sat op, og den første testmail blev sendt til mig selv.</div></div>
-        <div class="timeline-item"><div class="timeline-date">8.–11. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Fire døgns prøvedrift</strong>Jeg gennemgik manuelt 406 artikler og opslag, som systemet havde sorteret fra. Én relevant historie var blevet frasorteret ved en fejl, og kildekontrollen blev derefter rettet.</div></div>
-        <div class="timeline-item"><div class="timeline-date">11. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Løsningen blev sat i drift for modtageren</strong>Det skete først efter udtrykkelig godkendelse.</div></div>
-        <div class="timeline-item"><div class="timeline-date">12.–13. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Driften blev fulgt og forbedret</strong>Nattens fund blev samlet til morgenmailen, tidspunkterne blev tilpasset brugerens behov, to tidsplaner, der kunne overlappe, blev adskilt, og kildernes faktiske stabilitet blev gennemgået.</div></div>
+      <div class="timeline" aria-label="Project timeline from 7 to 13 July">
+        <div class="timeline-item"><div class="timeline-date">7 July</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Sources and first prototype</strong>Three source types were tested with real data. The system was configured the same day, and I sent the first test email to myself.</div></div>
+        <div class="timeline-item"><div class="timeline-date">8–11 July</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Four-day pre-deployment trial</strong>I manually reviewed 406 articles and posts that the system had filtered out. One relevant story had been rejected in error, so the source check was corrected.</div></div>
+        <div class="timeline-item"><div class="timeline-date">11 July</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>The solution was deployed for the recipient</strong>This happened only after explicit approval.</div></div>
+        <div class="timeline-item"><div class="timeline-date">12–13 July</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Operations were monitored and improved</strong>Overnight findings were consolidated into the morning email, delivery times were adapted to the user's needs, two potentially overlapping schedules were separated, and the sources' actual reliability was reviewed.</div></div>
       </div>
     </div>
   </section>
@@ -1006,49 +1007,49 @@
   <section class="section" id="laering">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">07 · Erfaringer fra driften</p><h2 id="reliability-title">Driften ændrede løsningen</h2></div>
-        <p class="intro">Fire døgns prøvedrift og de første døgn efter idriftsættelsen afdækkede problemer, som en kort demonstration ikke havde vist. Den største udfordring var ikke AI-vurderingen, men at få kilder, tidsplaner og systemets hukommelse til at fungere stabilt sammen. De vigtigste problemer blev dokumenteret, rettet og kontrolleret igen.</p>
+        <div><p class="section-label">07 · Lessons from operations</p><h2 id="reliability-title">Operations changed the solution</h2></div>
+        <p class="intro">A four-day pre-deployment trial and the first few days after deployment exposed problems that a short demonstration had not revealed. The main challenge was not the AI assessment, but making the sources, schedules and data passed between runs work reliably together. The most important problems were documented, fixed and checked again.</p>
       </div>
 
       <figure class="reliability" aria-labelledby="reliability-title">
         <div class="reliability-row">
-          <div class="reliability-label"><b>MÅLT I PRØVEDRIFT</b><span>GitHubs tidsplan</span></div>
+          <div class="reliability-label"><b>MEASURED IN TESTING</b><span>GitHub schedule</span></div>
           <div class="run-strip before" aria-hidden="true"></div>
-          <div class="reliability-result bad">8–12 af 24 planlagte kørsler</div>
+          <div class="reliability-result bad">8–12 of 24 scheduled runs</div>
         </div>
         <div class="reliability-row">
-          <div class="reliability-label"><b>NY KØREPLAN</b><span>ekstern tidsplan og reserve</span></div>
+          <div class="reliability-label"><b>NEW RUN SCHEDULE</b><span>external scheduler and fallback</span></div>
           <div class="run-strip after" aria-hidden="true"></div>
-          <div class="reliability-result good">Ekstern start hvert 30. minut</div>
+          <div class="reliability-result good">External start every 30 minutes</div>
         </div>
         <div class="reliability-row">
-          <div class="reliability-label"><b>DRIFTSTJEK · 13. JULI</b><span>100 automatiske kørsler kontrolleret</span></div>
+          <div class="reliability-label"><b>OPERATIONAL CHECK · 13 JULY</b><span>100 automated runs checked</span></div>
           <div class="run-strip latest" aria-hidden="true"></div>
-          <div class="reliability-result good">97 gennemført uden fejl</div>
+          <div class="reliability-result good">97 completed without errors</div>
         </div>
-        <figcaption class="diagram-caption">Den eksterne tidsplan startede monitoren hvert 30. minut, mens GitHubs egen tidsplan blev beholdt som reserve på et andet tidspunkt. I tre af de 100 kontrollerede kørsler lykkedes overvågningen og mailudsendelsen, men den efterfølgende gemning af systemets opdaterede hukommelse til næste kørsel fejlede. En uafhængig overvågning gav besked, hvis selve kørslerne udeblev.</figcaption>
+        <figcaption class="diagram-caption">The external scheduler started the monitor every 30 minutes, while GitHub's own schedule remained as a fallback at a different time. In three of the 100 checked runs, monitoring and email delivery succeeded, but saving the updated data for the next run failed. Independent monitoring issued an alert if a scheduled run did not happen.</figcaption>
       </figure>
 
       <div class="incident-grid">
         <article class="incident">
-          <p class="incident-label">Op til 4,6 timer mellem kørslerne</p>
-          <p>GitHubs indbyggede tidsplan sprang mange af de planlagte nattekørsler over.</p>
-          <p class="fix"><b>Løsning:</b> Monitoren blev sat til at starte hvert 30. minut via en ekstern tidsplan, mens GitHubs tidsplan blev beholdt som reserve. Den uafhængige overvågning blev også beholdt.</p>
+          <p class="incident-label">Up to 4.6 hours between runs</p>
+          <p>GitHub's built-in scheduler skipped many of the planned overnight runs.</p>
+          <p class="fix"><b>Solution:</b> The monitor was configured to start every 30 minutes through an external scheduler, with GitHub's schedule retained as a fallback. Independent monitoring continued to watch for missed runs.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">To tidsplaner kunne ramme samme hukommelse</p>
-          <p>Den eksterne start og GitHubs reserve kunne ligge så tæt, at to kørsler forsøgte at gemme systemets hukommelse samtidig. Det gav tre fejl efter kørsler, hvor overvågningen og mailudsendelsen ellers var lykkedes.</p>
-          <p class="fix"><b>Løsning:</b> Den eksterne start hvert 30. minut blev gjort til den primære tidsplan. GitHubs reserve blev reduceret til én start i timen mellem de eksterne starter.</p>
+          <p class="incident-label">Two schedules could update the same data at once</p>
+          <p>The external trigger and GitHub's fallback could run so close together that two runs attempted to save the same tracking data at the same time. This caused three errors after runs in which monitoring and email delivery had otherwise succeeded.</p>
+          <p class="fix"><b>Solution:</b> The external trigger every 30 minutes became the primary schedule. GitHub's fallback was reduced to one hourly trigger between the external runs.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">En relevant historie blev afvist af kildekontrollen</p>
-          <p>En udtalelse fra NATOs generalsekretær dukkede først op via et mindre medie, som ikke stod på listen over godkendte kilder.</p>
-          <p class="fix"><b>Løsning:</b> Systemet bruger nu både lignende overskrifter fra godkendte medier i de seneste 48 timer og en særskilt Google News-søgning afgrænset til nato.int.</p>
+          <p class="incident-label">A relevant story failed the source check</p>
+          <p>A statement by NATO's Secretary General first appeared in a smaller outlet that was not on the approved-source list.</p>
+          <p class="fix"><b>Solution:</b> The system now uses both similar headlines from approved outlets within the previous 48 hours and a separate Google News search restricted to the nato.int domain.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">GDELT svarede ikke stabilt fra driftsmiljøet</p>
-          <p>I 15 gennemgåede kørsler gav nyhedsdatabasen ingen brugbare svar: 14 blev afvist på grund af for mange forespørgsler, og én endte med en forbindelsesfejl. De øvrige kilder svarede normalt.</p>
-          <p class="fix"><b>Løsning:</b> GDELT blev slået fra i stedet for at stå som en falsk reserve. De danske og internationale Google News-søgninger fortsatte sammen med den målrettede NATO-søgning.</p>
+          <p class="incident-label">GDELT did not respond reliably from the operating environment</p>
+          <p>Across 15 reviewed runs, the news database produced no usable responses: 14 were rate-limited, and one ended with a connection error. The other sources responded normally.</p>
+          <p class="fix"><b>Solution:</b> GDELT was disabled instead of being presented as a fallback that was not actually available. The Danish and international Google News searches continued alongside the targeted NATO search.</p>
         </article>
       </div>
     </div>
@@ -1057,13 +1058,13 @@
   <section class="section" id="principper">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">08 · Efter projektet</p><h2>Tre erfaringer, jeg tager med videre</h2></div>
-        <p class="intro">De vigtigste erfaringer handlede ikke om valget af AI-model, men om prøvedrift, synlige fejl og klare grænser for automatiseringen.</p>
+        <div><p class="section-label">08 · After the project</p><h2>Three lessons I will carry forward</h2></div>
+        <p class="intro">The most important lessons were not about choosing an AI model, but about pre-deployment trials, visible failures and clear boundaries for automation.</p>
       </div>
       <ol class="takeaways">
-        <li><span>01</span><div><h3>Prøvedrift er en del af produktudviklingen</h3><p>Da jeg gennemgik det indhold, som systemet havde sorteret fra under fire døgns prøvedrift, fandt jeg én relevant historie, som den daværende kildekontrol havde afvist.</p></div></li>
-        <li><span>02</span><div><h3>Driftsfejl skal være synlige</h3><p>Statusmail, kildeoversigt og uafhængig overvågning gjorde det muligt at skelne stilhed fra nedbrud.</p></div></li>
-        <li><span>03</span><div><h3>AI bør først bruges, når de faste regler har gjort deres arbejde</h3><p>Faste regler fjernede det meste støj. AI-modellen vurderede kun det indhold, som reglerne ikke kunne afgøre sikkert.</p></div></li>
+        <li><span>01</span><div><h3>Pre-deployment trials are part of product development</h3><p>When I reviewed the content rejected by the system during the four-day trial, I found one relevant story that the source check in place at the time had rejected.</p></div></li>
+        <li><span>02</span><div><h3>Operational failures must be visible</h3><p>Status emails, source reporting and independent monitoring made it possible to distinguish silence from a system failure.</p></div></li>
+        <li><span>03</span><div><h3>AI should be used only after rule-based checks have done their job</h3><p>Rule-based checks removed most of the noise. The AI model assessed only the content that remained.</p></div></li>
       </ol>
     </div>
   </section>
@@ -1074,21 +1075,21 @@
   <div class="shell">
     <div class="cta-card">
       <div>
-        <p class="section-label" style="color:var(--accent)">Kontakt</p>
-        <h2>Har du spørgsmål til casen?</h2>
-        <p>Jeg fortæller gerne mere om, hvordan jeg valgte kilder, gennemgik det indhold, systemet havde sorteret fra, og gjorde løsningen klar til drift. Kildekoden er ikke offentlig, fordi den rummer en målrettet kildeliste og driftsopsætning til en konkret, tidsafgrænset opgave, men jeg gennemgår gerne arkitekturen, testresultaterne og anonymiserede eksempler i en samtale.</p>
+        <p class="section-label" style="color:var(--accent)">Contact</p>
+        <h2>Questions about the case study?</h2>
+        <p>I would be happy to explain how I selected sources, reviewed the content rejected by the system and prepared it for deployment. The source code is not public because it contains a targeted source list and deployment setup for a specific, time-limited assignment, but I would be glad to discuss the architecture, test results and anonymised examples in an interview.</p>
       </div>
       <div class="cta-actions">
-        <a class="button" href="mailto:fribert6@gmail.com">Skriv til mig</a>
-        <a class="button secondary" href="https://github.com/JonathanFribert" rel="me">Se andre projekter på GitHub</a>
+        <a class="button" href="mailto:fribert6@gmail.com">Email me</a>
+        <a class="button secondary" href="https://github.com/JonathanFribert" rel="me">View other projects on GitHub</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="shell">
-  <span>Jonathan Fribert · Nyhedsmonitor · juli 2026 · <a href="mailto:fribert6@gmail.com">fribert6@gmail.com</a></span>
-  <a href="#top">Til toppen ↑</a>
+  <span>Jonathan Fribert · Nyhedsmonitor · July 2026 · <a href="mailto:fribert6@gmail.com">fribert6@gmail.com</a></span>
+  <a href="#top">Back to top ↑</a>
 </footer>
 
 <script>
@@ -1098,7 +1099,7 @@
     var languageLink = document.querySelector('.language-switch');
     if (languageLink) {
       languageLink.addEventListener('click', function () {
-        if (window.location.hash) languageLink.setAttribute('href', 'en.html' + window.location.hash);
+        if (window.location.hash) languageLink.setAttribute('href', './' + window.location.hash);
       });
     }
 
@@ -1136,7 +1137,7 @@
           m.setAttribute('content', forced ? (forced === 'dark' ? '#141210' : '#FAF7F0') : metaDefaults[i]);
         });
         themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-        themeToggle.setAttribute('aria-label', isDark ? 'Skift til lyst tema' : 'Skift til mørkt tema');
+        themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
       };
       var applyThemeToggle = function () {
         var root = document.documentElement;
@@ -1185,7 +1186,7 @@
       revealEls.forEach(function (el) {
         el.classList.add('reveal');
       });
-      /* Talanimation: ét tal, der tælles hen mod målet med blød opbremsning. */
+      /* Number animation: a value counts towards its target with smooth easing. */
       var animateNumber = function (el, from, to, duration, suffix, done) {
         var start = null;
         var step = function (ts) {
@@ -1199,8 +1200,8 @@
         requestAnimationFrame(step);
       };
 
-      /* Tragten fortælles rækkevis: hvert trins tal tæller ned fra det
-         forrige trins niveau, i takt med at søjlerne vokser frem. */
+      /* The funnel is revealed row by row: each value counts down from the
+         previous stage as the bars grow into view. */
       var runFunnelStory = function (figureEl) {
         var strongs = Array.prototype.slice.call(figureEl.querySelectorAll('.filter-count strong'));
         var targets = strongs.map(function (s) { return parseInt(s.textContent, 10); });

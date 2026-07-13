@@ -1,14 +1,14 @@
 # Nyhedsmonitor — projektcase
 
-**Læs casen her: https://jonathanfribert.github.io/nyhedsmonitor-case/**
+**Læs casen:** [Dansk](https://jonathanfribert.github.io/nyhedsmonitor-case/) · [English](https://jonathanfribert.github.io/nyhedsmonitor-case/en.html)
 
 [![Delekort for casen](og-image.png)](https://jonathanfribert.github.io/nyhedsmonitor-case/)
 
-Et personligt værktøj til nyhedsovervågning, bygget og sat i drift på fem dage.
+Et personligt værktøj til nyhedsovervågning, bygget og sat i drift på fem kalenderdage.
 Modtageren var en medarbejder i Statsministeriet, der var på standby i en
 intensiv uge. Casen gennemgår arkitektur, test og drift med faktiske driftstal.
-Selve monitorens kildekode er privat, fordi værktøjet blev bygget til en konkret
-arbejdsopgave.
+Selve monitorens kildekode er privat, fordi den rummer en målrettet kildeliste
+og driftsopsætning til en konkret, tidsafgrænset opgave.
 
 Kontakt: fribert6@gmail.com
 
@@ -18,30 +18,32 @@ Kontakt: fribert6@gmail.com
   Truth Social og X.
 - Faste regler fjerner gammelt og gentaget indhold, før en AI-model vurderer de
   resterende fund.
-- Løsningen gik fra idé til drift på fem dage. Jeg kontrollerede 42 X-konti,
-  gennemgik manuelt 406 artikler og opslag og afsluttede med 19 beståede test.
+- Løsningen gik fra idé til drift på fem kalenderdage. Jeg kontrollerede 42
+  X-konti, gennemgik manuelt 406 artikler og opslag og afsluttede med 26
+  beståede test.
 
 <details>
 <summary><strong>Intern dokumentation for redigering og publicering</strong></summary>
 
 ## Intern dokumentation (for redigering af siden)
 
-Dette repo indeholder casens ene HTML-fil og delekortet; resten af denne
-README er arbejdsdokumentation. Én selvstændig HTML-fil, ingen build-trin.
+Dette repo indeholder casens danske og engelske HTML-side samt delekort på
+begge sprog; resten af denne README er arbejdsdokumentation. Siderne er
+selvstændige HTML-filer uden et build-trin.
 
 **Hosting:** GitHub Pages fra dette repo (branch `main`, rod). Selve
 monitorens kildekode ligger i det PRIVATE repo `JonathanFribert/nyhedsmonitor`
 og skal forblive privat.
 
-## Publicering (efter ændringer i index.html)
+## Publicering (efter ændringer i `index.html` eller `en.html`)
 
 ```
 git add -A && git commit -m "beskrivelse"
 git push origin main        # remote = det offentlige nyhedsmonitor-case-repo
 ```
 
-Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
-`curl -sI https://jonathanfribert.github.io/nyhedsmonitor-case/ | head -1`
+Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér
+både `/` og `/en.html`, og kontrollér sprogskiftet på mobil og desktop.
 
 OBS (set 13. juli 2026): Pages-konfigurationen kan forsvinde fra repoet, så
 siden svarer 404, selv om push lykkes og koden er på main. Tjek med
@@ -51,9 +53,10 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
 ## Indhold og principper
 
 - **Sandfærdighed er sidens valuta.** Alle tal stammer fra rigtige kørsler og
-  logs (tragten: produktionskørslen 7. juli kl. 16.25; pålidelighed: målingen
-  8.-11. juli). Det konstruerede journey-eksempel er eksplicit markeret som
-  illustrativt. Lav ALDRIG tal eller citater om uden at opdatere kilden.
+  logs (tragten: produktionskørslen 7. juli kl. 16.25; 406 fund: fire døgns
+  prøvedrift; 97/100 kørsler og GDELTs 15/15 fejlsvar: driftstjek 13. juli).
+  Det konstruerede mail-eksempel er eksplicit markeret som illustrativt. Lav
+  ALDRIG tal eller citater om uden at opdatere kilden.
 - **Statsministeriet nævnes bevidst** (hero, case-brief) med en tydelig
   disclaimer om, at værktøjet er personlig støtte, ikke et officielt system.
   Ingen modtagernavne eller mailadresser må optræde på siden.
@@ -77,19 +80,25 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   Sektionslabels er nummererede (01–08) i mono. Newsreader til overskrifter,
   IBM Plex Mono til etiketter og tal, lys/mørk via `prefers-color-scheme` +
   manuel knap. En tynd læseindikator under topbaren viser fremdriften på den
-  lange side. Bevægelse er begrænset til et let fade på udvalgte hovedfigurer
-  samt vækst i døgnbånd og tragtlinjer. Alt slås fra med
+  lange side. Et diskret, cirkulært iris-skift bruges ved manuelt temaskift,
+  og avishovedet folder let ind ved første visning. Bevægelse er ellers
+  begrænset til et let fade på udvalgte hovedfigurer samt vækst i døgnbånd og
+  tragtlinjer; de almindelige nøgletal animeres ikke. Alt slås fra med
   `prefers-reduced-motion`. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
-  `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; den redigerbare
-  kilde er `og-template.html` (bruger sidens rigtige skrifter Newsreader og
-  IBM Plex Mono via Google Fonts; et tidligere SVG-udkast udgik, fordi det
-  faldt tilbage på Georgia/Menlo). Regenerér PNG-filen, hvis titel, nøgletal
-  eller palet ændres:
+  Et meget let papirkorn (`opacity: .03`) binder fladerne sammen uden at gøre
+  teksten urolig og skjules i tvungne kontrasttilstande. `og-image.png` og
+  `og-image-en.png` (1200x630) er delekortene til LinkedIn m.m.; de redigerbare
+  kilder er `og-template.html` og `og-template-en.html`. De bruger sidens
+  skrifter Newsreader og IBM Plex Mono via Google Fonts. Regenerér PNG-filerne,
+  hvis titel, nøgletal eller palet ændres:
 
   ```sh
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
     --screenshot=og-image.png --window-size=1200,630 --hide-scrollbars \
     --virtual-time-budget=8000 "file://$PWD/og-template.html"
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+    --screenshot=og-image-en.png --window-size=1200,630 --hide-scrollbars \
+    --virtual-time-budget=8000 "file://$PWD/og-template-en.html"
   ```
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
@@ -98,6 +107,9 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   ingen LinkedIn. Den foldbare teknikblok samler sprog, værktøjer, kilder,
   test og drift ét sted; døgnrytme-diagrammet i "Opgaven" viser overvågning
   24/7, levering kl. 8-17, fund gemt til morgenmailen og hastemails.
+- **Sprogversioner:** `index.html` er dansk, `en.html` er engelsk. De skal have
+  samme struktur, faktatal og sektioner. Begge sider har canonical- og
+  `hreflang`-links, og sprogskiftet forsøger at bevare den aktuelle sektion.
 
 ## Historik
 
@@ -160,5 +172,15 @@ Slutkontrollen efter de parallelle Claude/Codex-pas fjernede den generiske
 talanimation, genindførte den dokumenterede vækst i døgn- og tragtdiagrammerne
 og forbedrede visningen ved 320–420 px. En diskret læseindikator blev tilføjet
 som eneste nye globale effekt.
+
+13. juli, afsluttende pas: Casen fik en fuld engelsk version med sprogskift,
+egne metadata og eget delekort. Heroen forklarer nu brugerens konkrete gevinst
+og relationen til Statsministeriet tydeligere, mens driftserfaringerne står
+efter "Min rolle". Siden dokumenterer nu også driftstjekket af 100 kørsler,
+den målrettede Google News-søgning afgrænset til nato.int og beslutningen om at
+slå GDELT fra efter 15 kørsler uden brugbare svar. Monitorens sidste
+regressionsrunde endte med 26 beståede test. Papirkornet blev dæmpet, og
+temaskiftets iris, avishovedets fold og de sekventielle diagramanimationer blev
+bevaret som de få bevidste effekter.
 
 </details>
