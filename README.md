@@ -46,7 +46,9 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér
 både `/` og `/en.html`, og kontrollér sprogskiftet på mobil og desktop.
 
 OBS (set 13. juli 2026): Pages-konfigurationen kan forsvinde fra repoet, så
-siden svarer 404, selv om push lykkes og koden er på main. Tjek med
+siden svarer 404, selv om push lykkes og koden er på main. En anden variant
+(også set 13. juli): push lander på main, men Pages bygger bare ikke — bestil
+da bygningen manuelt: `gh api -X POST repos/JonathanFribert/nyhedsmonitor-case/pages/builds`. Tjek med
 `gh api repos/JonathanFribert/nyhedsmonitor-case/pages` og genaktivér med:
 `gh api -X POST repos/JonathanFribert/nyhedsmonitor-case/pages -f "source[branch]=main" -f "source[path]=/"`
 
