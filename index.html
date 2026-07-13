@@ -128,6 +128,8 @@
     .js-reveal #resultater .filter-row:nth-child(5) .retention span { transition-delay: 0.15s; }
     .js-reveal #resultater .filter-row:nth-child(6) .retention span { transition-delay: 0.20s; }
     .js-reveal #resultater .filter-row:nth-child(7) .retention span { transition-delay: 0.25s; }
+    .js-reveal #resultater .filter-row.final.counted { animation: final-flash 0.9s ease-out 1; }
+    @keyframes final-flash { 0% { background: var(--red-soft); } 100% { background: transparent; } }
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
   }
 
@@ -1113,14 +1115,69 @@
       revealEls.forEach(function (el) {
         el.classList.add('reveal');
       });
+      /* Talanimation: ét tal, der tælles hen mod målet med blød opbremsning. */
+      var animateNumber = function (el, from, to, duration, suffix, done) {
+        var start = null;
+        var step = function (ts) {
+          if (start === null) start = ts;
+          var t = Math.min(1, (ts - start) / duration);
+          var eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(from + (to - from) * eased) + (suffix || '');
+          if (t < 1) requestAnimationFrame(step);
+          else if (done) done();
+        };
+        requestAnimationFrame(step);
+      };
+
+      /* Tragten fortælles rækkevis: hvert trins tal tæller ned fra det
+         forrige trins niveau, i takt med at søjlerne vokser frem. */
+      var runFunnelStory = function (figureEl) {
+        var strongs = Array.prototype.slice.call(figureEl.querySelectorAll('.filter-count strong'));
+        var targets = strongs.map(function (s) { return parseInt(s.textContent, 10); });
+        if (targets.some(isNaN)) return;
+        strongs.forEach(function (s, i) {
+          var from = i === 0 ? 0 : targets[i - 1];
+          setTimeout(function () {
+            animateNumber(s, from, targets[i], 600, '', i === strongs.length - 1 ? function () {
+              var finalRow = figureEl.querySelector('.filter-row.final');
+              if (finalRow) finalRow.classList.add('counted');
+            } : null);
+          }, i * 120);
+        });
+      };
+
       var revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           entry.target.classList.add('in-view');
           revealObserver.unobserve(entry.target);
+          if (entry.target.matches('#resultater figure')) runFunnelStory(entry.target);
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
       revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+      /* Nøgletallene i toppen tæller op, når rækken kommer i syne. Uden JS
+         (eller med reduceret bevægelse) står de fulde tal der fra start. */
+      var statsRow = document.querySelector('.stats');
+      if (statsRow) {
+        var counters = Array.prototype.slice.call(statsRow.querySelectorAll('.stat-value')).map(function (el) {
+          var m = el.textContent.match(/^(\d+)([\s\S]*)$/);
+          if (!m) return null;
+          return { el: el, target: parseInt(m[1], 10), suffix: m[2] };
+        }).filter(Boolean);
+        if (counters.length) {
+          var statsObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              statsObserver.unobserve(entry.target);
+              counters.forEach(function (c) {
+                animateNumber(c.el, 0, c.target, 900, c.suffix);
+              });
+            });
+          }, { threshold: 0.3 });
+          statsObserver.observe(statsRow);
+        }
+      }
     }
 
     if ('IntersectionObserver' in window) {
