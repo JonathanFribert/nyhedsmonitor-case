@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 | Jonathan Fribert</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231F4E79%22/><text x=%2232%22 y=%2243%22 text-anchor=%22middle%22 font-family=%22Menlo,monospace%22 font-size=%2228%22 font-weight=%22700%22 fill=%22white%22>JF</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,700&amp;family=IBM+Plex+Mono:wght@700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #FAF7F0; --ink: #1B1A17; --muted: #605C53;
+    --accent: #1F4E79; --red: #A6301F; --line: #E3DDD1;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --serif: "Newsreader", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ground: #141210; --ink: #ECE7DC; --muted: #A39D8F; --accent: #8FB4D9; --red: #E08B7A; --line: #3A342C; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; display: grid; min-height: 100dvh; place-items: center;
+    background: var(--ground); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6; padding: 1.5rem;
+  }
+  main { width: min(38rem, 100%); }
+  .masthead-line {
+    display: flex; justify-content: space-between; margin: 0 0 0.55rem;
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .masthead-rule { height: 7px; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); margin-bottom: 2.2rem; }
+  .stamp {
+    display: inline-block; border: 2px solid var(--red); border-radius: 2px;
+    color: var(--red); padding: 0.1rem 0.6rem; font-family: var(--mono);
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.08em;
+    transform: rotate(-2deg); margin-bottom: 1.2rem;
+  }
+  h1 { margin: 0 0 0.8rem; font-family: var(--serif); font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.05; letter-spacing: -0.02em; }
+  p { margin: 0 0 0.6rem; color: var(--muted); }
+  p[lang="en"] { font-size: 0.95rem; }
+  .links { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.7rem; }
+  .links a {
+    display: inline-flex; min-height: 3rem; align-items: center;
+    border: 1px solid var(--accent); border-radius: 4px; padding: 0.5rem 1.1rem;
+    color: var(--accent); font-weight: 700; text-decoration: none;
+  }
+  .links a:first-child { background: var(--accent); color: var(--ground); }
+</style>
+</head>
+<body>
+<main>
+  <div class="masthead-line" aria-hidden="true"><span>Jonathan Fribert</span><span>404</span></div>
+  <div class="masthead-rule" aria-hidden="true"></div>
+  <span class="stamp">FRASORTERET</span>
+  <h1>Denne side blev ikke fundet</h1>
+  <p>Adressen findes ikke, eller også er den blevet frasorteret af et filter med lidt for skrap kildekontrol.</p>
+  <p lang="en">This page could not be found. Perhaps a filter with an overly strict source check rejected it.</p>
+  <div class="links">
+    <a href="/nyhedsmonitor-case/">Til casen (dansk)</a>
+    <a href="/nyhedsmonitor-case/en.html" hreflang="en" lang="en">Case study in English</a>
+  </div>
+</main>
+</body>
+</html>

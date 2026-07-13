@@ -11,6 +11,7 @@
 <meta property="og:description" content="A news monitor that helped an employee at the Danish Prime Minister's Office quickly identify relevant public statements while on standby during a demanding week.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="da_DK">
 <meta property="og:url" content="https://jonathanfribert.github.io/nyhedsmonitor-case/en.html">
 <meta property="og:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image-en.png">
 <meta property="og:image:width" content="1200">
@@ -228,6 +229,8 @@
     background: var(--surface); color: var(--muted); cursor: pointer;
   }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle svg { transition: transform 0.25s ease; }
+  .theme-toggle:hover svg { transform: rotate(-14deg); }
   .no-js .theme-toggle { display: none; }
   .theme-toggle svg { display: block; }
   .theme-toggle .icon-sun { display: none; }
@@ -1383,6 +1386,11 @@
             if (active) link.setAttribute('aria-current', 'location');
             else link.removeAttribute('aria-current');
           });
+          var langSwitch = document.querySelector('.language-switch');
+          if (langSwitch) {
+            var base = langSwitch.getAttribute('href').split('#')[0];
+            langSwitch.setAttribute('href', base + '#' + entry.target.id);
+          }
         });
       }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
       sections.forEach(function (section) { navObserver.observe(section); });

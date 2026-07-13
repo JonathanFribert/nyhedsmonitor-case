@@ -223,4 +223,13 @@ viser sidens URL i print. (5) HASTER-badgen er nu et stempel (roteret, rammet)
 der stemples ned ved afsloering (afloeser pulsslaget), plus mikro-hovers paa
 kildenoder og filterchips. Alt i BEGGE sprogfiler.
 
+13. juli, revisionspas (Claude): fuld detaljerevision. Fundet og rettet:
+DA-siden manglede og:locale (nu da_DK + alternate en_GB, spejlet paa EN);
+sprogskiftet bevarer nu faktisk den aktuelle sektion (navObserver opdaterer
+.language-switch-href med #sektion — README paastod det foer koden kunne det);
+brandet 404.html i avis-stil (FRASORTERET-stempel, tosproget, noindex);
+sitemap.xml med hreflang-alternates + robots.txt; temaknappens ikon vipper
+ved hover. Revideret uden fund: ankre/id'er/aria-labelledby, dublerede id'er,
+overskriftshierarki (h1=1, ingen niveauspring), JSON-LD-parse, sitemap-XML.
+
 </details>

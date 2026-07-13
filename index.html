@@ -14,6 +14,8 @@
 <meta property="og:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:locale" content="da_DK">
+<meta property="og:locale:alternate" content="en_GB">
 <meta property="og:image:alt" content="Delekort: Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
@@ -227,6 +229,8 @@
     background: var(--surface); color: var(--muted); cursor: pointer;
   }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle svg { transition: transform 0.25s ease; }
+  .theme-toggle:hover svg { transform: rotate(-14deg); }
   .no-js .theme-toggle { display: none; }
   .theme-toggle svg { display: block; }
   .theme-toggle .icon-sun { display: none; }
@@ -1382,6 +1386,11 @@
             if (active) link.setAttribute('aria-current', 'location');
             else link.removeAttribute('aria-current');
           });
+          var langSwitch = document.querySelector('.language-switch');
+          if (langSwitch) {
+            var base = langSwitch.getAttribute('href').split('#')[0];
+            langSwitch.setAttribute('href', base + '#' + entry.target.id);
+          }
         });
       }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
       sections.forEach(function (section) { navObserver.observe(section); });
