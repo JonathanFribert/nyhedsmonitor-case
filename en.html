@@ -258,6 +258,8 @@
     letter-spacing: 0.12em; text-transform: uppercase;
   }
   .masthead-rule { height: 7px; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .masthead-link { color: inherit; text-decoration: none; }
+  .masthead-link:hover { color: var(--accent); }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(22rem, 0.68fr); gap: clamp(3rem, 8vw, 8rem); align-items: center; }
   .section-label { margin: 0 0 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
   h1, h2 { font-family: var(--serif); text-wrap: balance; }
@@ -743,7 +745,7 @@
 <header class="hero" id="top">
   <div class="shell">
     <div class="masthead">
-      <p class="masthead-line"><span>Jonathan Fribert</span><span class="masthead-mid">Case study</span><span>July 2026</span></p>
+      <p class="masthead-line"><span><a class="masthead-link" href="https://jonathanfribert.github.io/">Jonathan Fribert</a></span><span class="masthead-mid">Case study</span><span>July 2026</span></p>
       <div class="masthead-rule" aria-hidden="true"></div>
     </div>
     <div class="hero-grid">

@@ -35,6 +35,13 @@ selvstændige HTML-filer uden et build-trin.
 monitorens kildekode ligger i det PRIVATE repo `JonathanFribert/nyhedsmonitor`
 og skal forblive privat.
 
+**Forsiden** (portfolio, avisforside) bor i repoet
+`JonathanFribert/jonathanfribert.github.io` (lokalt:
+`nyhedsmonitor/portfolio-site/`) og serveres på https://jonathanfribert.github.io/.
+Casens avishoved-navn linker derover. Domænets gældende robots.txt ligger i
+forsidens repo og peger på begge sitemaps; casens egen robots.txt er uden
+virkning (ikke i roden).
+
 ## Publicering (efter ændringer i `index.html` eller `en.html`)
 
 ```
