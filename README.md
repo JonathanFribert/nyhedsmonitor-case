@@ -1,12 +1,26 @@
-# Case-side: Nyhedsmonitor (portfolio)
+# Nyhedsmonitor — projektcase
 
-Offentlig portfolio-side om nyhedsmonitor-projektet, målrettet fremtidige
-arbejdsgivere. Én selvstændig HTML-fil, ingen build-trin.
+**Læs casen her: https://jonathanfribert.github.io/nyhedsmonitor-case/**
 
-**Live:** https://jonathanfribert.github.io/nyhedsmonitor-case/
-**Hosting:** GitHub Pages fra det offentlige repo `JonathanFribert/nyhedsmonitor-case`
-(branch `main`, rod). Selve monitorens kildekode ligger i det PRIVATE repo
-`JonathanFribert/nyhedsmonitor` og skal forblive privat.
+[![Delekort for casen](og-image.png)](https://jonathanfribert.github.io/nyhedsmonitor-case/)
+
+Et personligt værktøj til nyhedsovervågning, bygget og sat i drift på fem dage
+til en medarbejder i Statsministeriet under en uge på standby. Casen gennemgår
+arkitektur, test og drift med faktiske driftstal. Selve monitorens kildekode er
+privat, fordi værktøjet blev bygget til en konkret arbejdsopgave.
+
+Kontakt: fribert6@gmail.com
+
+---
+
+## Intern dokumentation (for redigering af siden)
+
+Dette repo indeholder casens ene HTML-fil og delekortet; resten af denne
+README er arbejdsdokumentation. Én selvstændig HTML-fil, ingen build-trin.
+
+**Hosting:** GitHub Pages fra dette repo (branch `main`, rod). Selve
+monitorens kildekode ligger i det PRIVATE repo `JonathanFribert/nyhedsmonitor`
+og skal forblive privat.
 
 ## Publicering (efter ændringer i index.html)
 
@@ -53,12 +67,15 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   IBM Plex Mono til etiketter og tal, lys/mørk via `prefers-color-scheme` +
   manuel knap. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
   `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; den redigerbare
-  kilde er `og-image.svg`. Regenerér PNG-filen, hvis titel, nøgletal eller palet
-  ændres. På macOS køres disse to kommandoer i rækkefølge:
+  kilde er `og-template.html` (bruger sidens rigtige skrifter Newsreader og
+  IBM Plex Mono via Google Fonts; et tidligere SVG-udkast udgik, fordi det
+  faldt tilbage på Georgia/Menlo). Regenerér PNG-filen, hvis titel, nøgletal
+  eller palet ændres:
 
   ```sh
-  qlmanage -t -s 1200 -o /tmp og-image.svg
-  sips -z 630 1200 /tmp/og-image.svg.png --out og-image.png
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+    --screenshot=og-image.png --window-size=1200,630 --hide-scrollbars \
+    --virtual-time-budget=8000 "file://$PWD/og-template.html"
   ```
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;

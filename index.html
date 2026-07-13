@@ -107,6 +107,7 @@
   @media (prefers-reduced-motion: no-preference) {
     .js-reveal .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
     .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
   }
 
   .skip-link {
@@ -138,9 +139,14 @@
   .brand-name { font-family: var(--mono); font-size: 0.86rem; font-weight: 700; letter-spacing: 0.05em; }
   .nav-actions { display: flex; min-width: 0; align-items: center; gap: 1rem; }
   .nav-links { display: flex; min-width: 0; align-items: center; gap: 1.2rem; }
-  .nav-links a { display: inline-flex; min-height: 2.75rem; flex: 0 0 auto; align-items: center; color: var(--muted); font-size: 0.94rem; font-weight: 650; text-decoration: none; }
+  .nav-links a { position: relative; display: inline-flex; min-height: 2.75rem; flex: 0 0 auto; align-items: center; color: var(--muted); font-size: 0.94rem; font-weight: 650; text-decoration: none; }
+  .nav-links a::after {
+    position: absolute; right: 0; bottom: 0.5rem; left: 0; border-top: 2px solid var(--accent);
+    content: ""; transform: scaleX(0); transform-origin: left; transition: transform 0.22s ease;
+  }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a.active { color: var(--accent); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
   .nav-cta {
     border: 1px solid var(--line); border-radius: 4px; padding: 0.38rem 0.76rem;
     background: var(--surface);
@@ -246,6 +252,10 @@
   .section-heading.figure-led { max-width: 70rem; grid-template-columns: minmax(0, 1fr); gap: 0.8rem; }
   h2 { margin: 0; font-size: clamp(2rem, 3.3vw, 2.9rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
   .intro { max-width: 60rem; margin: 0; color: var(--muted); font-size: 1.15rem; line-height: 1.7; text-wrap: pretty; }
+  #problem .intro::first-letter {
+    float: left; margin: 0.07em 0.14em 0 0; color: var(--ink);
+    font-family: var(--serif); font-size: 3.1em; font-weight: 700; line-height: 0.8;
+  }
   .delivery-intro p { margin: 0; }
   .delivery-intro p + p { margin-top: 0.8rem; font-size: 0.98rem; }
   .quote {
@@ -990,7 +1000,7 @@
         themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
         themeToggle.setAttribute('aria-label', isDark ? 'Skift til lyst tema' : 'Skift til mørkt tema');
       };
-      themeToggle.addEventListener('click', function () {
+      var applyThemeToggle = function () {
         var root = document.documentElement;
         var current = root.getAttribute('data-theme') || (systemDark.matches ? 'dark' : 'light');
         var next = current === 'dark' ? 'light' : 'dark';
@@ -1002,6 +1012,13 @@
           try { localStorage.setItem('theme', next); } catch (e) {}
         }
         syncTheme();
+      };
+      themeToggle.addEventListener('click', function () {
+        if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.startViewTransition(applyThemeToggle);
+        } else {
+          applyThemeToggle();
+        }
       });
       if (systemDark.addEventListener) systemDark.addEventListener('change', syncTheme);
       syncTheme();
@@ -1023,6 +1040,41 @@
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
       revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+      /* Nøgletallene tæller op, når rækken kommer i syne. Uden JS (eller med
+         reduceret bevægelse) står de fulde tal der fra start. */
+      var statsRow = document.querySelector('.stats');
+      if (statsRow) {
+        var counters = Array.prototype.slice.call(statsRow.querySelectorAll('.stat-value')).map(function (el) {
+          var m = el.textContent.match(/^(\d+)([\s\S]*)$/);
+          if (!m) return null;
+          return { el: el, target: parseInt(m[1], 10), suffix: m[2] };
+        }).filter(Boolean);
+        if (counters.length) {
+          counters.forEach(function (c) { c.el.textContent = '0' + c.suffix; });
+          var runCount = function () {
+            var start = null, duration = 900;
+            var step = function (ts) {
+              if (start === null) start = ts;
+              var t = Math.min(1, (ts - start) / duration);
+              var eased = 1 - Math.pow(1 - t, 3);
+              counters.forEach(function (c) {
+                c.el.textContent = Math.round(c.target * eased) + c.suffix;
+              });
+              if (t < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          };
+          var statsObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              statsObserver.unobserve(entry.target);
+              runCount();
+            });
+          }, { threshold: 0.3 });
+          statsObserver.observe(statsRow);
+        }
+      }
     }
 
     if ('IntersectionObserver' in window) {
