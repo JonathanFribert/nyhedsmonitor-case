@@ -28,7 +28,7 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
   disclaimer om, at værktøjet er personlig støtte, ikke et officielt system.
   Ingen modtagernavne eller mailadresser må optræde på siden.
 - **Sprogniveau:** hovedsporet skrives til en ikke-teknisk læser; tekniske
-  detaljer bor i den foldbare "Se præcis, hvad der sker teknisk". Terminologi:
+  detaljer bor i den foldbare "Se de tekniske detaljer". Terminologi:
   "fund" bruges som fast begreb efter første, selvforklarende brug. Udadtil
   siges "alvorlige fund" (ikke det interne "høj alvor"), "uafhængig
   overvågning" (ikke "driftsmonitor") og "alvorsgrad" som feltnavn; undgå
@@ -40,18 +40,18 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
   LinkedIn m.m.; regenerér det hvis titel eller nøgletal ændres.
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
-  hero-eyebrow siger "Case 01" (flere cases kan komme til). Kontakt er
+  hero-eyebrow siger "Projektcase". Kontakt er
   fribert6@gmail.com (primær, synlig i CTA og footer) plus GitHub; bevidst
   ingen LinkedIn. Den foldbare teknikblok samler sprog, værktøjer, kilder,
   test og drift ét sted; døgnrytme-diagrammet i "Opgaven" viser overvågning
-  24/7, levering kl. 8-17, natkø og hastemails.
+  24/7, levering kl. 8-17, fund gemt til morgenmailen og hastemails.
 
 ## Historik
 
 Bygget 12. juli 2026 i tre lag: Claude skrev første udgave (commit 313aa0b),
 Codex redesignede til det nuværende flade udtryk med beslutningstræ og
 takeaways, Claude bidrog med typografi-skala, sprogpas (jargon ud af
-hovedsporet), og:image/delekort og publicering. 12. juli (senere samme dag):
+hovedsporet), og-image/delekort og publicering. 12. juli (senere samme dag):
 det åbne designspørgsmål blev lukket ved at fjerne seks-trins-kørslen fra
 "Løsningen" (den overlappede arkitekturdiagrammet); de to unikke detaljer
 (X henter kun siden sidste kørsel; dedup på id/link/normaliseret titel) blev
@@ -81,3 +81,8 @@ mindst 14 px på mobil, scrollindikatoren blev fjernet, og scroll-reveal blev
 begrænset til fem hovedfigurer uden stagger. Den dobbelte teknikforklaring blev
 samlet i én foldbar blok, driftslaget i arkitekturfiguren blev forkortet, og
 projektstatus, mailadfærd, auditlog og økonomi blev beskrevet mere præcist.
+
+13. juli: Et samlet sprogpas gjorde nøgletallene til hele sætninger, oversatte
+interne driftsord i hovedsporet og omskrev driftsfejlenes løsningsbeskrivelser.
+Tekniske begreber blev enten forklaret eller flyttet til teknikfolden. De
+mindste diagramtekster blev samtidig gjort større på desktop.
