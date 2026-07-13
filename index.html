@@ -850,7 +850,7 @@
           <div><h3>Filtrering og AI</h3><p>Sociale opslag genkendes på opslagets unikke id. Hvis et opslag citerer eller deler et andet opslag, læser monitoren også teksten fra det citerede eller delte opslag samt tilgængelige linkforhåndsvisninger, før relevansen vurderes. Nyhedsartikler genkendes på deres link og en forenklet version af overskriften. En artikel fra en ukendt kilde slipper kun igennem, hvis et godkendt medie har bragt en lignende historie inden for 48 timer. Hvis AI-modellen ikke kan gennemføre vurderingen af et fund, der har bestået de faste kontroller, bliver fundet alligevel leveret.</p></div>
           <div><h3>Levering og hukommelse</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten lægges de i kø til den første morgenmail. Når en kørsel finder et alvorligt fund, sendes desuden en hastemail med det samme. En statusmail uden nye fund sendes kun, når der er gået mindst 50 minutter siden den seneste almindelige mail. Ved hver kørsel gemmes op til 200 eksempler på indhold, som hvert filter sorterede fra: tid, emne, kilde og AI. Hvis der er flere, registreres kun det samlede antal for resten.</p></div>
           <div><h3>Kode og data</h3><p>Et lille Python-program bruger requests, PyYAML, python-dotenv og Anthropics officielle programbibliotek. Systemets hukommelse og oplysninger om det frasorterede indhold gemmes i enkle tekstfiler i JSON-format; løsningen kræver hverken database eller egen server.</p></div>
-          <div><h3>Drift og adgangsnøgler</h3><p>I projektugen kørte monitoren via GitHub Actions. Tjenesten cron-job.org startede programmet hvert 30. minut. GitHubs egen tidsplan kørte én gang i timen som reserve på et andet tidspunkt, og healthchecks.io holdt uafhængigt øje med, om kørslerne blev gennemført. I GitHub Actions lå adgangsnøglerne som krypterede variabler. Lokalt blev de læst fra en .env-fil, som ikke bliver gemt i Git.</p></div>
+          <div><h3>Drift og adgangsnøgler</h3><p>I projektugen kørte monitoren via GitHub Actions. Tjenesten cron-job.org startede programmet hvert 30. minut. GitHubs egen tidsplan kørte én gang i timen som reserve på et andet tidspunkt, og healthchecks.io holdt uafhængigt øje med, om kørslerne blev gennemført. Adgangsnøglerne blev opbevaret sikkert som GitHub Actions-secrets. Lokalt blev de læst fra en .env-fil, som ikke bliver gemt i Git.</p></div>
           <div><h3>Test og økonomi</h3><p>Efter de sidste driftsændringer bestod løsningen alle 26 automatiske test med Pythons indbyggede testværktøj. Det anslåede API- og tjenesteforbrug for projektugen var under 50 kr.</p></div>
         </div>
       </details>
@@ -955,7 +955,7 @@
           <div class="filter-count"><strong>17</strong><small>−1</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Troværdig kilde</b><span>kilden kontrolleret</span></div>
+          <div class="filter-stage"><b>Godkendt kilde</b><span>kilden kontrolleret</span></div>
           <div class="retention"><span style="width:8%"></span></div>
           <div class="filter-count"><strong>16</strong><small>−1</small></div>
         </div>
