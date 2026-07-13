@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jonathan Fribert | Case: Nyhedsmonitor</title>
 <meta name="description" content="Jonathan Fribert byggede et personligt nyhedsovervågningsværktøj til en medarbejder i Statsministeriet under en tidsafgrænset periode på standby. Projektcase med rigtige driftstal.">
-<meta name="theme-color" content="#F3F7F8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B1117" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Jonathan Fribert | Case: Nyhedsmonitor">
 <meta property="og:description" content="Jonathan Fribert byggede et personligt nyhedsovervågningsværktøj til en medarbejder i Statsministeriet under en tidsafgrænset periode på standby.">
 <meta property="og:type" content="website">
@@ -15,26 +15,26 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
 <link rel="canonical" href="https://jonathanfribert.github.io/nyhedsmonitor-case/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230E7490%22/><text x=%2232%22 y=%2243%22 text-anchor=%22middle%22 font-family=%22Menlo,monospace%22 font-size=%2228%22 font-weight=%22700%22 fill=%22white%22>JF</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231F4E79%22/><text x=%2232%22 y=%2243%22 text-anchor=%22middle%22 font-family=%22Menlo,monospace%22 font-size=%2228%22 font-weight=%22700%22 fill=%22white%22>JF</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&amp;family=IBM+Plex+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   :root {
-    --ground: #F3F7F8;
+    --ground: #FAF7F0;
     --surface: #FFFFFF;
-    --surface-soft: #EAF2F4;
-    --line: #D4E0E4;
-    --ink: #12212A;
-    --muted: #5D6E78;
-    --accent: #0B7189;
-    --accent-strong: #07596C;
-    --accent-soft: #DCEEF2;
-    --red: #B93B30;
-    --red-soft: #F7E7E4;
-    --amber: #A86A08;
-    --green: #217548;
-    --green-soft: #E1F0E7;
+    --surface-soft: #F2EDE3;
+    --line: #E3DDD1;
+    --ink: #1B1A17;
+    --muted: #6B675E;
+    --accent: #1F4E79;
+    --accent-strong: #163A5B;
+    --accent-soft: #E9EFF5;
+    --red: #A6301F;
+    --red-soft: #F5E8E3;
+    --amber: #9A6708;
+    --green: #2F6B44;
+    --green-soft: #E7EFE7;
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -42,37 +42,37 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #0B1117;
-      --surface: #121B23;
-      --surface-soft: #16232C;
-      --line: #283943;
-      --ink: #E9F0F3;
-      --muted: #9AADB7;
-      --accent: #58BED3;
-      --accent-strong: #83D1E0;
-      --accent-soft: #142C35;
-      --red: #EE8277;
-      --red-soft: #33201F;
-      --amber: #E0AD52;
-      --green: #7AC69A;
-      --green-soft: #183126;
+      --ground: #141210;
+      --surface: #1D1A16;
+      --surface-soft: #24201B;
+      --line: #3A342C;
+      --ink: #ECE7DC;
+      --muted: #A39D8F;
+      --accent: #8FB4D9;
+      --accent-strong: #B0CCE7;
+      --accent-soft: #1E2B39;
+      --red: #E08B7A;
+      --red-soft: #35211C;
+      --amber: #D9AC5E;
+      --green: #8CC2A0;
+      --green-soft: #1F2E23;
     }
   }
   :root[data-theme="dark"] {
-    --ground: #0B1117;
-    --surface: #121B23;
-    --surface-soft: #16232C;
-    --line: #283943;
-    --ink: #E9F0F3;
-    --muted: #9AADB7;
-    --accent: #58BED3;
-    --accent-strong: #83D1E0;
-    --accent-soft: #142C35;
-    --red: #EE8277;
-    --red-soft: #33201F;
-    --amber: #E0AD52;
-    --green: #7AC69A;
-    --green-soft: #183126;
+    --ground: #141210;
+    --surface: #1D1A16;
+    --surface-soft: #24201B;
+    --line: #3A342C;
+    --ink: #ECE7DC;
+    --muted: #A39D8F;
+    --accent: #8FB4D9;
+    --accent-strong: #B0CCE7;
+    --accent-soft: #1E2B39;
+    --red: #E08B7A;
+    --red-soft: #35211C;
+    --amber: #D9AC5E;
+    --green: #8CC2A0;
+    --green-soft: #1F2E23;
   }
 
   * { box-sizing: border-box; }
@@ -186,10 +186,10 @@
   .button.secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .brand-mark,
-    :root:not([data-theme="light"]) .hero-actions .button:not(.secondary) { color: #081117; }
+    :root:not([data-theme="light"]) .hero-actions .button:not(.secondary) { color: #141210; }
   }
   :root[data-theme="dark"] .brand-mark,
-  :root[data-theme="dark"] .hero-actions .button:not(.secondary) { color: #081117; }
+  :root[data-theme="dark"] .hero-actions .button:not(.secondary) { color: #141210; }
 
   .case-brief { align-self: start; border-top: 4px solid var(--accent); border-bottom: 1px solid var(--line); padding: 1.2rem 0; }
   .case-brief-title { margin: 0 0 1rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 700; }
@@ -529,7 +529,7 @@
   }
   @media print {
     .topbar, .hero-actions { display: none; }
-    body { background: white; color: #12212A; }
+    body { background: white; color: #1B1A17; }
     .section { break-inside: avoid; }
   }
 </style>
@@ -971,7 +971,7 @@
         var forced = document.documentElement.getAttribute('data-theme');
         var isDark = forced ? forced === 'dark' : systemDark.matches;
         themeMetas.forEach(function (m, i) {
-          m.setAttribute('content', forced ? (forced === 'dark' ? '#0B1117' : '#F3F7F8') : metaDefaults[i]);
+          m.setAttribute('content', forced ? (forced === 'dark' ? '#141210' : '#FAF7F0') : metaDefaults[i]);
         });
         themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
         themeToggle.setAttribute('aria-label', isDark ? 'Skift til lyst tema' : 'Skift til mørkt tema');
