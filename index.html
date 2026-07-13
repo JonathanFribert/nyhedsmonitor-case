@@ -163,12 +163,16 @@
   :root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
 
   /* Hero */
-  .hero { padding: clamp(3.5rem, 8vw, 7rem) 0 3rem; }
+  .hero { padding: clamp(2.5rem, 5vw, 4rem) 0 3rem; }
+  .masthead { margin-bottom: clamp(2.4rem, 5vw, 3.8rem); }
+  .masthead-line {
+    display: flex; justify-content: space-between; gap: 1rem; margin: 0 0 0.55rem;
+    color: var(--ink); font-family: var(--mono); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .masthead-rule { height: 7px; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(22rem, 0.68fr); gap: clamp(3rem, 8vw, 8rem); align-items: center; }
-  .eyebrow, .section-label { margin: 0 0 0.8rem; color: var(--accent); font-size: 0.78rem; font-weight: 700; }
-  .eyebrow { font-family: var(--mono); }
-  .section-label { font-family: var(--sans); font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; }
-  .eyebrow { letter-spacing: 0.12em; text-transform: uppercase; }
+  .section-label { margin: 0 0 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
   h1, h2 { font-family: var(--serif); text-wrap: balance; }
   h1 {
     max-width: 20ch; margin: 0; font-size: clamp(2.4rem, 4.6vw, 3.6rem);
@@ -446,7 +450,12 @@
   .cta-card .button.secondary { background: transparent; color: var(--ink); }
   .cta-card .button.secondary:hover { background: var(--ink); color: var(--ground); }
   .cta-card p a { color: var(--accent-strong); font-weight: 700; }
-  footer { display: flex; justify-content: space-between; gap: 1rem; padding: 0 0 2.5rem; color: var(--muted); font-family: var(--mono); font-size: 0.76rem; line-height: 1.7; }
+  footer {
+    position: relative; display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 3px solid var(--ink); margin-top: 0.5rem; padding: 1.1rem 0 2.5rem;
+    color: var(--muted); font-family: var(--mono); font-size: 0.76rem; line-height: 1.7;
+  }
+  footer::before { position: absolute; top: 4px; right: 0; left: 0; border-top: 1px solid var(--ink); content: ""; }
   footer a { color: var(--accent); text-decoration: none; }
 
   @media (max-width: 900px) {
@@ -501,7 +510,9 @@
     .operations-node { grid-template-columns: minmax(0, 1fr); gap: 0.7rem; }
     .operations-node ul { grid-template-columns: minmax(0, 1fr); gap: 0.55rem; }
     .operations-node li + li { border-top: 1px solid var(--line); border-left: 0; padding-top: 0.55rem; padding-left: 0; }
-    .eyebrow, .section-label, .journey-label { font-size: 0.875rem; }
+    .section-label, .journey-label { font-size: 0.875rem; }
+    .masthead-mid { display: none; }
+    .masthead-line { font-size: 0.72rem; letter-spacing: 0.08em; }
     .node span, .tech-grid p, .journey-meta, .check-list li, .ai-result dt, .ai-result dd, .filter-stage span, .diagram-caption { font-size: 0.95rem; }
     .node b, .pipeline-core h3, .filter, .filter-stage b, .incident-label, .mail-footer, footer { font-size: 0.875rem; }
     .legend span, .reliability-label b, .reliability-label span, .reliability-result, .filter-count small, .timeline-date, .takeaways li > span { font-size: 0.875rem; }
@@ -569,9 +580,12 @@
 
 <header class="hero" id="top">
   <div class="shell">
+    <div class="masthead">
+      <p class="masthead-line"><span>Jonathan Fribert</span><span class="masthead-mid">Projektcase</span><span>Juli 2026</span></p>
+      <div class="masthead-rule" aria-hidden="true"></div>
+    </div>
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">Projektcase · juli 2026</p>
         <h1>Nyhedsovervågning til en medarbejder i Statsministeriet under en uge på standby</h1>
         <p class="lead">I en intensiv uge på standby havde en medarbejder i Statsministeriet brug for hurtigt at opdage nye offentlige udmeldinger om forholdet mellem USA og Kongeriget Danmark, især når Grønland eller Færøerne var berørt. Jeg byggede derfor et personligt hjælpeværktøj, der overvåger nyhedsmedier og udvalgte konti, fjerner irrelevant stof og gentagelser og sender relevante artikler og opslag på mail.</p>
         <div class="hero-actions">
@@ -632,7 +646,7 @@
   <section class="section" id="problem">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">Opgaven</p><h2>Målet: at opdage relevante historier, undgå gentagelser og gøre fejl synlige</h2></div>
+        <div><p class="section-label">01 · Opgaven</p><h2>Målet: at opdage relevante historier, undgå gentagelser og gøre fejl synlige</h2></div>
         <div>
           <p class="intro">Opgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Fordi en overset historie var værre end en ekstra mail, accepterede systemet fund fra et bredt tidsrum. Hvis AI-vurderingen derefter fejlede, blev fundet beholdt.</p>
           <p class="quote">Stilhed måtte ikke kunne forveksles med et nedbrud.</p>
@@ -672,7 +686,7 @@
   <section class="section soft" id="system">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">Løsningen</p><h2>Sådan går en artikel eller et opslag fra kilde til mail</h2></div>
+        <div><p class="section-label">02 · Løsningen</p><h2>Sådan går en artikel eller et opslag fra kilde til mail</h2></div>
         <p class="intro">Monitoren henter artikler fra GDELT og Google News og opslag fra Truth Social og 42 udvalgte X-konti. Alle fund kontrolleres for alder, gentagelser og emne. Nyhedsartikler kontrolleres desuden for kilde, før en AI-model vurderer relevansen, angiver hvor alvorligt fundet er og skriver et kort resumé på dansk.</p>
       </div>
 
@@ -731,7 +745,7 @@
   <section class="section" id="eksempel">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">Ét fund gennem systemet</p><h2 id="journey-title">Sådan bliver et nyt opslag vurderet</h2></div>
+        <div><p class="section-label">03 · Ét fund gennem systemet</p><h2 id="journey-title">Sådan bliver et nyt opslag vurderet</h2></div>
         <p class="intro">Eksemplet er konstrueret og indeholder ingen oplysninger fra modtagerens virkelige mails, men bruger de samme regler og oplysninger som løsningen i drift.</p>
       </div>
 
@@ -766,7 +780,7 @@
   <section class="section" id="resultater">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">Målt på faktiske data</p><h2 id="filter-title">Af 201 hentede artikler og opslag var ét relevant</h2></div>
+        <div><p class="section-label">04 · Målt på faktiske data</p><h2 id="filter-title">Af 201 hentede artikler og opslag var ét relevant</h2></div>
         <p class="intro">Tallene stammer fra en faktisk kørsel i prøvedriften 7. juli kl. 16.25. De faste kontroller fjernede det meste; AI-modellen vurderede de resterende 16 og markerede ét fund som relevant.</p>
       </div>
 
@@ -816,7 +830,7 @@
   <section class="section soft" id="levering">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">Det brugeren modtog</p><h2>Mailen viser både fund og driftsstatus</h2></div>
+        <div><p class="section-label">05 · Det brugeren modtog</p><h2>Mailen viser både fund og driftsstatus</h2></div>
         <div class="intro delivery-intro">
           <p>I dagtimerne sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen. Fund, som AI-modellen vurderer som alvorlige, udløser desuden en særskilt hastemail, også om natten.</p>
           <p><strong>Kildestatus:</strong> Nederst i de almindelige mails står, om kilderne svarede normalt. Hvis Google News, Truth Social eller X fejler, markeres det også med ⚠ i emnefeltet. Et problem med GDELT vises i oversigten, men udløser ikke alene en advarsel.</p>
@@ -848,7 +862,7 @@
   <section class="section" id="laering">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">Erfaringer fra driften</p><h2 id="reliability-title">Hvad prøvedriften afslørede</h2></div>
+        <div><p class="section-label">06 · Erfaringer fra driften</p><h2 id="reliability-title">Hvad prøvedriften afslørede</h2></div>
         <p class="intro">Fire døgns prøvedrift afdækkede fejl, som en kort demonstration ikke havde vist. Den største udfordring var ikke AI-vurderingen, men at GitHubs automatiske tidsplan ikke altid startede monitoren som planlagt. Hver fejl blev dokumenteret, rettet og kontrolleret igen.</p>
       </div>
 
@@ -894,7 +908,7 @@
   <section class="section soft" id="rolle">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">Min rolle</p><h2>Jeg byggede, testede og satte løsningen i drift</h2></div>
+        <div><p class="section-label">07 · Min rolle</p><h2>Jeg byggede, testede og satte løsningen i drift</h2></div>
         <p class="intro">Jeg omsatte behovet under ugen på standby til konkrete regler, valgte og kontrollerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og overvågning. Claude blev brugt til sparring og udkast til kode. Jeg traf beslutningerne og gennemgik og testede ændringerne, før de blev sat i drift.</p>
       </div>
       <div class="role-grid">
@@ -923,7 +937,7 @@
   <section class="section" id="principper">
     <div class="shell">
       <div class="section-heading">
-        <div><p class="section-label">Efter projektet</p><h2>Tre erfaringer, jeg tager med videre</h2></div>
+        <div><p class="section-label">08 · Efter projektet</p><h2>Tre erfaringer, jeg tager med videre</h2></div>
         <p class="intro">De vigtigste erfaringer handlede ikke om valget af AI-model, men om prøvedrift, synlige fejl og klare grænser for automatiseringen.</p>
       </div>
       <ol class="takeaways">
