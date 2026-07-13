@@ -18,6 +18,11 @@ git push origin main        # remote = det offentlige nyhedsmonitor-case-repo
 Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
 `curl -sI https://jonathanfribert.github.io/nyhedsmonitor-case/ | head -1`
 
+OBS (set 13. juli 2026): Pages-konfigurationen kan forsvinde fra repoet, så
+siden svarer 404, selv om push lykkes og koden er på main. Tjek med
+`gh api repos/JonathanFribert/nyhedsmonitor-case/pages` og genaktivér med:
+`gh api -X POST repos/JonathanFribert/nyhedsmonitor-case/pages -f "source[branch]=main" -f "source[path]=/"`
+
 ## Indhold og principper
 
 - **Sandfærdighed er sidens valuta.** Alle tal stammer fra rigtige kørsler og
