@@ -846,10 +846,42 @@
     </div>
   </section>
 
+  <section class="section soft" id="levering">
+    <div class="shell">
+      <div class="section-heading figure-led">
+        <div><p class="section-label">04 · Det brugeren modtog</p><h2>Mailen viser både relevante historier og om monitoren kører</h2></div>
+        <div class="intro delivery-intro">
+          <p>I dagtimerne sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen. Fund, som AI-modellen vurderer som alvorlige, udløser desuden en særskilt hastemail, også om natten.</p>
+          <p><strong>Kildestatus:</strong> Nederst i de almindelige mails står, om kilderne svarede normalt. Hvis Google News, Truth Social eller X fejler, markeres det også med ⚠ i emnefeltet. Et problem med GDELT vises i oversigten, men udløser ikke alene en advarsel. I driftsugen har GDELT ofte været begrænset af udbyderens loft for antal opslag i cloud-miljøet; Google News dækker nyhedsbanen imens, og status står åbent i hver mail, som i eksemplet her.</p>
+        </div>
+      </div>
+      <div class="delivery-grid">
+        <div class="mail" aria-label="Eksempel på en statusmail uden nye fund">
+          <div class="mail-bar" aria-hidden="true"><span class="mail-dot"></span><span class="mail-dot"></span><span class="mail-dot"></span></div>
+          <div class="mail-head">
+            <div class="mail-field"><b>Fra:</b> Nyhedsmonitor</div>
+            <div class="mail-field"><b>Emne:</b> Ingen nye opdateringer (11-07-2026 15:24)</div>
+          </div>
+          <div class="mail-body">
+            <p>Ingen nye relevante opdateringer siden sidste kørsel.</p>
+            <p>Statusmailen bekræfter, at monitoren har kørt, også når der ikke er nye relevante fund.</p>
+          </div>
+          <div class="mail-footer">Kilder: GDELT: rate-limit · Google News: ok · Google News (DA): ok · Truth Social: ok · X: ok (42/42)</div>
+        </div>
+        <div class="alert-stack" aria-label="Forenklede eksempler på tre typer emnelinjer">
+          <div class="alert high"><div class="alert-type">Alvorligt fund · forenklet eksempel</div><div class="alert-subject">🔴 HASTER: 1 fund med høj prioritet (11-07-2026 16:25)</div></div>
+          <div class="alert ok"><div class="alert-type">Relevante fund · forenklet eksempel</div><div class="alert-subject">🔴 3 nye fund · 1 med høj prioritet (11-07-2026 16:25)</div></div>
+          <div class="alert warn"><div class="alert-type">Kildefejl · forenklet eksempel</div><div class="alert-subject">⚠ Ingen nye opdateringer (11-07-2026 14:41)</div></div>
+          <p class="diagram-caption">Eksemplerne er gjort lettere at læse på casesiden. Alvorsgrad, antal fund og driftsstatus står stadig forrest, så indbakken kan skimmes på få sekunder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="resultater">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">04 · Målt på faktiske data</p><h2 id="filter-title">Kun ét af 201 fund blev vurderet som relevant</h2></div>
+        <div><p class="section-label">05 · Målt på faktiske data</p><h2 id="filter-title">Kun ét af 201 fund blev vurderet som relevant</h2></div>
         <p class="intro">Tallene stammer fra en faktisk kørsel under prøvedriften den 7. juli kl. 16.25. De faste kontroller fjernede det meste; AI-modellen vurderede de resterende 16 og markerede ét fund som relevant.</p>
       </div>
 
@@ -893,38 +925,6 @@
         <div class="note-card"><b>Det frasorterede kan kontrolleres</b><p>Systemet gemmer eksempler på det, der sorteres fra, så fejl kan opdages og undersøges under prøvedriften.</p></div>
       </div>
       </figure>
-    </div>
-  </section>
-
-  <section class="section soft" id="levering">
-    <div class="shell">
-      <div class="section-heading figure-led">
-        <div><p class="section-label">05 · Det brugeren modtog</p><h2>Mailen viser både relevante historier og om monitoren kører</h2></div>
-        <div class="intro delivery-intro">
-          <p>I dagtimerne sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen. Fund, som AI-modellen vurderer som alvorlige, udløser desuden en særskilt hastemail, også om natten.</p>
-          <p><strong>Kildestatus:</strong> Nederst i de almindelige mails står, om kilderne svarede normalt. Hvis Google News, Truth Social eller X fejler, markeres det også med ⚠ i emnefeltet. Et problem med GDELT vises i oversigten, men udløser ikke alene en advarsel.</p>
-        </div>
-      </div>
-      <div class="delivery-grid">
-        <div class="mail" aria-label="Eksempel på en statusmail uden nye fund">
-          <div class="mail-bar" aria-hidden="true"><span class="mail-dot"></span><span class="mail-dot"></span><span class="mail-dot"></span></div>
-          <div class="mail-head">
-            <div class="mail-field"><b>Fra:</b> Nyhedsmonitor</div>
-            <div class="mail-field"><b>Emne:</b> Ingen nye opdateringer (11-07-2026 15:24)</div>
-          </div>
-          <div class="mail-body">
-            <p>Ingen nye relevante opdateringer siden sidste kørsel.</p>
-            <p>Statusmailen bekræfter, at monitoren har kørt, også når der ikke er nye relevante fund.</p>
-          </div>
-          <div class="mail-footer">Kilder: GDELT: ok · Google News: ok · Google News (DA): ok · Truth Social: ok · X: ok (42/42)</div>
-        </div>
-        <div class="alert-stack" aria-label="Forenklede eksempler på tre typer emnelinjer">
-          <div class="alert high"><div class="alert-type">Alvorligt fund · forenklet eksempel</div><div class="alert-subject">🔴 HASTER: 1 fund med høj prioritet (11-07-2026 16:25)</div></div>
-          <div class="alert ok"><div class="alert-type">Relevante fund · forenklet eksempel</div><div class="alert-subject">🔴 3 nye fund · 1 med høj prioritet (11-07-2026 16:25)</div></div>
-          <div class="alert warn"><div class="alert-type">Kildefejl · forenklet eksempel</div><div class="alert-subject">⚠ Ingen nye opdateringer (11-07-2026 14:41)</div></div>
-          <p class="diagram-caption">Eksemplerne er gjort lettere at læse på casesiden. Alvorsgrad, antal fund og driftsstatus står stadig forrest, så indbakken kan skimmes på få sekunder.</p>
-        </div>
-      </div>
     </div>
   </section>
 
