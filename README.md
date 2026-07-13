@@ -34,10 +34,19 @@ Pages bygger automatisk ved push (typisk live inden for 1-2 min). Verificér:
   overvågning" (ikke "driftsmonitor") og "alvorsgrad" som feltnavn; undgå
   kancelli-vendinger og ordgentagelser (sprogpas 12. juli efter brugerens
   feedback om spøjst sprog).
-- **Design:** fladt redaktionelt udtryk (ingen skygger/pills/hover-løft),
-  Newsreader til overskrifter, IBM Plex Mono til etiketter og tal, lys/mørk
-  via `prefers-color-scheme`. `og-image.png` (1200x630) er delekortet til
-  LinkedIn m.m.; regenerér det hvis titel eller nøgletal ændres.
+- **Design ("Morgenavisen", besluttet 13. juli 2026):** fladt redaktionelt
+  udtryk uden skygger/pills/hover-løft, nu i avis-palet: varmt papir #FAF7F0,
+  blæk #1B1A17, avisblå accent #1F4E79, rustrød #A6301F KUN som alarmfarve,
+  grøn #2F6B44 til levering (mørk tilstand: kul #141210, blæk #ECE7DC, lys
+  avisblå #8FB4D9 — findes i TO CSS-blokke, der skal holdes i sync).
+  Identitetsmotiv: avishoved med udgavelinje og klassisk dobbeltstreg (tyk
+  over tynd) øverst; samme dobbeltstreg lukker siden over footeren.
+  Sektionslabels er nummererede (01–08) i mono. Newsreader til overskrifter,
+  IBM Plex Mono til etiketter og tal, lys/mørk via `prefers-color-scheme` +
+  manuel knap. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
+  `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; det bygges fra en
+  HTML-skabelon og renderes med headless Chrome — regenerér det, hvis titel,
+  nøgletal eller palet ændres.
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
   hero-eyebrow siger "Projektcase". Kontakt er
@@ -81,6 +90,17 @@ mindst 14 px på mobil, scrollindikatoren blev fjernet, og scroll-reveal blev
 begrænset til fem hovedfigurer uden stagger. Den dobbelte teknikforklaring blev
 samlet i én foldbar blok, driftslaget i arkitekturfiguren blev forkortet, og
 projektstatus, mailadfærd, auditlog og økonomi blev beskrevet mere præcist.
+
+13. juli 2026, "Morgenavisen"-redesign (Claude, efter brugerens valg af
+retning): (A) avis-paletten ovenfor erstattede den kølige teal-palet i begge
+temaer; theme-color, favicon, print og JS-tema-synk fulgte med; alle tekstpar
+kontrastkontrolleret. (B) hero omkomponeret som avishoved (udgavelinje +
+dobbeltstreg, eyebrow-elementet udgik), sektionslabels nummereret 01–08 i
+mono, footer fik samme dobbeltstreg. (C) figursprog ensrettet: mail-mock med
+avisblå toplinje, figurtitler med ens underlinje, tragt i avisblå med rød
+slutrække. (D) og-image regenereret i avis-stil med den aktuelle rubrik.
+Codex' sprogpas fra samme formiddag blev committet separat forinden og er
+fuldt bevaret.
 
 13. juli: Et samlet sprogpas gjorde nøgletallene til hele sætninger, oversatte
 interne driftsord i hovedsporet og omskrev driftsfejlenes løsningsbeskrivelser.
