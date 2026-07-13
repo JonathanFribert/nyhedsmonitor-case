@@ -33,7 +33,7 @@
     --surface-soft: #F2EDE3;
     --line: #E3DDD1;
     --ink: #1B1A17;
-    --muted: #6B675E;
+    --muted: #605C53;
     --accent: #1F4E79;
     --accent-strong: #163A5B;
     --accent-soft: #E9EFF5;
@@ -42,7 +42,6 @@
     --amber: #9A6708;
     --green: #2F6B44;
     --green-soft: #E7EFE7;
-    --grain-o: 0.03;
     --grain-blend: multiply;
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
@@ -65,7 +64,6 @@
       --amber: #D9AC5E;
       --green: #8CC2A0;
       --green-soft: #1F2E23;
-      --grain-o: 0.03;
       --grain-blend: screen;
     }
   }
@@ -84,7 +82,6 @@
     --amber: #D9AC5E;
     --green: #8CC2A0;
     --green-soft: #1F2E23;
-    --grain-o: 0.03;
     --grain-blend: screen;
   }
 
@@ -92,7 +89,7 @@
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; font-size: 112.5%; }
   body {
     margin: 0;
-    background: var(--ground);
+    background: transparent;
     color: var(--ink);
     font-family: var(--sans);
     font-size: 1rem;
@@ -116,16 +113,20 @@
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
   ::selection { background: var(--accent-soft); color: var(--ink); }
 
-  /* Papirkorn: statisk avispapir-tekstur over hele siden. */
-  body::before {
-    content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 240px 240px;
-    mix-blend-mode: var(--grain-blend); opacity: var(--grain-o);
+  /* Papirkorn: statisk avispapir-tekstur i baggrundslaget, aldrig over tekst. */
+  html {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E") 0 0 / 240px 240px var(--ground);
+    background-attachment: fixed;
+    background-blend-mode: var(--grain-blend);
   }
 
   /* Diskret bevægelse på få hovedfigurer. Alt er synligt uden JavaScript. */
   @media (prefers-reduced-motion: no-preference) {
+    /* Blidt skift mellem dansk og engelsk udgave (og al anden intern navigation). */
+    @view-transition { navigation: auto; }
+    /* Sektionslabelen kvitterer med et kort farvestroeg, naar man hopper dertil. */
+    [id]:target .section-label { animation: label-ink 1.1s ease-out 1; }
+    @keyframes label-ink { 0% { background-color: var(--accent-soft); } 100% { background-color: transparent; } }
     .js-reveal .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
     .js-reveal .reveal.in-view { opacity: 1; transform: none; }
     .js-reveal .day-band.reveal .band-seg {
@@ -359,9 +360,11 @@
   .band-seg.urgent { border: 1px solid var(--red); background: var(--red-soft); }
   .band-seg.queue {
     border: 1px dashed var(--line); color: var(--muted);
-    background: repeating-linear-gradient(135deg, var(--line) 0 2px, transparent 2px 9px);
+    background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--line) 55%, transparent) 0 2px, transparent 2px 9px);
   }
   .segment-copy-short { display: none; }
+  .now-marker { position: absolute; top: -3px; bottom: -3px; border-left: 2px solid var(--ink); opacity: 0.6; pointer-events: none; }
+  .now-label { color: var(--ink); font-weight: 700; }
 
   /* Architecture */
   .architecture {
@@ -645,7 +648,7 @@
     .nav-links a[href="#problem"] { display: none; }
   }
   @media (forced-colors: active), (prefers-contrast: more) {
-    body::before { display: none; }
+    html { background-image: none; }
   }
   .no-js .reading-progress { display: none; }
   @media (prefers-reduced-motion: reduce) {
@@ -664,7 +667,7 @@
       --green: #2F6B44; --green-soft: #E7EFE7;
     }
     .topbar, .hero-actions { display: none; }
-    body::before { display: none; }
+    html { background-image: none; }
     body { background: white; color: #1B1A17; }
     .section { break-inside: avoid; }
   }
@@ -728,7 +731,7 @@
           <div><dt>Periode</dt><dd>Én intensiv uge på standby</dd></div>
           <div><dt>Status</dt><dd>Sat i drift 11. juli 2026, tidsafgrænset til projektugen</dd></div>
           <div><dt>Fokus</dt><dd>USA og Kongeriget Danmark</dd></div>
-          <div><dt>Behov</dt><dd>Hurtig reaktion uden selv at overvåge nyhedsstrømmen hele tiden</dd></div>
+          <div><dt>Behov</dt><dd>Hurtig reaktion uden selv at skulle overvåge nyhedsstrømmen hele tiden</dd></div>
         </dl>
         <p class="case-disclaimer">Værktøjet blev bygget som et personligt hjælpemiddel til én medarbejder, der var på standby i en afgrænset periode. Det er ikke et officielt system fra Statsministeriet og er ikke udviklet på ministeriets vegne. Det bruger kun offentligt tilgængelige oplysninger og skaber alene overblik; det træffer ingen beslutninger og anbefaler ingen handlinger.</p>
       </aside>
@@ -737,7 +740,7 @@
     <div class="stats" aria-label="Projektets nøgletal">
       <div class="stat"><div class="stat-value">5 kalenderdage</div><div class="stat-label">Fra den første prototype den 7. juli til idriftsættelsen den 11. juli.</div></div>
       <div class="stat"><div class="stat-value">42 X-konti</div><div class="stat-label">Afsenderen bag hver konto blev kontrolleret manuelt.</div></div>
-      <div class="stat"><div class="stat-value">406 artikler og opslag</div><div class="stat-label">Jeg gennemgik manuelt det indhold, monitoren sorterede fra under fire døgns prøvedrift.</div></div>
+      <div class="stat"><div class="stat-value">406 artikler og opslag</div><div class="stat-label">Jeg gennemgik manuelt det indhold, som monitoren sorterede fra under fire døgns prøvedrift.</div></div>
       <div class="stat"><div class="stat-value">1 fejlsorteret historie</div><div class="stat-label">Den manuelle kontrol fangede historien, og kildekontrollen blev rettet før idriftsættelsen.</div></div>
     </div>
   </div>
@@ -815,7 +818,7 @@
     <div class="shell">
       <div class="section-heading">
         <div><p class="section-label">02 · Løsningen</p><h2>Sådan går en artikel eller et opslag fra kilde til mail</h2></div>
-        <p class="intro">Monitoren søger efter danske og internationale artikler via Google News, herunder i en særskilt Google News-søgning afgrænset til nato.int, og følger Truth Social samt 42 udvalgte X-konti. Alle fund kontrolleres for alder, gentagelser og emne. Nyhedsartikler kontrolleres desuden for kilde, før en AI-model vurderer relevansen, angiver hvor alvorligt fundet er og skriver et kort resumé på dansk.</p>
+        <p class="intro">Monitoren søger efter danske og internationale artikler via Google News, herunder en særskilt søgning, der kun leder på NATOs eget websted nato.int, og følger Truth Social samt 42 udvalgte X-konti. Alle fund kontrolleres for alder, gentagelser og emne. Nyhedsartikler kontrolleres desuden for kilde, før en AI-model vurderer relevansen, angiver hvor alvorligt fundet er og skriver et kort resumé på dansk.</p>
       </div>
 
       <h3 class="figure-title architecture-heading" id="architecture-title">Sådan hænger systemet sammen</h3>
@@ -847,7 +850,7 @@
             <b>Drift og kontrol</b>
             <ul>
               <li>En ekstern tidsplan starter monitoren automatisk, så ingen lokal computer skal være tændt.</li>
-              <li>Systemet husker tidligere fund, gemmer nattens fund til morgen og registrerer det indhold, filtrene frasorterer.</li>
+              <li>Systemet husker tidligere fund, gemmer nattens fund til morgenmailen og registrerer det indhold, som filtrene sorterer fra.</li>
               <li>Hvis monitoren ikke har kørt i 1,5 time, får jeg som driftsansvarlig automatisk besked om, at den muligvis er stoppet.</li>
             </ul>
           </div>
@@ -859,11 +862,11 @@
       <details class="tech-details" id="teknik">
         <summary>Se de tekniske detaljer</summary>
         <div class="tech-grid">
-          <div><h3>Kilder</h3><p>Google News leverer danske og internationale artikler. En særskilt Google News-søgning er afgrænset til domænet nato.int. Truth Social leverer opslag fra Donald Trumps konto. På X fulgte monitoren 42 udvalgte konti fra politiske aktører, myndigheder, nyhedsbureauer, medier og journalister. Afsendernes identitet er kontrolleret manuelt. Fra X hentede monitoren kun opslag, der var publiceret siden den forrige kørsel. GDELT blev afprøvet, men slået fra den 13. juli efter 15 kørsler uden brugbare svar.</p></div>
+          <div><h3>Kilder</h3><p>Google News leverer danske og internationale artikler. En særskilt søgning dækker kun NATOs eget websted, nato.int. Truth Social leverer opslag fra Donald Trumps konto. På X fulgte monitoren 42 udvalgte konti fra politiske aktører, myndigheder, nyhedsbureauer, medier og journalister. Afsendernes identitet er kontrolleret manuelt. Fra X hentede monitoren kun opslag, der var publiceret siden den forrige kørsel. Nyhedsdatabasen GDELT blev også afprøvet, men slået fra den 13. juli efter 15 kørsler uden brugbare svar.</p></div>
           <div><h3>Filtrering og AI</h3><p>Sociale opslag genkendes på opslagets unikke id. Hvis et opslag citerer eller deler et andet opslag, læser monitoren også teksten fra det citerede eller delte opslag samt tilgængelige linkforhåndsvisninger, før relevansen vurderes. Nyhedsartikler genkendes på deres link og en forenklet version af overskriften. En artikel fra en ukendt kilde slipper kun igennem, hvis et godkendt medie har bragt en lignende historie inden for 48 timer. Hvis AI-modellen ikke kan gennemføre vurderingen af et fund, der har bestået de faste kontroller, bliver fundet alligevel leveret.</p></div>
           <div><h3>Levering og hukommelse</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten lægges de i kø til den første morgenmail. Når en kørsel finder et alvorligt fund, sendes desuden en hastemail med det samme. En statusmail uden nye fund sendes kun, når der er gået mindst 50 minutter siden den seneste almindelige mail. Ved hver kørsel gemmes op til 200 eksempler på indhold, som hvert filter sorterede fra: tid, emne, kilde og AI. Hvis der er flere, registreres kun det samlede antal for resten.</p></div>
           <div><h3>Kode og data</h3><p>Et lille Python-program bruger requests, PyYAML, python-dotenv og Anthropics officielle programbibliotek. Systemets hukommelse og oplysninger om det frasorterede indhold gemmes i enkle tekstfiler i JSON-format; løsningen kræver hverken database eller egen server.</p></div>
-          <div><h3>Drift og adgangsnøgler</h3><p>I projektugen kørte monitoren via GitHub Actions. Tjenesten cron-job.org startede programmet hvert 30. minut. GitHubs egen tidsplan kørte én gang i timen som reserve på et andet tidspunkt, og healthchecks.io holdt uafhængigt øje med, om kørslerne blev gennemført. Adgangsnøglerne blev opbevaret sikkert som GitHub Actions-secrets. Lokalt blev de læst fra en .env-fil, som ikke bliver gemt i Git.</p></div>
+          <div><h3>Drift og adgangsnøgler</h3><p>I projektugen kørte monitoren via GitHub Actions. Tjenesten cron-job.org startede programmet hvert 30. minut. GitHubs egen tidsplan kørte én gang i timen som reserve, forskudt i forhold til de eksterne starter, og healthchecks.io holdt uafhængigt øje med, om kørslerne blev gennemført. Adgangsnøglerne blev opbevaret sikkert som GitHub Actions-secrets. Lokalt blev de læst fra en .env-fil, som ikke bliver gemt i Git.</p></div>
           <div><h3>Test og økonomi</h3><p>Efter de sidste driftsændringer bestod løsningen alle 26 automatiske test med Pythons indbyggede testværktøj. Det anslåede API- og tjenesteforbrug for projektugen var under 50 kr.</p></div>
         </div>
       </details>
@@ -908,10 +911,10 @@
   <section class="section soft" id="levering">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">04 · Det brugeren modtog</p><h2>Mailen viser både relevante historier og om monitoren kører</h2></div>
+        <div><p class="section-label">04 · Det brugeren modtog</p><h2>Mailen viser relevante historier og bekræfter samtidig, at monitoren kører</h2></div>
         <div class="intro delivery-intro">
           <p>I dagtimerne sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen. Fund, som AI-modellen vurderer som alvorlige, udløser desuden en særskilt hastemail, også om natten.</p>
-          <p><strong>Kildestatus:</strong> Nederst i de almindelige mails fremgår status for hver kilde. Hvis Google News, Truth Social eller X ikke svarer normalt, vises ⚠ i emnefeltet. GDELT udløser ikke alene en advarsel. Kilden gav ingen brugbare svar i 15 kontrollerede kørsler og blev derfor slået fra den 13. juli. Den historiske mail nedenfor viser et af de 14 svar med en begrænsning på antal forespørgsler.</p>
+          <p><strong>Kildestatus:</strong> Nederst i de almindelige mails fremgår status for hver kilde. Hvis Google News, Truth Social eller X ikke svarer normalt, vises ⚠ i emnefeltet. GDELT udløser ikke alene en advarsel. Kilden gav ingen brugbare svar i 15 kontrollerede kørsler og blev derfor slået fra den 13. juli. Eksempelmailen nedenfor er fra før den 13. juli; statuslinjen “GDELT: rate-limit” betyder, at kilden afviste at svare, fordi der var sendt for mange forespørgsler.</p>
         </div>
       </div>
       <div class="delivery-grid">
@@ -931,7 +934,7 @@
           <div class="alert high"><div class="alert-type">Alvorligt fund · forenklet eksempel</div><div class="alert-subject">🔴 HASTER: 1 fund med høj prioritet (11-07-2026 16:25)</div></div>
           <div class="alert ok"><div class="alert-type">Relevante fund · forenklet eksempel</div><div class="alert-subject">🔴 3 nye fund · 1 med høj prioritet (11-07-2026 16:25)</div></div>
           <div class="alert warn"><div class="alert-type">Kildefejl · forenklet eksempel</div><div class="alert-subject">⚠ Ingen nye opdateringer (11-07-2026 14:41)</div></div>
-          <p class="diagram-caption">Eksemplerne er gjort lettere at læse på casesiden. Alvorsgrad, antal fund og driftsstatus står stadig forrest, så indbakken kan skimmes på få sekunder.</p>
+          <p class="diagram-caption">Eksemplerne er gjort lettere at læse her på siden. Alvorsgrad, antal fund og driftsstatus står stadig forrest, så indbakken kan skimmes på få sekunder.</p>
         </div>
       </div>
     </div>
@@ -1039,7 +1042,7 @@
           <div class="run-strip latest" aria-hidden="true"></div>
           <div class="reliability-result good">97 gennemført uden fejl</div>
         </div>
-        <figcaption class="diagram-caption">Den eksterne tidsplan startede monitoren hvert 30. minut, mens GitHubs egen tidsplan blev beholdt som reserve på et andet tidspunkt. I tre af de 100 kontrollerede kørsler lykkedes overvågningen og mailudsendelsen, men den efterfølgende gemning af systemets opdaterede hukommelse til næste kørsel fejlede. En uafhængig overvågning gav besked, hvis selve kørslerne udeblev.</figcaption>
+        <figcaption class="diagram-caption">Den eksterne tidsplan startede monitoren hvert 30. minut, mens GitHubs egen tidsplan blev beholdt som reserve på forskudte tidspunkter. I tre af de 100 kontrollerede kørsler lykkedes overvågningen og mailudsendelsen, men systemet kunne ikke bagefter gemme sin opdaterede hukommelse til den næste kørsel. En uafhængig overvågning gav besked, hvis selve kørslerne udeblev.</figcaption>
       </figure>
 
       <div class="incident-grid">
@@ -1049,7 +1052,7 @@
           <p class="fix"><b>Løsning:</b> Monitoren blev sat til at starte hvert 30. minut via en ekstern tidsplan, mens GitHubs tidsplan blev beholdt som reserve. Den uafhængige overvågning blev også beholdt.</p>
         </article>
         <article class="incident">
-          <p class="incident-label">To tidsplaner kunne ramme samme hukommelse</p>
+          <p class="incident-label">To tidsplaner kunne komme i vejen for hinanden</p>
           <p>Den eksterne start og GitHubs reserve kunne ligge så tæt, at to kørsler forsøgte at gemme systemets hukommelse samtidig. Det gav tre fejl efter kørsler, hvor overvågningen og mailudsendelsen ellers var lykkedes.</p>
           <p class="fix"><b>Løsning:</b> Den eksterne start hvert 30. minut blev gjort til den primære tidsplan. GitHubs reserve blev reduceret til én start i timen mellem de eksterne starter.</p>
         </article>
@@ -1176,6 +1179,38 @@
       });
       if (systemDark.addEventListener) systemDark.addEventListener('change', syncTheme);
       syncTheme();
+    }
+
+    /* "Nu"-viser: lodret markering i doegnbaandet ved aktuelt dansk klokkeslaet.
+       Information, ikke bevaegelse, saa den er uafhaengig af reduced motion. */
+    var dayBand = document.querySelector('.day-band');
+    if (dayBand) {
+      try {
+        var parts = new Intl.DateTimeFormat('da-DK', { timeZone: 'Europe/Copenhagen', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+        var hh = 0, mm = 0;
+        parts.forEach(function (p) {
+          if (p.type === 'hour') hh = +p.value;
+          if (p.type === 'minute') mm = +p.value;
+        });
+        var frac = (hh + mm / 60) / 24 * 100;
+        Array.prototype.forEach.call(dayBand.querySelectorAll('.band-track'), function (track) {
+          var mark = document.createElement('span');
+          mark.className = 'now-marker';
+          mark.setAttribute('aria-hidden', 'true');
+          mark.style.left = frac + '%';
+          track.appendChild(mark);
+        });
+        var axis = dayBand.querySelector('.band-axis');
+        var clearOfTicks = [0, 33.333, 70.833, 100].every(function (p) { return Math.abs(p - frac) > 7; });
+        if (axis && clearOfTicks && axis.lastElementChild) {
+          var lbl = document.createElement('span');
+          lbl.className = 'now-label';
+          lbl.textContent = (document.documentElement.lang === 'da' ? 'nu ' : 'now ') +
+            String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
+          lbl.style.left = frac + '%';
+          axis.insertBefore(lbl, axis.lastElementChild);
+        }
+      } catch (e) {}
     }
 
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

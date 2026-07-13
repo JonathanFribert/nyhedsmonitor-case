@@ -192,4 +192,19 @@ aldrig i loop. Alt gated bag js-reveal + prefers-reduced-motion. Påstanden
 3 failure i seneste 100), og begge sider siger 26 test, hvilket matcher
 testsuiten (Ran 26 tests, OK).
 
+13. juli, klarheds- og effektpas (Claude, efter brugerens feedback om internt
+sprog, manglende ord og utydelighed): Papirkornet flyttet fra et fixed
+overlay OVER al tekst til html-baggrundslaget (background-blend-mode; opacitet
+bagt ind i SVG'en som 0.055) — teksten er skarp igen, og det var hovedaarsagen
+til utydeligheden. Broedtekstgraa moerknet (#6B675E -> #605C53), koestribernes
+moenster daempet. Sprogpas i begge filer: manglende "som" indsat,
+"gemning"/"ramme samme hukommelse"/"paa et andet tidspunkt" omskrevet,
+GDELT forklaret som nyhedsdatabase ved foerste omtale, rate-limit-statuslinjen
+forklaret i klartekst, "casesiden" -> "her paa siden". Nye effekter (begge
+filer): @view-transition navigation:auto (bloedt skift DA<->EN og intern
+navigation, Chrome 126+), :target-sweep paa sektionslabels, og "nu"-viser i
+doegnbaandet (lodret streg + klokkeslaet i dansk tid via Intl/Europe/Copenhagen;
+information, ikke bevaegelse, saa den er aktiv uanset reduced motion; label
+udelades naar den ville kollidere med akseticks).
+
 </details>
