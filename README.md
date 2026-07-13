@@ -4,14 +4,25 @@
 
 [![Delekort for casen](og-image.png)](https://jonathanfribert.github.io/nyhedsmonitor-case/)
 
-Et personligt værktøj til nyhedsovervågning, bygget og sat i drift på fem dage
-til en medarbejder i Statsministeriet under en uge på standby. Casen gennemgår
-arkitektur, test og drift med faktiske driftstal. Selve monitorens kildekode er
-privat, fordi værktøjet blev bygget til en konkret arbejdsopgave.
+Et personligt værktøj til nyhedsovervågning, bygget og sat i drift på fem dage.
+Modtageren var en medarbejder i Statsministeriet, der var på standby i en
+intensiv uge. Casen gennemgår arkitektur, test og drift med faktiske driftstal.
+Selve monitorens kildekode er privat, fordi værktøjet blev bygget til en konkret
+arbejdsopgave.
 
 Kontakt: fribert6@gmail.com
 
----
+## Kort fortalt
+
+- Monitoren følger offentligt tilgængelige nyhedsmedier samt udvalgte konti på
+  Truth Social og X.
+- Faste regler fjerner gammelt og gentaget indhold, før en AI-model vurderer de
+  resterende fund.
+- Løsningen gik fra idé til drift på fem dage. Jeg kontrollerede 42 X-konti,
+  gennemgik manuelt 406 artikler og opslag og afsluttede med 19 beståede test.
+
+<details>
+<summary><strong>Intern dokumentation for redigering og publicering</strong></summary>
 
 ## Intern dokumentation (for redigering af siden)
 
@@ -65,7 +76,10 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   over tynd) øverst; samme dobbeltstreg lukker siden over footeren.
   Sektionslabels er nummererede (01–08) i mono. Newsreader til overskrifter,
   IBM Plex Mono til etiketter og tal, lys/mørk via `prefers-color-scheme` +
-  manuel knap. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
+  manuel knap. En tynd læseindikator under topbaren viser fremdriften på den
+  lange side. Bevægelse er begrænset til et let fade på udvalgte hovedfigurer
+  samt vækst i døgnbånd og tragtlinjer. Alt slås fra med
+  `prefers-reduced-motion`. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
   `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; den redigerbare
   kilde er `og-template.html` (bruger sidens rigtige skrifter Newsreader og
   IBM Plex Mono via Google Fonts; et tidligere SVG-udkast udgik, fordi det
@@ -79,7 +93,7 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   ```
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
-  hero-eyebrow siger "Projektcase". Kontakt er
+  avishovedets udgavelinje siger "Projektcase". Kontakt er
   fribert6@gmail.com (primær, synlig i CTA og footer) plus GitHub; bevidst
   ingen LinkedIn. Den foldbare teknikblok samler sprog, værktøjer, kilder,
   test og drift ét sted; døgnrytme-diagrammet i "Opgaven" viser overvågning
@@ -95,8 +109,9 @@ det åbne designspørgsmål blev lukket ved at fjerne seks-trins-kørslen fra
 "Løsningen" (den overlappede arkitekturdiagrammet); de to unikke detaljer
 (X henter kun siden sidste kørsel; dedup på id/link/normaliseret titel) blev
 flyttet ind i den tekniske foldeboks. Tankestreger i brødteksten blev erstattet
-af kommaer (talintervaller som "kl. 8–17" og den ægte emnelinje med "—" er
-bevidst beholdt). Senere samme dag, oprydningspas efter brugerens "siden ser
+af kommaer, mens talintervaller som "kl. 8–17" blev beholdt. De rå emnelinjer
+blev senere erstattet af tydeligt markerede, læsevenlige eksempler. Senere samme
+dag, oprydningspas efter brugerens "siden ser
 lidt rodet ud": beslutningstræet fjernet (dubleret af døgnrytme-diagrammet),
 stats-labels og sektionsintroer forkortet, quick-head-sideteksten droppet, én
 hero-CTA, h2/intro/quote skaleret ned, journey-kortene ensrettet til
@@ -140,3 +155,10 @@ mindste diagramtekster blev samtidig gjort større på desktop.
 Et afsluttende læsbarhedspas erstattede de rå, forkortede emnelinjer med tydeligt
 markerede eksempler og ændrede blandt andet "fravalg", "samme kørsel" og
 "systemet set ovenfra" til mere almindeligt dansk.
+
+Slutkontrollen efter de parallelle Claude/Codex-pas fjernede den generiske
+talanimation, genindførte den dokumenterede vækst i døgn- og tragtdiagrammerne
+og forbedrede visningen ved 320–420 px. En diskret læseindikator blev tilføjet
+som eneste nye globale effekt.
+
+</details>

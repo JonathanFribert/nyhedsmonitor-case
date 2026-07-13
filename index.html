@@ -1,19 +1,23 @@
 <!doctype html>
-<html lang="da">
+<html lang="da" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jonathan Fribert | Case: Nyhedsmonitor</title>
-<meta name="description" content="Projektcase om en nyhedsmonitor, der hjalp en medarbejder i Statsministeriet med at opdage relevante offentlige udmeldinger under en uge på standby. Bygget af Jonathan Fribert og dokumenteret med faktiske driftstal.">
+<meta name="description" content="Projektcase om en nyhedsmonitor, der hjalp en medarbejder i Statsministeriet med hurtigt at opdage relevante offentlige udmeldinger, mens medarbejderen var på standby i en intensiv uge. Bygget af Jonathan Fribert og dokumenteret med faktiske driftstal.">
 <meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Jonathan Fribert | Case: Nyhedsmonitor">
-<meta property="og:description" content="En nyhedsmonitor, der hjalp en medarbejder i Statsministeriet med at opdage relevante offentlige udmeldinger under en uge på standby.">
+<meta property="og:description" content="En nyhedsmonitor, der hjalp en medarbejder i Statsministeriet med hurtigt at opdage relevante offentlige udmeldinger, mens medarbejderen var på standby i en intensiv uge.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jonathanfribert.github.io/nyhedsmonitor-case/">
 <meta property="og:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Delekort: Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png">
+<meta name="twitter:image:alt" content="Delekort: Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet">
 <link rel="canonical" href="https://jonathanfribert.github.io/nyhedsmonitor-case/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231F4E79%22/><text x=%2232%22 y=%2243%22 text-anchor=%22middle%22 font-family=%22Menlo,monospace%22 font-size=%2228%22 font-weight=%22700%22 fill=%22white%22>JF</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -107,6 +111,23 @@
   @media (prefers-reduced-motion: no-preference) {
     .js-reveal .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
     .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+    .js-reveal .day-band.reveal .band-seg {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .js-reveal #resultater figure.reveal .retention span {
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .js-reveal .day-band.reveal.in-view .band-seg { clip-path: inset(0); }
+    .js-reveal #resultater figure.reveal.in-view .retention span { transform: scaleX(1); }
+    .js-reveal .day-band .band-row:nth-of-type(3) .band-seg { transition-delay: 0.08s; }
+    .js-reveal .day-band .band-row:nth-of-type(4) .band-seg { transition-delay: 0.16s; }
+    .js-reveal #resultater .filter-row:nth-child(3) .retention span { transition-delay: 0.05s; }
+    .js-reveal #resultater .filter-row:nth-child(4) .retention span { transition-delay: 0.10s; }
+    .js-reveal #resultater .filter-row:nth-child(5) .retention span { transition-delay: 0.15s; }
+    .js-reveal #resultater .filter-row:nth-child(6) .retention span { transition-delay: 0.20s; }
+    .js-reveal #resultater .filter-row:nth-child(7) .retention span { transition-delay: 0.25s; }
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
   }
 
@@ -118,14 +139,19 @@
   .skip-link:focus { transform: none; }
 
   .shell { width: min(124rem, calc(100% - 3rem)); margin-inline: auto; }
-  .reading { width: min(58rem, 100%); }
-
   /* Navigation */
   .topbar {
     position: sticky; z-index: 20; top: 0;
+    border-bottom: 1px solid var(--line);
     border-bottom: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+    background: var(--ground);
     background: color-mix(in srgb, var(--ground) 84%, transparent);
     -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  }
+  .reading-progress { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; overflow: hidden; pointer-events: none; }
+  .reading-progress span {
+    display: block; width: 100%; height: 100%; background: var(--accent);
+    transform: scaleX(0); transform-origin: left; will-change: transform;
   }
   .nav {
     display: flex; min-height: 4.2rem; align-items: center; justify-content: space-between; gap: 1rem;
@@ -157,6 +183,7 @@
     background: var(--surface); color: var(--muted); cursor: pointer;
   }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .no-js .theme-toggle { display: none; }
   .theme-toggle svg { display: block; }
   .theme-toggle .icon-sun { display: none; }
   @media (prefers-color-scheme: dark) {
@@ -246,7 +273,7 @@
 
   /* Sections */
   .section { padding: clamp(4rem, 8vw, 7rem) 0; border-top: 1px solid var(--line); }
-  .section.soft { background: color-mix(in srgb, var(--surface-soft) 45%, transparent); }
+  .section.soft { background: var(--surface-soft); background: color-mix(in srgb, var(--surface-soft) 45%, transparent); }
   .section-heading { display: grid; grid-template-columns: minmax(24rem, 0.8fr) minmax(0, 1.6fr); gap: clamp(3rem, 7vw, 7rem); align-items: start; }
   .section-heading.compact { grid-template-columns: minmax(20rem, 0.7fr) minmax(0, 1.3fr); }
   .section-heading.figure-led { max-width: 70rem; grid-template-columns: minmax(0, 1fr); gap: 0.8rem; }
@@ -287,6 +314,7 @@
     border: 1px dashed var(--line); color: var(--muted);
     background: repeating-linear-gradient(135deg, var(--line) 0 2px, transparent 2px 9px);
   }
+  .segment-copy-short { display: none; }
 
   /* Architecture */
   .architecture {
@@ -351,6 +379,11 @@
   .filter-count { text-align: right; }
   .filter-count strong { display: block; font-family: var(--mono); font-size: 1.2rem; }
   .filter-count small { display: block; color: var(--red); font-family: var(--mono); font-size: 0.8rem; }
+  @media (hover: hover) {
+    .filter-row { transition: background-color 0.18s ease; }
+    .filter-row:hover { background: var(--accent-soft); }
+    .filter-row.final:hover { background: var(--red-soft); }
+  }
   .filter-note { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
   .note-card { border-top: 2px solid var(--line); padding-top: 0.8rem; }
   .note-card b { font-family: var(--mono); font-size: 0.82rem; }
@@ -478,6 +511,8 @@
     .quick-step, .quick-step + .quick-step { border-top: 0; border-left: 0; padding: 1.4rem 0; }
     .quick-step + .quick-step { border-top: 1px solid var(--line); }
     .tech-grid { grid-template-columns: minmax(0, 1fr); }
+    .segment-copy-full { display: none; }
+    .segment-copy-short { display: inline; }
   }
   @media (max-width: 1100px) {
     .shell { width: min(124rem, calc(100% - 2.5rem)); }
@@ -527,7 +562,7 @@
     .node b, .pipeline-core h3, .filter, .filter-stage b, .incident-label, .mail-footer, footer { font-size: 0.875rem; }
     .legend span, .reliability-label b, .reliability-label span, .reliability-result, .filter-count small, .timeline-date, .takeaways li > span { font-size: 0.875rem; }
     .stat-label, .case-disclaimer { font-size: 0.95rem; }
-    .case-brief dt { font-size: 0.875rem; }
+    .case-brief dt, .mail-field, .alert-type, .alert-subject { font-size: 0.95rem; }
   }
   @media (max-width: 520px) {
     .shell { width: calc(100% - 1.5rem); }
@@ -544,11 +579,33 @@
     .mail-footer { white-space: normal; }
     .alert-subject { overflow-wrap: anywhere; }
   }
+  @media (max-width: 420px) {
+    .stats { grid-template-columns: minmax(0, 1fr); }
+    .stat + .stat, .stat:nth-child(3) { border-left: 0; }
+    .stat:nth-child(n+2) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 380px) {
+    .nav { gap: 0.25rem; }
+    .nav-actions, .nav-links { gap: 0.35rem; }
+  }
+  @media (max-width: 360px) {
+    .nav-links a[href="#kontakt"] { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
+    .reading-progress { display: none; }
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
   @media print {
+    :root,
+    :root:not([data-theme="light"]),
+    :root[data-theme="dark"],
+    :root[data-theme="light"] {
+      --ground: #FFFFFF; --surface: #FFFFFF; --surface-soft: #F2EDE3; --line: #E3DDD1;
+      --ink: #1B1A17; --muted: #5F5B53; --accent: #1F4E79; --accent-strong: #163A5B;
+      --accent-soft: #E9EFF5; --red: #A6301F; --red-soft: #F5E8E3; --amber: #9A6708;
+      --green: #2F6B44; --green-soft: #E7EFE7;
+    }
     .topbar, .hero-actions { display: none; }
     body { background: white; color: #1B1A17; }
     .section { break-inside: avoid; }
@@ -556,6 +613,7 @@
 </style>
 <script>
   (function () {
+    document.documentElement.classList.remove('no-js');
     try {
       var t = localStorage.getItem('theme');
       if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
@@ -586,6 +644,7 @@
       </button>
     </div>
   </div>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
 </nav>
 
 <header class="hero" id="top">
@@ -596,7 +655,7 @@
     </div>
     <div class="hero-grid">
       <div>
-        <h1>En nyhedsmonitor til en medarbejder på standby i Statsministeriet</h1>
+        <h1>Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet</h1>
         <p class="lead">En medarbejder i Statsministeriet var på standby i en intensiv uge og skulle hurtigt opdage nye offentlige udmeldinger om forholdet mellem USA og Kongeriget Danmark, især når Grønland eller Færøerne var berørt. Jeg byggede derfor et personligt hjælpeværktøj, der overvåger nyhedsmedier og udvalgte konti, fjerner irrelevant stof og gentagelser og sender relevante artikler og opslag på mail.</p>
         <div class="hero-actions">
           <a class="button" href="#kort-fortalt">Forstå løsningen ↓</a>
@@ -619,7 +678,7 @@
     <div class="stats" aria-label="Projektets nøgletal">
       <div class="stat"><div class="stat-value">5 dage</div><div class="stat-label">Fra den første prototype den 7. juli til idriftsættelsen den 11. juli.</div></div>
       <div class="stat"><div class="stat-value">42 X-konti</div><div class="stat-label">Afsenderen bag hver konto blev kontrolleret manuelt.</div></div>
-      <div class="stat"><div class="stat-value">406 frasorteringer</div><div class="stat-label">Jeg gennemgik dem alle manuelt efter fire døgns prøvedrift.</div></div>
+      <div class="stat"><div class="stat-value">406 gennemgået</div><div class="stat-label">Artikler og opslag, som systemet havde sorteret fra.</div></div>
       <div class="stat"><div class="stat-value">1 fejl</div><div class="stat-label">Fejlen i kildekontrollen blev fundet og rettet før idriftsættelsen.</div></div>
     </div>
   </div>
@@ -658,10 +717,10 @@
       <div class="section-heading">
         <div><p class="section-label">01 · Opgaven</p><h2>Målet: at opdage relevante historier, undgå gentagelser og gøre fejl synlige</h2></div>
         <div>
-          <p class="intro">Opgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Fordi en overset historie var værre end en ekstra mail, accepterede systemet fund fra et bredt tidsrum. Hvis AI-vurderingen derefter fejlede, blev fundet beholdt.</p>
+          <p class="intro">Opgaven stillede tre praktiske krav: Nye udmeldinger skulle opdages hurtigt, indbakken skulle ikke fyldes med gengangere, og tekniske fejl skulle være synlige. Værktøjet skulle kun skabe overblik, aldrig træffe myndighedsbeslutninger eller foreslå handlinger. Systemet tog hellere lidt ældre indhold med end at risikere at overse noget. Hvis AI-modellen ikke kunne gennemføre sin vurdering, blev indholdet taget med for en sikkerheds skyld.</p>
           <p class="quote">Stilhed måtte ikke kunne forveksles med et nedbrud.</p>
           <div class="prose">
-            <p>I tidsrummet kl. 8–17 sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen som bekræftelse på, at monitoren har kørt. Hvis monitoren ikke har gennemført en kørsel i 1,5 time, får jeg automatisk besked om, at den muligvis er stoppet.</p>
+            <p>I tidsrummet kl. 8–17 sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen som bekræftelse på, at monitoren har kørt. Hvis monitoren ikke har kørt i 1,5 time, får jeg automatisk besked om, at den muligvis er stoppet.</p>
           </div>
         </div>
       </div>
@@ -679,14 +738,14 @@
         <div class="band-row">
           <div class="band-label"><b>Øvrige relevante fund</b><span>mails og status</span></div>
           <div class="band-track">
-            <span class="band-seg queue" style="left:0;width:calc(33.333% - 2px)">Til morgenmailen</span>
-            <span class="band-seg deliver" style="left:calc(33.333% + 1px);width:calc(37.5% - 2px)">Mail kl. 8–17</span>
-            <span class="band-seg queue" style="left:calc(70.833% + 1px);width:calc(29.167% - 1px)">Til morgenmailen</span>
+            <span class="band-seg queue" style="left:0;width:calc(33.333% - 2px)"><span class="segment-copy-full">Til morgenmailen</span><span class="segment-copy-short">Morgen</span></span>
+            <span class="band-seg deliver" style="left:calc(33.333% + 1px);width:calc(37.5% - 2px)"><span class="segment-copy-full">Mail kl. 8–17</span><span class="segment-copy-short">Mail 8–17</span></span>
+            <span class="band-seg queue" style="left:calc(70.833% + 1px);width:calc(29.167% - 1px)"><span class="segment-copy-full">Til morgenmailen</span><span class="segment-copy-short">Morgen</span></span>
           </div>
         </div>
         <div class="band-row">
           <div class="band-label"><b>Hastemail</b><span>alvorlige fund</span></div>
-          <div class="band-track"><span class="band-seg urgent" style="left:0;width:100%">Hastemail straks efter fundet, hele døgnet</span></div>
+          <div class="band-track"><span class="band-seg urgent" style="left:0;width:100%"><span class="segment-copy-full">Hastemail ved alvorlige fund, hele døgnet</span><span class="segment-copy-short">Hastemail hele døgnet</span></span></div>
         </div>
         <figcaption class="diagram-caption">Overvågningen kører hele døgnet. Relevante fund leveres kl. 8–17, og fund fra natten gemmes til den første morgenmail. Når monitoren finder et alvorligt fund, sender den straks en særskilt hastemail, også om natten.</figcaption>
       </figure>
@@ -728,9 +787,9 @@
           <div class="node operations-node">
             <b>Drift og kontrol</b>
             <ul>
-              <li>En ekstern tidsplan starter monitoren automatisk i GitHub, så ingen lokal computer skal være tændt.</li>
+              <li>En ekstern tidsplan starter monitoren automatisk, så ingen lokal computer skal være tændt.</li>
               <li>Systemet husker tidligere fund, gemmer nattens fund til morgen og registrerer det indhold, filtrene frasorterer.</li>
-              <li>Hvis monitoren ikke har gennemført en kørsel i 1,5 time, får jeg besked om, at den muligvis er stoppet.</li>
+              <li>Hvis monitoren ikke har kørt i 1,5 time, får jeg besked om, at den muligvis er stoppet.</li>
             </ul>
           </div>
         </div>
@@ -741,10 +800,10 @@
       <details class="tech-details" id="teknik">
         <summary>Se de tekniske detaljer</summary>
         <div class="tech-grid">
-          <div><h3>Kilder</h3><p>GDELT, en international nyhedsdatabase, og Google News leverer artikler. Truth Social leverer opslag fra Donald Trumps konto. X-kilden følger 42 udvalgte konti fra politiske aktører, myndigheder, nyhedsbureauer, medier og journalister. Afsendernes identitet er kontrolleret manuelt, og X henter kun opslag, der er publiceret siden sidste kørsel. Nyhedssøgningerne kører på dansk og engelsk.</p></div>
-          <div><h3>Filtrering og AI</h3><p>Sociale opslag genkendes på opslagets unikke id. Nyhedsartikler genkendes på deres link og en forenklet version af overskriften. For nyheder læser modellen overskriften; for sociale opslag læser den op til 1.500 tegn af opslaget. En artikel fra en ukendt kilde slipper kun igennem, hvis et godkendt medie har bragt en lignende historie inden for 48 timer. Hvis AI-vurderingen fejler for et fund, der har bestået de faste kontroller, beholdes fundet til levering.</p></div>
-          <div><h3>Levering og hukommelse</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten lægges de i kø til den første morgenmail. Når en kørsel finder et alvorligt fund, sendes desuden en hastemail med det samme. En tom statusmail sendes kun, når der er gået mindst 50 minutter siden den seneste almindelige mail. Ved hver kørsel gemmes op til 200 konkrete frasorteringer fra hvert filter: tid, emne, kilde og AI. Hvis der er flere, registreres kun det samlede antal for resten.</p></div>
-          <div><h3>Kode og data</h3><p>Et lille Python-program bruger requests, PyYAML, python-dotenv og Anthropics officielle programbibliotek. Systemets hukommelse og kontrollog gemmes i enkle tekstfiler i JSON-format; løsningen kræver hverken database eller egen server.</p></div>
+          <div><h3>Kilder</h3><p>GDELT, en international nyhedsdatabase, og Google News leverer artikler. Truth Social leverer opslag fra Donald Trumps konto. På X fulgte monitoren 42 udvalgte konti fra politiske aktører, myndigheder, nyhedsbureauer, medier og journalister. Afsendernes identitet er kontrolleret manuelt. Fra X hentede monitoren kun opslag, der var publiceret siden den forrige kørsel. Nyhedssøgningerne kører på dansk og engelsk.</p></div>
+          <div><h3>Filtrering og AI</h3><p>Sociale opslag genkendes på opslagets unikke id. Nyhedsartikler genkendes på deres link og en forenklet version af overskriften. For nyheder læser modellen overskriften; for sociale opslag læser den op til 1.500 tegn af opslaget. En artikel fra en ukendt kilde slipper kun igennem, hvis et godkendt medie har bragt en lignende historie inden for 48 timer. Hvis AI-modellen ikke kan gennemføre vurderingen af et fund, der har bestået de faste kontroller, bliver fundet alligevel leveret.</p></div>
+          <div><h3>Levering og hukommelse</h3><p>Kl. 8–17 sendes nye fund i mailen fra den aktuelle kørsel; om natten lægges de i kø til den første morgenmail. Når en kørsel finder et alvorligt fund, sendes desuden en hastemail med det samme. En statusmail uden nye fund sendes kun, når der er gået mindst 50 minutter siden den seneste almindelige mail. Ved hver kørsel gemmes op til 200 eksempler på indhold, som hvert filter sorterede fra: tid, emne, kilde og AI. Hvis der er flere, registreres kun det samlede antal for resten.</p></div>
+          <div><h3>Kode og data</h3><p>Et lille Python-program bruger requests, PyYAML, python-dotenv og Anthropics officielle programbibliotek. Systemets hukommelse og oplysninger om det frasorterede indhold gemmes i enkle tekstfiler i JSON-format; løsningen kræver hverken database eller egen server.</p></div>
           <div><h3>Drift og adgangsnøgler</h3><p>I projektugen kørte monitoren via GitHub Actions. Tjenesten cron-job.org startede programmet hvert 30. minut, og healthchecks.io holdt uafhængigt øje med, om kørslerne blev gennemført. I GitHub Actions lå adgangsnøglerne som krypterede variabler. Lokalt blev de læst fra en .env-fil, som ikke bliver gemt i Git.</p></div>
           <div><h3>Test og økonomi</h3><p>Efter de sidste driftsændringer bestod løsningen alle 19 automatiske test med Pythons indbyggede testværktøj. Det anslåede API- og tjenesteforbrug for projektugen var under 50 kr.</p></div>
         </div>
@@ -830,8 +889,8 @@
       </div>
       <div class="filter-note">
         <div class="note-card"><b>Enkle tjek først</b><p>Over 90 procent fjernes, før AI-modellen bruges. Det gør løsningen hurtig og billig.</p></div>
-        <div class="note-card"><b>Hellere én for meget</b><p>Hvis AI-vurderingen fejler efter de faste kontroller, beholdes fundet. Lidt ekstra støj er bedre end en overset nyhed.</p></div>
-        <div class="note-card"><b>Frasorteringer kan kontrolleres</b><p>Systemet gemmer eksempler på det, der sorteres fra, så fejl kan opdages og undersøges under prøvedriften.</p></div>
+        <div class="note-card"><b>Hellere én for meget</b><p>Hvis AI-modellen ikke kan gennemføre vurderingen efter de faste kontroller, bliver indholdet taget med. Lidt ekstra støj er bedre end en overset nyhed.</p></div>
+        <div class="note-card"><b>Det frasorterede kan kontrolleres</b><p>Systemet gemmer eksempler på det, der sorteres fra, så fejl kan opdages og undersøges under prøvedriften.</p></div>
       </div>
       </figure>
     </div>
@@ -840,14 +899,14 @@
   <section class="section soft" id="levering">
     <div class="shell">
       <div class="section-heading figure-led">
-        <div><p class="section-label">05 · Det brugeren modtog</p><h2>Mailen viser både fund og driftsstatus</h2></div>
+        <div><p class="section-label">05 · Det brugeren modtog</p><h2>Mailen viser både relevante historier og om monitoren kører</h2></div>
         <div class="intro delivery-intro">
           <p>I dagtimerne sendes relevante fund med det samme. Hvis der ikke er noget nyt, kommer der cirka én statusmail i timen. Fund, som AI-modellen vurderer som alvorlige, udløser desuden en særskilt hastemail, også om natten.</p>
           <p><strong>Kildestatus:</strong> Nederst i de almindelige mails står, om kilderne svarede normalt. Hvis Google News, Truth Social eller X fejler, markeres det også med ⚠ i emnefeltet. Et problem med GDELT vises i oversigten, men udløser ikke alene en advarsel.</p>
         </div>
       </div>
       <div class="delivery-grid">
-        <div class="mail" aria-label="Eksempel på en tom timemail">
+        <div class="mail" aria-label="Eksempel på en statusmail uden nye fund">
           <div class="mail-bar" aria-hidden="true"><span class="mail-dot"></span><span class="mail-dot"></span><span class="mail-dot"></span></div>
           <div class="mail-head">
             <div class="mail-field"><b>Fra:</b> Nyhedsmonitor</div>
@@ -893,7 +952,7 @@
       <div class="incident-grid">
         <article class="incident">
           <p class="incident-label">Op til 4,6 timer mellem kørslerne</p>
-          <p>GitHubs gratis tidsplan sprang mange af de planlagte nattekørsler over.</p>
+          <p>GitHubs indbyggede tidsplan sprang mange af de planlagte nattekørsler over.</p>
           <p class="fix"><b>Løsning:</b> Monitoren blev sat til at starte hvert 30. minut via en ekstern tidsplan, mens GitHubs tidsplan blev beholdt som reserve. Den uafhængige overvågning blev også beholdt.</p>
         </article>
         <article class="incident">
@@ -909,7 +968,7 @@
         <article class="incident">
           <p class="incident-label">En relevant historie blev afvist af kildekontrollen</p>
           <p>Historien kom fra et websted uden for listen over godkendte kilder. Den bekræftende version fra et nyhedsbureau var blevet hentet i en tidligere kørsel.</p>
-          <p class="fix"><b>Løsning:</b> Systemet blev ændret, så lignende overskrifter fra godkendte medier i de seneste 48 timer også kan bruges som bekræftelse. Derudover viser en separat log, hvad der faktisk blev sendt.</p>
+          <p class="fix"><b>Løsning:</b> Systemet blev ændret, så lignende overskrifter fra godkendte medier i de seneste 48 timer også kan bruges som bekræftelse. Derudover viser en separat oversigt, hvad der faktisk blev sendt.</p>
         </article>
       </div>
     </div>
@@ -919,25 +978,25 @@
     <div class="shell">
       <div class="section-heading compact">
         <div><p class="section-label">07 · Min rolle</p><h2>Jeg byggede, testede og satte løsningen i drift</h2></div>
-        <p class="intro">Jeg omsatte medarbejderens behov til konkrete regler, valgte og kontrollerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og overvågning. Claude blev brugt til sparring og udkast til kode. Jeg traf beslutningerne og gennemgik og testede ændringerne, før de blev sat i drift.</p>
+        <p class="intro">Jeg omsatte medarbejderens behov til konkrete regler, valgte og kontrollerede kilderne, byggede monitoren og stod for prøvedrift, idriftsættelse og overvågning. Jeg brugte Claude til sparring og til at udarbejde udkast til dele af koden. Jeg traf selv beslutningerne og gennemgik og testede alle ændringer, før de blev sat i drift.</p>
       </div>
       <div class="role-grid">
         <article class="role-card primary">
           <h3>Fra behov til fungerende drift</h3>
-          <p>Opgaven krævede mere end kode: behovet skulle afgrænses, kilderne kontrolleres, frasorteringerne gennemgås, og driften overvåges efter idriftsættelsen.</p>
+          <p>Opgaven krævede mere end kode: behovet skulle afgrænses, kilderne kontrolleres, det frasorterede indhold gennemgås, og driften overvåges efter idriftsættelsen.</p>
           <div class="ownership">
             <span>Afgrænsning af behovet</span><span>Arkitektur</span><span>Udvikling</span><span>Kontrol af kilder</span><span>Test og efterkontrol</span><span>Idriftsættelse og drift</span>
           </div>
         </article>
         <article class="role-card">
           <h3>Det vigtigste valg</h3>
-          <p>En overset historie var værre end lidt ekstra støj. Derfor accepterer systemet fund fra et bredt tidsrum. Hvis AI-vurderingen fejler efter de faste kontroller, bliver fundet beholdt. Frasorteringer gemmes, så fejl kan findes bagefter.</p>
+          <p>En overset historie var værre end lidt ekstra støj. Derfor tager systemet hellere lidt ældre indhold med end at risikere at overse noget. Hvis AI-modellen ikke kan gennemføre sin vurdering efter de faste kontroller, bliver indholdet taget med for en sikkerheds skyld. Det frasorterede indhold gemmes, så fejl kan findes bagefter.</p>
         </article>
       </div>
 
       <div class="timeline" aria-label="Projektforløb fra 7. til 12. juli">
         <div class="timeline-item"><div class="timeline-date">7. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Kilder og første prototype</strong>Tre kildetyper blev afprøvet med faktiske data. Samme dag blev systemet sat op, og den første testmail blev sendt til mig selv.</div></div>
-        <div class="timeline-item"><div class="timeline-date">8.–11. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Fire døgns prøvedrift</strong>Jeg gennemgik manuelt 406 frasorteringer. Én relevant historie var blevet frasorteret ved en fejl, og kildekontrollen blev derefter rettet.</div></div>
+        <div class="timeline-item"><div class="timeline-date">8.–11. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Fire døgns prøvedrift</strong>Jeg gennemgik manuelt 406 artikler og opslag, som systemet havde sorteret fra. Én relevant historie var blevet frasorteret ved en fejl, og kildekontrollen blev derefter rettet.</div></div>
         <div class="timeline-item"><div class="timeline-date">11. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Løsningen blev sat i drift for modtageren</strong>Det skete først efter udtrykkelig godkendelse.</div></div>
         <div class="timeline-item"><div class="timeline-date">12. juli</div><div class="timeline-dot"></div><div class="timeline-copy"><strong>Driften blev gjort mere robust</strong>Fejl i den automatiske tidsplan blev håndteret, nattens fund blev gemt til morgenmailen, og tidspunkterne for mails blev tilpasset brugerens behov.</div></div>
       </div>
@@ -951,7 +1010,7 @@
         <p class="intro">De vigtigste erfaringer handlede ikke om valget af AI-model, men om prøvedrift, synlige fejl og klare grænser for automatiseringen.</p>
       </div>
       <ol class="takeaways">
-        <li><span>01</span><div><h3>Prøvedrift er en del af produktudviklingen</h3><p>Da jeg gennemgik frasorteringerne fra fire døgns drift, fandt jeg én relevant historie, som den daværende kildekontrol havde afvist.</p></div></li>
+        <li><span>01</span><div><h3>Prøvedrift er en del af produktudviklingen</h3><p>Da jeg gennemgik det indhold, som systemet havde sorteret fra under fire døgns drift, fandt jeg én relevant historie, som den daværende kildekontrol havde afvist.</p></div></li>
         <li><span>02</span><div><h3>Driftsfejl skal være synlige</h3><p>Statusmail, kildeoversigt og uafhængig overvågning gjorde det muligt at skelne stilhed fra nedbrud.</p></div></li>
         <li><span>03</span><div><h3>AI bør først bruges, når de faste regler har gjort deres arbejde</h3><p>Faste regler fjernede det meste støj. AI-modellen vurderede kun det indhold, som reglerne ikke kunne afgøre sikkert.</p></div></li>
       </ol>
@@ -966,7 +1025,7 @@
       <div>
         <p class="section-label" style="color:var(--accent)">Kontakt</p>
         <h2>Har du spørgsmål til casen?</h2>
-        <p>Jeg fortæller gerne mere om, hvordan jeg valgte kilder, gennemgik de frasorterede historier og gjorde løsningen klar til drift. Kildekoden er ikke offentlig, fordi løsningen blev udviklet til en konkret arbejdsopgave, men jeg gennemgår gerne arkitekturen, testresultaterne og anonymiserede eksempler i en samtale.</p>
+        <p>Jeg fortæller gerne mere om, hvordan jeg valgte kilder, gennemgik det indhold, systemet havde sorteret fra, og gjorde løsningen klar til drift. Kildekoden er ikke offentlig, fordi løsningen blev udviklet til en konkret arbejdsopgave, men jeg gennemgår gerne arkitekturen, testresultaterne og anonymiserede eksempler i en samtale.</p>
       </div>
       <div class="cta-actions">
         <a class="button" href="mailto:fribert6@gmail.com">Skriv til mig</a>
@@ -985,6 +1044,28 @@
   (function () {
     var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
     var sections = navLinks.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean);
+
+    var readingProgress = document.querySelector('.reading-progress span');
+    if (readingProgress) {
+      var progressScheduled = false;
+      var updateReadingProgress = function () {
+        var doc = document.documentElement;
+        var maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+        var scrollTop = window.scrollY || doc.scrollTop || 0;
+        var progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
+        readingProgress.style.transform = 'scaleX(' + progress + ')';
+        progressScheduled = false;
+      };
+      var scheduleReadingProgress = function () {
+        if (progressScheduled) return;
+        progressScheduled = true;
+        window.requestAnimationFrame(updateReadingProgress);
+      };
+      window.addEventListener('scroll', scheduleReadingProgress, { passive: true });
+      window.addEventListener('resize', scheduleReadingProgress);
+      window.addEventListener('pageshow', scheduleReadingProgress);
+      scheduleReadingProgress();
+    }
 
     var themeToggle = document.querySelector('.theme-toggle');
     if (themeToggle) {
@@ -1027,7 +1108,7 @@
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('js-reveal');
       var revealEls = Array.prototype.slice.call(document.querySelectorAll(
-        '#system figure, #eksempel figure, #resultater figure, .delivery-grid, #laering .reliability'
+        '#problem .day-band, #system figure, #eksempel figure, #resultater figure, .delivery-grid, #laering .reliability'
       ));
       revealEls.forEach(function (el) {
         el.classList.add('reveal');
@@ -1040,41 +1121,6 @@
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
       revealEls.forEach(function (el) { revealObserver.observe(el); });
-
-      /* Nøgletallene tæller op, når rækken kommer i syne. Uden JS (eller med
-         reduceret bevægelse) står de fulde tal der fra start. */
-      var statsRow = document.querySelector('.stats');
-      if (statsRow) {
-        var counters = Array.prototype.slice.call(statsRow.querySelectorAll('.stat-value')).map(function (el) {
-          var m = el.textContent.match(/^(\d+)([\s\S]*)$/);
-          if (!m) return null;
-          return { el: el, target: parseInt(m[1], 10), suffix: m[2] };
-        }).filter(Boolean);
-        if (counters.length) {
-          counters.forEach(function (c) { c.el.textContent = '0' + c.suffix; });
-          var runCount = function () {
-            var start = null, duration = 900;
-            var step = function (ts) {
-              if (start === null) start = ts;
-              var t = Math.min(1, (ts - start) / duration);
-              var eased = 1 - Math.pow(1 - t, 3);
-              counters.forEach(function (c) {
-                c.el.textContent = Math.round(c.target * eased) + c.suffix;
-              });
-              if (t < 1) requestAnimationFrame(step);
-            };
-            requestAnimationFrame(step);
-          };
-          var statsObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (!entry.isIntersecting) return;
-              statsObserver.unobserve(entry.target);
-              runCount();
-            });
-          }, { threshold: 0.3 });
-          statsObserver.observe(statsRow);
-        }
-      }
     }
 
     if ('IntersectionObserver' in window) {
