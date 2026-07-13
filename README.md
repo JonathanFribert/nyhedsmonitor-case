@@ -209,4 +209,18 @@ doegnbaandet (lodret streg + klokkeslaet i dansk tid via Intl/Europe/Copenhagen;
 information, ikke bevaegelse, saa den er aktiv uanset reduced motion; label
 udelades naar den ville kollidere med akseticks).
 
+13. juli, femte runde (Claude, paa brugerens bestilling): (1) Doegnbaandets
+akse skriver nu kl. 00:00/08:00/17:00/24:00, saa den matcher nu-viserens
+"nu 15:00" (EN havde allerede formatet). (2) Ny EFTERSKRIFT-sektion foer
+Kontakt med verificerede driftstal pr. 13. juli (100 koersler siden go-live,
+97 uden fejl, GDELT slaaet fra, manuel drop-gennemgang uden fund) — SKAL
+OPDATERES med ugens samlede tal, naar standbyperioden slutter; tallene
+efterproeves moed gh run list foer opdatering. (3) JSON-LD (schema.org
+Article + Person) i begge sider; valideret med json.loads. (4) Print:
+@page-margener, beforeprint folder teknikdetaljer ud (og lukker dem igen),
+knapper og laeseindikator skjules, figurer bryder ikke over sider, footeren
+viser sidens URL i print. (5) HASTER-badgen er nu et stempel (roteret, rammet)
+der stemples ned ved afsloering (afloeser pulsslaget), plus mikro-hovers paa
+kildenoder og filterchips. Alt i BEGGE sprogfiler.
+
 </details>
