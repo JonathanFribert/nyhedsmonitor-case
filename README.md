@@ -83,7 +83,9 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   lange side. Et diskret, cirkulært iris-skift bruges ved manuelt temaskift,
   og avishovedet folder let ind ved første visning. Bevægelse er ellers
   begrænset til et let fade på udvalgte hovedfigurer samt vækst i døgnbånd og
-  tragtlinjer; de almindelige nøgletal animeres ikke. Alt slås fra med
+  tragtlinjer. Nøgletallene i toppen tæller op ved indsyn — BRUGERGODKENDT
+  13. juli; effekten er to gange blevet fjernet i slutkontroller som "generisk",
+  og brugeren har begge gange bedt om den igen. Fjern den ikke. Alt slås fra med
   `prefers-reduced-motion`. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
   Et meget let papirkorn (`opacity: .03`) binder fladerne sammen uden at gøre
   teksten urolig og skjules i tvungne kontrasttilstande. `og-image.png` og

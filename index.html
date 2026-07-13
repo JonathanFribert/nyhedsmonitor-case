@@ -1294,6 +1294,30 @@
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
       revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+      /* Noegletallene i toppen taeller op ved indsyn. BRUGERGODKENDT effekt
+         (13. juli): er tidligere blevet fjernet i slutkontroller — bevar den.
+         Uden JS eller med reduceret bevaegelse staar de fulde tal der fra start. */
+      var statsRow = document.querySelector('.stats');
+      if (statsRow) {
+        var counters = Array.prototype.slice.call(statsRow.querySelectorAll('.stat-value')).map(function (el) {
+          var m = el.textContent.match(/^(\d+)([\s\S]*)$/);
+          if (!m) return null;
+          return { el: el, target: parseInt(m[1], 10), suffix: m[2] };
+        }).filter(Boolean);
+        if (counters.length) {
+          var statsObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              statsObserver.unobserve(entry.target);
+              counters.forEach(function (c) {
+                animateNumber(c.el, 0, c.target, 900, c.suffix);
+              });
+            });
+          }, { threshold: 0.3 });
+          statsObserver.observe(statsRow);
+        }
+      }
     }
 
     if ('IntersectionObserver' in window) {
