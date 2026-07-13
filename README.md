@@ -183,4 +183,13 @@ regressionsrunde endte med 26 beståede test. Papirkornet blev dæmpet, og
 temaskiftets iris, avishovedets fold og de sekventielle diagramanimationer blev
 bevaret som de få bevidste effekter.
 
+13. juli, pas 3-effekter (Claude, i BEGGE sprogfiler — hold dem i sync):
+figurtitlernes underlinje tegnes fra venstre ved afsløring, kildestatuslinjen
+i mail-mocken skriver sig selv som en telegraflinje (fuld tekst i aria-label
+og uden JS), og HASTER-blokken i journey-eksemplet giver ét enkelt pulsslag,
+aldrig i loop. Alt gated bag js-reveal + prefers-reduced-motion. Påstanden
+"97 af 100 kørsler uden fejl" er efterprøvet mod GitHub Actions (97 success,
+3 failure i seneste 100), og begge sider siger 26 test, hvilket matcher
+testsuiten (Ran 26 tests, OK).
+
 </details>
