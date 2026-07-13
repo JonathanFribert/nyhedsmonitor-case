@@ -39,6 +39,9 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   overvågning" (ikke "driftsmonitor") og "alvorsgrad" som feltnavn; undgå
   kancelli-vendinger og ordgentagelser (sprogpas 12. juli efter brugerens
   feedback om spøjst sprog).
+  De synlige emnelinjer er forenklede, læsevenlige eksempler. De bevarer
+  rækkefølgen af alvorsgrad, antal fund og driftsstatus, men gengiver ikke de
+  oprindelige forkortelser ordret.
 - **Design ("Morgenavisen", besluttet 13. juli 2026):** fladt redaktionelt
   udtryk uden skygger/pills/hover-løft, nu i avis-palet: varmt papir #FAF7F0,
   blæk #1B1A17, avisblå accent #1F4E79, rustrød #A6301F KUN som alarmfarve,
@@ -49,9 +52,9 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   Sektionslabels er nummererede (01–08) i mono. Newsreader til overskrifter,
   IBM Plex Mono til etiketter og tal, lys/mørk via `prefers-color-scheme` +
   manuel knap. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
-  `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; det bygges fra en
-  HTML-skabelon og renderes med headless Chrome — regenerér det, hvis titel,
-  nøgletal eller palet ændres.
+  `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; den redigerbare
+  kilde er `og-image.svg`. Regenerér PNG-filen, hvis titel, nøgletal eller palet
+  ændres.
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
   hero-eyebrow siger "Projektcase". Kontakt er
@@ -111,3 +114,7 @@ fuldt bevaret.
 interne driftsord i hovedsporet og omskrev driftsfejlenes løsningsbeskrivelser.
 Tekniske begreber blev enten forklaret eller flyttet til teknikfolden. De
 mindste diagramtekster blev samtidig gjort større på desktop.
+
+Et afsluttende læsbarhedspas erstattede de rå, forkortede emnelinjer med tydeligt
+markerede eksempler og ændrede blandt andet "fravalg", "samme kørsel" og
+"systemet set ovenfra" til mere almindeligt dansk.
