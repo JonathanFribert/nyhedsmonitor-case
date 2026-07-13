@@ -54,7 +54,12 @@ siden svarer 404, selv om push lykkes og koden er på main. Tjek med
   manuel knap. Alle tekst/baggrund-par er kontrolleret mod WCAG AA.
   `og-image.png` (1200x630) er delekortet til LinkedIn m.m.; den redigerbare
   kilde er `og-image.svg`. Regenerér PNG-filen, hvis titel, nøgletal eller palet
-  ændres.
+  ændres. På macOS køres disse to kommandoer i rækkefølge:
+
+  ```sh
+  qlmanage -t -s 1200 -o /tmp og-image.svg
+  sips -z 630 1200 /tmp/og-image.svg.png --out og-image.png
+  ```
 - **Identitet og kontakt (besluttet 12. juli 2026):** siden er starten på
   Jonathans portfolio. Topbar og `<title>` bærer navnet Jonathan Fribert;
   hero-eyebrow siger "Projektcase". Kontakt er

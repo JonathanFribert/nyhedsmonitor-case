@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- Skabelon til og-image.png (delekortet, 1200x630).
+     Regenerér PNG'en, hvis rubrik, nøgletal eller palet ændres:
+     chrome --headless --screenshot=og-image.png --window-size=1200,630 \
+            --hide-scrollbars --virtual-time-budget=8000 file://.../og-template.html -->
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: #FAF7F0;
+    color: #1B1A17;
+    font-family: "IBM Plex Mono", monospace;
+    padding: 46px 80px 0;
+    position: relative;
+  }
+  .masthead-line { display: flex; justify-content: space-between; color: #1B1A17; font-size: 19px; font-weight: 700; letter-spacing: 0.12em; }
+  .masthead-rule { height: 8px; border-top: 4px solid #1B1A17; border-bottom: 1px solid #1B1A17; margin-top: 10px; }
+  h1 {
+    font-family: "Newsreader", Georgia, serif; font-weight: 700;
+    font-size: 66px; line-height: 1.12; letter-spacing: -0.01em;
+    margin-top: 36px; max-width: 21ch;
+  }
+  hr { border: 0; border-top: 1px solid #E3DDD1; margin: 36px 0 0; }
+  .stats { display: flex; gap: 0; margin-top: 34px; }
+  .stat { width: 360px; }
+  .stat b { display: block; color: #1F4E79; font-size: 40px; font-weight: 700; }
+  .stat span { display: block; margin-top: 10px; color: #6B675E; font-size: 20px; font-weight: 500; }
+  .byline {
+    position: absolute; left: 80px; bottom: 38px;
+    color: #6B675E; font-size: 20px; font-weight: 600; letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+  <div class="masthead-line"><span>JONATHAN FRIBERT</span><span>PROJEKTCASE</span><span>JULI 2026</span></div>
+  <div class="masthead-rule"></div>
+  <h1>En nyhedsmonitor til en medarbejder på standby i&nbsp;Statsministeriet</h1>
+  <hr>
+  <div class="stats">
+    <div class="stat"><b>5 dage</b><span>fra idé til drift</span></div>
+    <div class="stat"><b>406</b><span>frasorteringer gennemgået manuelt</span></div>
+    <div class="stat"><b>&lt; 50 kr.</b><span>drift for hele ugen</span></div>
+  </div>
+  <div class="byline">PYTHON + AI I PRODUKTION</div>
+</body>
+</html>
