@@ -371,8 +371,13 @@
     background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--line) 55%, transparent) 0 2px, transparent 2px 9px);
   }
   .segment-copy-short { display: none; }
-  .now-marker { position: absolute; top: -3px; bottom: -3px; border-left: 2px solid var(--ink); opacity: 0.6; pointer-events: none; }
-  .now-label { color: var(--ink); font-weight: 700; }
+  .now-marker { position: absolute; top: -3px; bottom: -3px; border-left: 2px solid var(--ink); opacity: 0.45; pointer-events: none; }
+  .now-flag {
+    position: absolute; top: -1.55rem; padding: 0 0.35rem; border: 1px solid var(--ink);
+    border-radius: 3px; background: var(--ground); color: var(--ink);
+    font-family: var(--mono); font-size: 0.72rem; font-weight: 700; line-height: 1.5;
+    white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums;
+  }
 
   /* Architecture */
   .architecture {
@@ -489,7 +494,7 @@
   .mail-field b { color: var(--ink); }
   .mail-body { padding: 1.4rem; font-size: 1.04rem; }
   .mail-body p { margin: 0 0 0.8rem; }
-  .mail-footer { overflow-x: auto; border-top: 1px dashed var(--line); padding: 0.9rem 1.2rem; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+  .mail-footer { border-top: 1px dashed var(--line); padding: 0.9rem 1.2rem; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; }
   .alert-stack { display: grid; gap: 0.7rem; }
   .alert { border: 1px solid var(--line); border-radius: 4px; background: var(--surface); padding: 0.9rem 1rem; }
   .alert-type { color: var(--muted); font-size: 0.84rem; }
@@ -708,7 +713,7 @@
   "headline": "Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet",
   "inLanguage": "da",
   "datePublished": "2026-07-12",
-  "dateModified": "2026-07-13",
+  "dateModified": "2026-07-14",
   "mainEntityOfPage": "https://jonathanfribert.github.io/nyhedsmonitor-case/",
   "image": "https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png",
   "author": { "@type": "Person", "name": "Jonathan Fribert", "email": "mailto:fribert6@gmail.com", "url": "https://github.com/JonathanFribert" }
@@ -867,7 +872,7 @@
             <h3>Filtrering</h3>
             <div class="filters">
               <span class="filter">01 Ensartet format</span><span class="filter">02 Set før?</span>
-              <span class="filter">03 Nyt nok?</span><span class="filter">04 Om emnet?</span>
+              <span class="filter">03 Stadig aktuelt?</span><span class="filter">04 Om emnet?</span>
               <span class="filter">05 Godkendt kilde?</span><span class="filter">06 AI-vurdering</span>
             </div>
           </div>
@@ -923,7 +928,7 @@
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card">
           <p class="journey-label">2 · Faste kontroller</p>
-          <ul class="check-list"><li>Ikke set før</li><li>Nyt nok</li><li>Handler om Grønland</li><li>Officiel afsender</li></ul>
+          <ul class="check-list"><li>Ikke set før</li><li>Stadig aktuelt</li><li>Handler om Grønland</li><li>Officiel afsender</li></ul>
         </article>
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card ai-item">
@@ -994,7 +999,7 @@
           <div class="filter-count"><strong>189</strong><small>−12</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Nyt nok</b><span>gamle fund fjernet</span></div>
+          <div class="filter-stage"><b>Stadig aktuelt</b><span>for gammelt indhold fjernet</span></div>
           <div class="retention"><span style="width:9%"></span></div>
           <div class="filter-count"><strong>18</strong><small>−171</small></div>
         </div>
@@ -1120,9 +1125,9 @@
   <section class="section soft" id="efterskrift">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">Efterskrift · 13. juli 2026</p><h2>Status efter de første to døgn i drift</h2></div>
+        <div><p class="section-label">Efterskrift · opdateret 14. juli 2026</p><h2>Status efter de første tre døgn i drift</h2></div>
         <div class="intro delivery-intro">
-          <p>Siden idriftsættelsen den 11. juli har monitoren gennemført 100 kørsler, heraf 97 uden fejl. De tre fejl ramte kun systemets hukommelse mellem kørslerne, aldrig overvågningen eller mailene. Den eneste kildeændring er, at nyhedsdatabasen GDELT er slået fra. En manuel gennemgang af det indhold, som filtrene sorterede fra den 12.–13. juli, fandt ingen oversete relevante historier.</p>
+          <p>Siden idriftsættelsen den 11. juli har monitoren gennemført 145 kørsler, heraf 141 uden fejl. Alle fire fejl var af samme type: To kørsler forsøgte at gemme systemets hukommelse på samme tid, og gemningen fejlede. Overvågningen og mailene blev aldrig ramt. Den eneste kildeændring er, at nyhedsdatabasen GDELT er slået fra. En manuel gennemgang af det indhold, som filtrene sorterede fra den 12.–13. juli, fandt ingen oversete relevante historier.</p>
           <p>Efterskriftet opdateres med ugens samlede tal, når standbyperioden er slut.</p>
         </div>
       </div>
@@ -1239,35 +1244,37 @@
       syncTheme();
     }
 
-    /* "Nu"-viser: lodret markering i doegnbaandet ved aktuelt dansk klokkeslaet.
-       Information, ikke bevaegelse, saa den er uafhaengig af reduced motion. */
+    /* "Nu"-viser: lodret streg i doegnbaandet plus et altid synligt flag
+       med dansk klokkeslaet ned til sekundet. Information, ikke pynt, saa den
+       er uafhaengig af reduced motion. */
     var dayBand = document.querySelector('.day-band');
     if (dayBand) {
       try {
-        var parts = new Intl.DateTimeFormat('da-DK', { timeZone: 'Europe/Copenhagen', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
-        var hh = 0, mm = 0;
-        parts.forEach(function (p) {
-          if (p.type === 'hour') hh = +p.value;
-          if (p.type === 'minute') mm = +p.value;
-        });
-        var frac = (hh + mm / 60) / 24 * 100;
-        Array.prototype.forEach.call(dayBand.querySelectorAll('.band-track'), function (track) {
+        var isDa = document.documentElement.lang === 'da';
+        var nowFmt = new Intl.DateTimeFormat('da-DK', { timeZone: 'Europe/Copenhagen', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' });
+        var tracks = Array.prototype.slice.call(dayBand.querySelectorAll('.band-track'));
+        var marks = tracks.map(function (track) {
           var mark = document.createElement('span');
           mark.className = 'now-marker';
           mark.setAttribute('aria-hidden', 'true');
-          mark.style.left = frac + '%';
           track.appendChild(mark);
+          return mark;
         });
-        var axis = dayBand.querySelector('.band-axis');
-        var clearOfTicks = [0, 33.333, 70.833, 100].every(function (p) { return Math.abs(p - frac) > 7; });
-        if (axis && clearOfTicks && axis.lastElementChild) {
-          var lbl = document.createElement('span');
-          lbl.className = 'now-label';
-          lbl.textContent = (document.documentElement.lang === 'da' ? 'nu ' : 'now ') +
-            String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
-          lbl.style.left = frac + '%';
-          axis.insertBefore(lbl, axis.lastElementChild);
-        }
+        var flag = document.createElement('span');
+        flag.className = 'now-flag';
+        flag.setAttribute('aria-hidden', 'true');
+        if (tracks.length) tracks[0].appendChild(flag);
+        var tick = function () {
+          var v = {};
+          nowFmt.formatToParts(new Date()).forEach(function (p) { v[p.type] = p.value; });
+          var frac = ((+v.hour) + (+v.minute) / 60 + (+v.second) / 3600) / 24 * 100;
+          marks.forEach(function (m) { m.style.left = frac + '%'; });
+          flag.style.left = frac + '%';
+          flag.textContent = (isDa ? 'nu ' : 'now ') + v.hour + ':' + v.minute + ':' + v.second;
+          flag.style.transform = frac < 8 ? 'translateX(0)' : (frac > 92 ? 'translateX(-100%)' : 'translateX(-50%)');
+        };
+        tick();
+        setInterval(tick, 1000);
       } catch (e) {}
     }
 

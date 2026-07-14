@@ -241,4 +241,15 @@ sitemap.xml med hreflang-alternates + robots.txt; temaknappens ikon vipper
 ved hover. Revideret uden fund: ankre/id'er/aria-labelledby, dublerede id'er,
 overskriftshierarki (h1=1, ingen niveauspring), JSON-LD-parse, sitemap-XML.
 
+14. juli (Claude, efter brugerfeedback): (1) Nu-viseren har nu et ALTID
+synligt flag med sekundviser ("nu HH:MM:SS", dansk tid, tikker hvert sekund,
+kant-klemmes ved 0/24); den gamle akse-label med kollisionsvagt udgik.
+(2) "Nyt nok" erstattet med "Stadig aktuelt" i chips, tjekliste og tragt
+(EN: "Still current") efter feedback om internt sprog. (3) Mail-mockens
+kildelinje ombrydes i stedet for at klippe. (4) Efterskrift opdateret til
+145/141 koersler pr. 14. juli (fjerde fejl verificeret som samme state-race
+som de tre foerste); dateModified og sitemap fulgte med. OBS driftsnote:
+state-racet optraeder stadig (~3 %) trods adskilte tidsplaner — kendt,
+ufarligt for levering, men naevnes ved naeste efterskrift-opdatering.
+
 </details>

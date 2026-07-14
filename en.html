@@ -371,8 +371,13 @@
     background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--line) 55%, transparent) 0 2px, transparent 2px 9px);
   }
   .segment-copy-short { display: none; }
-  .now-marker { position: absolute; top: -3px; bottom: -3px; border-left: 2px solid var(--ink); opacity: 0.6; pointer-events: none; }
-  .now-label { color: var(--ink); font-weight: 700; }
+  .now-marker { position: absolute; top: -3px; bottom: -3px; border-left: 2px solid var(--ink); opacity: 0.45; pointer-events: none; }
+  .now-flag {
+    position: absolute; top: -1.55rem; padding: 0 0.35rem; border: 1px solid var(--ink);
+    border-radius: 3px; background: var(--ground); color: var(--ink);
+    font-family: var(--mono); font-size: 0.72rem; font-weight: 700; line-height: 1.5;
+    white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums;
+  }
 
   /* Architecture */
   .architecture {
@@ -489,7 +494,7 @@
   .mail-field b { color: var(--ink); }
   .mail-body { padding: 1.4rem; font-size: 1.04rem; }
   .mail-body p { margin: 0 0 0.8rem; }
-  .mail-footer { overflow-x: auto; border-top: 1px dashed var(--line); padding: 0.9rem 1.2rem; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+  .mail-footer { border-top: 1px dashed var(--line); padding: 0.9rem 1.2rem; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; }
   .alert-stack { display: grid; gap: 0.7rem; }
   .alert { border: 1px solid var(--line); border-radius: 4px; background: var(--surface); padding: 0.9rem 1rem; }
   .alert-type { color: var(--muted); font-size: 0.84rem; }
@@ -708,7 +713,7 @@
   "headline": "I built a news monitor for an employee at the Danish Prime Minister's Office",
   "inLanguage": "en",
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-13",
+  "dateModified": "2026-07-14",
   "mainEntityOfPage": "https://jonathanfribert.github.io/nyhedsmonitor-case/en.html",
   "image": "https://jonathanfribert.github.io/nyhedsmonitor-case/og-image-en.png",
   "author": { "@type": "Person", "name": "Jonathan Fribert", "email": "mailto:fribert6@gmail.com", "url": "https://github.com/JonathanFribert" }
@@ -867,7 +872,7 @@
             <h3>Filtering</h3>
             <div class="filters">
               <span class="filter">01 Standardised format</span><span class="filter">02 Seen before?</span>
-              <span class="filter">03 Recent enough?</span><span class="filter">04 On topic?</span>
+              <span class="filter">03 Still current?</span><span class="filter">04 On topic?</span>
               <span class="filter">05 Approved source?</span><span class="filter">06 AI assessment</span>
             </div>
           </div>
@@ -923,7 +928,7 @@
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card">
           <p class="journey-label">2 · Rule-based checks</p>
-          <ul class="check-list"><li>Not seen before</li><li>Recent enough</li><li>Concerns Greenland</li><li>Official source</li></ul>
+          <ul class="check-list"><li>Not seen before</li><li>Still current</li><li>Concerns Greenland</li><li>Official source</li></ul>
         </article>
         <div class="journey-arrow" aria-hidden="true">→</div>
         <article class="journey-card ai-item">
@@ -994,7 +999,7 @@
           <div class="filter-count"><strong>189</strong><small>−12</small></div>
         </div>
         <div class="filter-row">
-          <div class="filter-stage"><b>Recent enough</b><span>old findings removed</span></div>
+          <div class="filter-stage"><b>Still current</b><span>outdated findings removed</span></div>
           <div class="retention"><span style="width:9%"></span></div>
           <div class="filter-count"><strong>18</strong><small>−171</small></div>
         </div>
@@ -1120,9 +1125,9 @@
   <section class="section soft" id="efterskrift">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">Postscript · 13 July 2026</p><h2>Status after the first two days in operation</h2></div>
+        <div><p class="section-label">Postscript · updated 14 July 2026</p><h2>Status after the first three days in operation</h2></div>
         <div class="intro delivery-intro">
-          <p>Since deployment on 11 July, the monitor has completed 100 runs, 97 of them without errors. The three failures affected only the system's memory between runs, never the monitoring or the emails. The only source change is that the GDELT news database has been disabled. A manual review of the content filtered out on 12–13 July found no missed relevant stories.</p>
+          <p>Since deployment on 11 July, the monitor has completed 145 runs, 141 of them without errors. All four failures were of the same kind: two runs tried to save the system's memory at the same time, and the save failed. The monitoring and the emails were never affected. The only source change is that the GDELT news database has been disabled. A manual review of the content filtered out on 12–13 July found no missed relevant stories.</p>
           <p>This postscript will be updated with the full week's figures once the standby period ends.</p>
         </div>
       </div>
@@ -1239,35 +1244,37 @@
       syncTheme();
     }
 
-    /* "Nu"-viser: lodret markering i doegnbaandet ved aktuelt dansk klokkeslaet.
-       Information, ikke bevaegelse, saa den er uafhaengig af reduced motion. */
+    /* "Nu"-viser: lodret streg i doegnbaandet plus et altid synligt flag
+       med dansk klokkeslaet ned til sekundet. Information, ikke pynt, saa den
+       er uafhaengig af reduced motion. */
     var dayBand = document.querySelector('.day-band');
     if (dayBand) {
       try {
-        var parts = new Intl.DateTimeFormat('da-DK', { timeZone: 'Europe/Copenhagen', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
-        var hh = 0, mm = 0;
-        parts.forEach(function (p) {
-          if (p.type === 'hour') hh = +p.value;
-          if (p.type === 'minute') mm = +p.value;
-        });
-        var frac = (hh + mm / 60) / 24 * 100;
-        Array.prototype.forEach.call(dayBand.querySelectorAll('.band-track'), function (track) {
+        var isDa = document.documentElement.lang === 'da';
+        var nowFmt = new Intl.DateTimeFormat('da-DK', { timeZone: 'Europe/Copenhagen', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' });
+        var tracks = Array.prototype.slice.call(dayBand.querySelectorAll('.band-track'));
+        var marks = tracks.map(function (track) {
           var mark = document.createElement('span');
           mark.className = 'now-marker';
           mark.setAttribute('aria-hidden', 'true');
-          mark.style.left = frac + '%';
           track.appendChild(mark);
+          return mark;
         });
-        var axis = dayBand.querySelector('.band-axis');
-        var clearOfTicks = [0, 33.333, 70.833, 100].every(function (p) { return Math.abs(p - frac) > 7; });
-        if (axis && clearOfTicks && axis.lastElementChild) {
-          var lbl = document.createElement('span');
-          lbl.className = 'now-label';
-          lbl.textContent = (document.documentElement.lang === 'da' ? 'nu ' : 'now ') +
-            String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
-          lbl.style.left = frac + '%';
-          axis.insertBefore(lbl, axis.lastElementChild);
-        }
+        var flag = document.createElement('span');
+        flag.className = 'now-flag';
+        flag.setAttribute('aria-hidden', 'true');
+        if (tracks.length) tracks[0].appendChild(flag);
+        var tick = function () {
+          var v = {};
+          nowFmt.formatToParts(new Date()).forEach(function (p) { v[p.type] = p.value; });
+          var frac = ((+v.hour) + (+v.minute) / 60 + (+v.second) / 3600) / 24 * 100;
+          marks.forEach(function (m) { m.style.left = frac + '%'; });
+          flag.style.left = frac + '%';
+          flag.textContent = (isDa ? 'nu ' : 'now ') + v.hour + ':' + v.minute + ':' + v.second;
+          flag.style.transform = frac < 8 ? 'translateX(0)' : (frac > 92 ? 'translateX(-100%)' : 'translateX(-50%)');
+        };
+        tick();
+        setInterval(tick, 1000);
       } catch (e) {}
     }
 
