@@ -133,7 +133,9 @@ Når standbyperioden slutter og monitoren pensioneres:
    (OBS: uden `-R` tælles det forkerte repos kørsler — det er sket).
 2. **Case-briefens status** ændres fra drift til "Afsluttet efter planen
    [dato]" i begge sprogfiler. En case der slutter ryddeligt er et stærkt
-   signal; lad datoen stå.
+   signal; lad datoen stå. Statusfeltets grønne stempel (`.status-stamp`,
+   DA "I DRIFT" / EN "LIVE") skiftes samtidig til "AFSLUTTET" / "COMPLETED";
+   behold den grønne farve, afslutning efter planen er positiv status.
 3. **JSON-LD `dateModified`** og `sitemap.xml`-lastmod følger med.
 4. **Forsiden** (portfolio-repoet) synkroniseres: nøgletal i begge sprog,
    kicker til afsluttet form, `live-dot` fjernes — se forsidens README.
@@ -164,9 +166,13 @@ uden bevægelse for følsomme brugere. Plus ::selection i accentfarve. Fjerde pa
 Mekanik: uden valg følger siden systemet (media query); et klik sætter
 `data-theme` på `<html>` og gemmer i localStorage (læses af et lille
 head-script før første maling, så intet blink); vælges systemets eget tema,
-ryddes valget, og siden følger systemet igen. Dark-variablerne findes derfor
-BÅDE i media-queryen (gated med `:not([data-theme="light"])`) og duplikeret
-under `[data-theme="dark"]` — hold de to blokke i sync ved farveændringer.
+ryddes valget, og siden følger systemet igen. De mørke FARVEVÆRDIER er
+konsolideret (14/7) til én kilde: `--dark-*`-variablerne i `:root`. De to
+selektorer (media-queryen gated med `:not([data-theme="light"])` og
+`[data-theme="dark"]`) mapper begge de samme `--dark-*`-værdier — ret
+farver ét sted, i paletten. Mappingerne skal fortsat findes i begge blokke,
+men indeholder ingen hexkoder. Konsolideringen er pixel-verificeret identisk
+i alle fire tilstande (lys, system-mørk, tvunget mørk, tvunget lys).
 Knappen opdaterer også begge theme-color-metatags.
 
 Femte pas samme dag: mobilnavigationen blev gjort ikke-scrollende med tre
@@ -279,6 +285,21 @@ vaeret i monitor-workflowet fra foerste commit og er beviseligt utaet for
 koersler startet sekunder fra hinanden (kollisionen 14/7 kl. 03:31 skete MED
 laasen); kuren er merge-drivere i monitor-repoet (union for jsonl-logs,
 "tag den rebasede koersels version" for seen.json) og ligger som diff, der
-afventer groent lys.
+afventer groent lys. Kuren fik groent lys senere samme dag, er pushet
+(a989d83) og foerste koersel paa den var groen.
+
+14. juli, pas 3 (Claude, fem bestilte rettelser): (1) Datid rettet til nutid
+i case-briefens status ("I drift siden 11. juli 2026") og systemdiagrammets
+figcaption, saa de ikke modsiger efterskriftets aktive drift. (2) Moerk
+palet konsolideret til een vaerdikilde (--dark-* i :root; begge selektorer
+mapper samme saet) — pixel-verificeret identisk i fire tilstande, se
+temaafsnittet. (3) .quick-step fik hover (accent-soft baggrundsskift som
+.filter-row, i samme hover:hover-gate). (4) Groent I DRIFT/LIVE-stempel
+(.status-stamp, aria-hidden) ved statusfeltet i case-briefen, samme
+stempelsprog som HASTER men groen = positiv status; skiftes ved ugens
+afslutning, se tjeklisten. (5) Diskret spalte-streg (masthead-dobbeltstregen
+paa hoejkant, daempet linjefarve via color-mix) i hoejre margen af
+.prose/.delivery-intro i #problem og #efterskrift; fjernes under
+tvangsfarver/hoej kontrast og i print ligesom papirkornet.
 
 </details>

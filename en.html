@@ -49,43 +49,62 @@
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+    /* Moerk palet: EN kilde til sandhed. Ret farver HER; de to selektorer
+       nedenfor (system-moerk uden tvunget lys, og tvunget moerk) mapper
+       begge de samme --dark-*-vaerdier. */
+    --dark-ground: #141210;
+    --dark-surface: #1D1A16;
+    --dark-surface-soft: #24201B;
+    --dark-line: #3A342C;
+    --dark-ink: #ECE7DC;
+    --dark-muted: #A39D8F;
+    --dark-accent: #8FB4D9;
+    --dark-accent-strong: #B0CCE7;
+    --dark-accent-soft: #1E2B39;
+    --dark-red: #E08B7A;
+    --dark-red-soft: #35211C;
+    --dark-amber: #D9AC5E;
+    --dark-green: #8CC2A0;
+    --dark-green-soft: #1F2E23;
+    --dark-grain-blend: screen;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #141210;
-      --surface: #1D1A16;
-      --surface-soft: #24201B;
-      --line: #3A342C;
-      --ink: #ECE7DC;
-      --muted: #A39D8F;
-      --accent: #8FB4D9;
-      --accent-strong: #B0CCE7;
-      --accent-soft: #1E2B39;
-      --red: #E08B7A;
-      --red-soft: #35211C;
-      --amber: #D9AC5E;
-      --green: #8CC2A0;
-      --green-soft: #1F2E23;
-      --grain-blend: screen;
+      --ground: var(--dark-ground);
+      --surface: var(--dark-surface);
+      --surface-soft: var(--dark-surface-soft);
+      --line: var(--dark-line);
+      --ink: var(--dark-ink);
+      --muted: var(--dark-muted);
+      --accent: var(--dark-accent);
+      --accent-strong: var(--dark-accent-strong);
+      --accent-soft: var(--dark-accent-soft);
+      --red: var(--dark-red);
+      --red-soft: var(--dark-red-soft);
+      --amber: var(--dark-amber);
+      --green: var(--dark-green);
+      --green-soft: var(--dark-green-soft);
+      --grain-blend: var(--dark-grain-blend);
     }
   }
   :root[data-theme="dark"] {
-    --ground: #141210;
-    --surface: #1D1A16;
-    --surface-soft: #24201B;
-    --line: #3A342C;
-    --ink: #ECE7DC;
-    --muted: #A39D8F;
-    --accent: #8FB4D9;
-    --accent-strong: #B0CCE7;
-    --accent-soft: #1E2B39;
-    --red: #E08B7A;
-    --red-soft: #35211C;
-    --amber: #D9AC5E;
-    --green: #8CC2A0;
-    --green-soft: #1F2E23;
-    --grain-blend: screen;
+    --ground: var(--dark-ground);
+    --surface: var(--dark-surface);
+    --surface-soft: var(--dark-surface-soft);
+    --line: var(--dark-line);
+    --ink: var(--dark-ink);
+    --muted: var(--dark-muted);
+    --accent: var(--dark-accent);
+    --accent-strong: var(--dark-accent-strong);
+    --accent-soft: var(--dark-accent-soft);
+    --red: var(--dark-red);
+    --red-soft: var(--dark-red-soft);
+    --amber: var(--dark-amber);
+    --green: var(--dark-green);
+    --green-soft: var(--dark-green-soft);
+    --grain-blend: var(--dark-grain-blend);
   }
 
   * { box-sizing: border-box; }
@@ -280,10 +299,10 @@
   .button.secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .brand-mark,
-    :root:not([data-theme="light"]) .hero-actions .button:not(.secondary) { color: #141210; }
+    :root:not([data-theme="light"]) .hero-actions .button:not(.secondary) { color: var(--dark-ground); }
   }
   :root[data-theme="dark"] .brand-mark,
-  :root[data-theme="dark"] .hero-actions .button:not(.secondary) { color: #141210; }
+  :root[data-theme="dark"] .hero-actions .button:not(.secondary) { color: var(--dark-ground); }
 
   .case-brief { align-self: start; border-top: 4px solid var(--accent); border-bottom: 1px solid var(--line); padding: 1.2rem 0; }
   .case-brief-title { margin: 0 0 1rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 700; }
@@ -291,6 +310,12 @@
   .case-brief dl > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.8rem; border-top: 1px solid var(--line); padding: 0.65rem 0; }
   .case-brief dt { color: var(--muted); font-family: var(--mono); font-size: 0.78rem; }
   .case-brief dd { margin: 0; font-size: 0.92rem; line-height: 1.45; }
+  .status-stamp {
+    display: inline-block; border: 2px solid var(--green); border-radius: 2px;
+    color: var(--green); padding: 0.05rem 0.5rem; margin: 0.15rem 0 0 0.1rem;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em;
+    transform: rotate(-2deg);
+  }
   .case-disclaimer { margin: 0.9rem 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
 
   .stats {
@@ -347,6 +372,21 @@
     font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 1.7rem); font-style: italic; line-height: 1.4;
   }
   .prose { margin-top: 1.3rem; }
+  /* Spalte-streg i avisens aand: masthead-dobbeltstregen paa hoejkant i
+     hoejre margen af broedtekstblokkene i 01 og efterskriftet. Ligger i
+     baggrunden med daempet linjefarve; padding sikrer luft til teksten,
+     og under tvangsfarver/hoej kontrast samt i print fjernes den ligesom
+     papirkornet. */
+  #problem .prose, #problem .delivery-intro,
+  #efterskrift .prose, #efterskrift .delivery-intro {
+    padding-right: 1.5rem;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--line) 55%, transparent), color-mix(in srgb, var(--line) 55%, transparent)),
+      linear-gradient(color-mix(in srgb, var(--line) 55%, transparent), color-mix(in srgb, var(--line) 55%, transparent));
+    background-position: right 0 top 0, right 0.3rem top 0;
+    background-repeat: no-repeat;
+    background-size: 2px 100%, 1px 100%;
+  }
   .prose p { max-width: 58rem; margin: 0 0 1rem; }
 
   /* Day band */
@@ -452,6 +492,8 @@
     .filter-row { transition: background-color 0.18s ease; }
     .filter-row:hover { background: var(--accent-soft); }
     .filter-row.final:hover { background: var(--red-soft); }
+    .quick-step { transition: background-color 0.18s ease; }
+    .quick-step:hover { background: var(--accent-soft); }
   }
   .filter-note { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
   .note-card { border-top: 2px solid var(--line); padding-top: 0.8rem; }
@@ -671,6 +713,8 @@
   }
   @media (forced-colors: active), (prefers-contrast: more) {
     html { background-image: none; }
+    #problem .prose, #problem .delivery-intro,
+    #efterskrift .prose, #efterskrift .delivery-intro { background-image: none; }
   }
   .no-js .reading-progress { display: none; }
   @media (prefers-reduced-motion: reduce) {
@@ -694,6 +738,8 @@
     h2, h3 { break-after: avoid; }
     .print-only { display: inline; }
     html { background-image: none; }
+    #problem .prose, #problem .delivery-intro,
+    #efterskrift .prose, #efterskrift .delivery-intro { background-image: none; }
     body { background: white; color: #1B1A17; }
     .section { break-inside: avoid; }
   }
@@ -768,7 +814,7 @@
         <dl>
           <div><dt>User</dt><dd>An employee at the Danish Prime Minister's Office</dd></div>
           <div><dt>Period</dt><dd>One demanding week on standby</dd></div>
-          <div><dt>Status</dt><dd>Deployed on 11 July 2026; limited to the project week</dd></div>
+          <div><dt>Status</dt><dd>In operation since 11 July 2026; limited to the project week <b class="status-stamp" aria-hidden="true">LIVE</b></dd></div>
           <div><dt>Focus</dt><dd>The United States and the Kingdom of Denmark</dd></div>
           <div><dt>Need</dt><dd>Quick detection without having to monitor the news continuously</dd></div>
         </dl>
@@ -894,7 +940,7 @@
             </ul>
           </div>
         </div>
-        <figcaption class="diagram-caption">The solution was designed for one demanding week of operation. Each time the program starts, it retrieves and filters new content. It then delivers relevant findings or holds them for the morning email, while remembering what it has already processed.</figcaption>
+        <figcaption class="diagram-caption">The solution is designed for one demanding week of operation. Each time the program starts, it retrieves and filters new content. It then delivers relevant findings or holds them for the morning email, while remembering what it has already processed.</figcaption>
         <div class="legend" aria-label="Colour key"><span><i></i>Data and filtering</span><span><i class="delivery"></i>Delivery</span><span><i class="alert-color"></i>Requires attention</span><span><i class="operations"></i>Operations and safeguards</span></div>
       </figure>
 
