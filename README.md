@@ -121,6 +121,23 @@ da bygningen manuelt: `gh api -X POST repos/JonathanFribert/nyhedsmonitor-case/p
 - **Sprogversioner:** `index.html` er dansk, `en.html` er engelsk. De skal have
   samme struktur, faktatal og sektioner. Begge sider har canonical- og
   `hreflang`-links, og sprogskiftet forsøger at bevare den aktuelle sektion.
+  Avishovedets navn linker til forsiden: DA-siden til
+  `https://jonathanfribert.github.io/`, EN-siden til `.../en.html`.
+
+## Ugens afslutning (tjekliste, godkendt af Jonathan 14. juli)
+
+Når standbyperioden slutter og monitoren pensioneres:
+
+1. **Efterskriftet** opdateres med ugens SAMLEDE tal i begge sprogfiler.
+   Tallene efterprøves først mod `gh run list -R JonathanFribert/nyhedsmonitor`
+   (OBS: uden `-R` tælles det forkerte repos kørsler — det er sket).
+2. **Case-briefens status** ændres fra drift til "Afsluttet efter planen
+   [dato]" i begge sprogfiler. En case der slutter ryddeligt er et stærkt
+   signal; lad datoen stå.
+3. **JSON-LD `dateModified`** og `sitemap.xml`-lastmod følger med.
+4. **Forsiden** (portfolio-repoet) synkroniseres: nøgletal i begge sprog,
+   kicker til afsluttet form, `live-dot` fjernes — se forsidens README.
+5. Delekortene regenereres kun, hvis tallene på dem ændrer sig.
 
 ## Historik
 
@@ -251,5 +268,17 @@ kildelinje ombrydes i stedet for at klippe. (4) Efterskrift opdateret til
 som de tre foerste); dateModified og sitemap fulgte med. OBS driftsnote:
 state-racet optraeder stadig (~3 %) trods adskilte tidsplaner — kendt,
 ufarligt for levering, men naevnes ved naeste efterskrift-opdatering.
+
+14. juli, pas 2 (Claude, paa Jonathans bestilling): (1) Forsiden fik fuld
+engelsk udgave (en.html i portfolio-repoet) med sprogskifte i topbaren;
+casens EN-avishoved linker nu til forsidens en.html, DA fortsat til roden.
+(2) Ny sektion "Ugens afslutning (tjekliste)" ovenfor — efterskriftets
+sluttal OG case-briefens skift til "Afsluttet efter planen" er godkendt af
+Jonathan. (3) State-racet analyseret til bunds: GitHubs concurrency-laas har
+vaeret i monitor-workflowet fra foerste commit og er beviseligt utaet for
+koersler startet sekunder fra hinanden (kollisionen 14/7 kl. 03:31 skete MED
+laasen); kuren er merge-drivere i monitor-repoet (union for jsonl-logs,
+"tag den rebasede koersels version" for seen.json) og ligger som diff, der
+afventer groent lys.
 
 </details>
