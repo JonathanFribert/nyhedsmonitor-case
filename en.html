@@ -25,6 +25,7 @@
 <link rel="alternate" hreflang="en" href="https://jonathanfribert.github.io/nyhedsmonitor-case/en.html">
 <link rel="alternate" hreflang="x-default" href="https://jonathanfribert.github.io/nyhedsmonitor-case/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231F4E79%22/><text x=%2232%22 y=%2243%22 text-anchor=%22middle%22 font-family=%22Menlo,monospace%22 font-size=%2228%22 font-weight=%22700%22 fill=%22white%22>JF</text></svg>">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&amp;family=IBM+Plex+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet">
@@ -1274,7 +1275,11 @@
           flag.style.transform = frac < 8 ? 'translateX(0)' : (frac > 92 ? 'translateX(-100%)' : 'translateX(-50%)');
         };
         tick();
-        setInterval(tick, 1000);
+        var nowTimer = setInterval(tick, 1000);
+        document.addEventListener('visibilitychange', function () {
+          clearInterval(nowTimer);
+          if (!document.hidden) { tick(); nowTimer = setInterval(tick, 1000); }
+        });
       } catch (e) {}
     }
 
