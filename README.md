@@ -140,6 +140,32 @@ Når standbyperioden slutter og monitoren pensioneres:
 4. **Forsiden** (portfolio-repoet) synkroniseres: nøgletal i begge sprog,
    kicker til afsluttet form, `live-dot` fjernes — se forsidens README.
 5. Delekortene regenereres kun, hvis tallene på dem ændrer sig.
+6. **Skærmbillede som bevis** (godkendt af Jonathan 15. juli): tag ét ægte
+   skærmbillede af `gh run list -R JonathanFribert/nyhedsmonitor --limit 20`
+   (terminal, grønne kørsler) eller healthchecks-historikken, og sæt det ind i
+   sektion 07 eller teknik-folden i begge sprogfiler med dansk/engelsk alt-tekst.
+   Kørselslisten indeholder ingen modtagernavne. Komprimér til web (maks ~150 kB).
+
+### Klargjorte tekstudkast til flippet (indsæt tal, søg/erstat)
+
+Case-brief status (DA/EN):
+
+    I drift siden 11. juli 2026; tidsafgrænset til projektugen
+    →  Afsluttet efter planen [DATO]. 2026 — i drift 11.–[SLUTDATO]. juli
+    In operation since 11 July 2026; limited to the project week
+    →  Completed as planned on [DATE] July 2026 — live 11–[END DATE] July
+
+Stempel: `.status-stamp` DA "I DRIFT" → "AFSLUTTET", EN "LIVE" → "COMPLETED"
+(grøn farve beholdes).
+
+Efterskrift-sluttal (efterprøv med `gh run list -R JonathanFribert/nyhedsmonitor`):
+
+    [ANTAL KØRSLER] kørsler i alt, [ANTAL FEJL] fejl ([FEJLPROCENT] % fejlfri)
+    [ANTAL MAILS] leverede mails, heraf [ANTAL HASTE] hastemails
+    Drop-audit: [ANTAL DROPS] frasorterede fund gennemgået, [ANTAL MISS] ægte miss
+
+Efterskrift-rubrikken "Status efter de første tre døgn i drift" ændres til
+"Sådan endte ugen" / EN "How the week ended".
 
 ## Historik
 
