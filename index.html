@@ -1427,7 +1427,7 @@
               if (!entry.isIntersecting) return;
               statsObserver.unobserve(entry.target);
               counters.forEach(function (c) {
-                animateNumber(c.el, 0, c.target, 900, c.suffix);
+                animateNumber(c.el, 0, c.target, 1500, c.suffix);
               });
             });
           }, { threshold: 0.3 });
