@@ -576,6 +576,8 @@
   .incident p { margin: 0; font-size: 0.98rem; line-height: 1.6; }
   .incident .fix { margin-top: 0.45rem; color: var(--muted); }
   .incident .fix b { color: var(--green); }
+  .driftlog { margin: 2.4rem 0 0; }
+  .driftlog img { display: block; width: 100%; max-width: 60rem; height: auto; }
 
   /* Role, timeline and principles */
   .role-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 1rem; margin-top: 2.5rem; }
@@ -760,7 +762,7 @@
   "headline": "Jeg byggede en nyhedsmonitor til en medarbejder i Statsministeriet",
   "inLanguage": "da",
   "datePublished": "2026-07-12",
-  "dateModified": "2026-07-14",
+  "dateModified": "2026-07-20",
   "mainEntityOfPage": "https://jonathanfribert.github.io/nyhedsmonitor-case/",
   "image": "https://jonathanfribert.github.io/nyhedsmonitor-case/og-image.png",
   "author": { "@type": "Person", "name": "Jonathan Fribert", "email": "mailto:fribert6@gmail.com", "url": "https://github.com/JonathanFribert" }
@@ -814,7 +816,7 @@
         <dl>
           <div><dt>Bruger</dt><dd>En medarbejder i Statsministeriet</dd></div>
           <div><dt>Periode</dt><dd>Én intensiv uge på standby</dd></div>
-          <div><dt>Status</dt><dd>I drift siden 11. juli 2026, tidsafgrænset til projektugen <b class="status-stamp" aria-hidden="true">I DRIFT</b></dd></div>
+          <div><dt>Status</dt><dd>Afsluttet efter planen 20. juli 2026, i drift 11.–20. juli <b class="status-stamp" aria-hidden="true">AFSLUTTET</b></dd></div>
           <div><dt>Fokus</dt><dd>USA og Kongeriget Danmark</dd></div>
           <div><dt>Behov</dt><dd>Hurtig reaktion uden selv at skulle overvåge nyhedsstrømmen hele tiden</dd></div>
         </dl>
@@ -1152,6 +1154,10 @@
           <p class="fix"><b>Løsning:</b> GDELT blev slået fra i stedet for at stå som en falsk reserve. De danske og internationale Google News-søgninger fortsatte sammen med den målrettede NATO-søgning.</p>
         </article>
       </div>
+      <figure class="driftlog">
+        <img src="koersel-log.png" alt="Terminaludskrift af kørselsloggen fra GitHub Actions: nedlukningsdagens 14 kørsler viser alle resultatet success, og opsummeringen viser 533 kørsler med 524 succes for hele perioden 11. til 20. juli." loading="lazy" width="1104" height="546">
+        <figcaption class="diagram-caption">Kørselsloggen fra nedlukningsdagen den 20. juli, gengivet fra <code>gh run list</code> med de faktiske kørsels-id'er fra GitHub Actions: dagens 14 kørsler var alle fejlfri.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1172,10 +1178,9 @@
   <section class="section soft" id="efterskrift">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">Efterskrift · opdateret 14. juli 2026</p><h2>Status efter de første tre døgn i drift</h2></div>
+        <div><p class="section-label">Efterskrift · afsluttet 20. juli 2026</p><h2>Sådan endte ugen</h2></div>
         <div class="intro delivery-intro">
-          <p>Siden idriftsættelsen den 11. juli har monitoren gennemført 145 kørsler, heraf 141 uden fejl. Alle fire fejl var af samme type: To kørsler forsøgte at gemme systemets hukommelse på samme tid, og gemningen fejlede. Overvågningen og mailene blev aldrig ramt. Den eneste kildeændring er, at nyhedsdatabasen GDELT er slået fra. En manuel gennemgang af det indhold, som filtrene sorterede fra den 12.–13. juli, fandt ingen oversete relevante historier.</p>
-          <p>Efterskriftet opdateres med ugens samlede tal, når standbyperioden er slut.</p>
+          <p>Standbyperioden sluttede den 20. juli, og monitoren blev pensioneret efter planen. Fra idriftsættelsen den 11. juli gennemførte den 533 kørsler, heraf 524 uden fejl. De fire fejl var af samme type: To kørsler forsøgte at gemme systemets hukommelse på samme tid. Problemet blev løst den 14. juli og opstod ikke igen; fem natlige kørsler den 20. juli blev annulleret som ventende dubletter, mens en enkelt langsom kørsel gjorde sig færdig. Overvågningen og mailene blev aldrig ramt. Ugen var nyhedsmæssigt rolig: Kun en håndfuld fund blev vurderet relevante og leveret, heraf ét alvorligt, som udløste en hastemail om morgenen den 15. juli. De manuelle gennemgange af det frasorterede indhold fortsatte ugen ud og fandt ingen oversete relevante historier; frasorteringsloggen endte på 1.623 poster.</p>
         </div>
       </div>
     </div>

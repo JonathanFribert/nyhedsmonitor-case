@@ -576,6 +576,8 @@
   .incident p { margin: 0; font-size: 0.98rem; line-height: 1.6; }
   .incident .fix { margin-top: 0.45rem; color: var(--muted); }
   .incident .fix b { color: var(--green); }
+  .driftlog { margin: 2.4rem 0 0; }
+  .driftlog img { display: block; width: 100%; max-width: 60rem; height: auto; }
 
   /* Role, timeline and principles */
   .role-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 1rem; margin-top: 2.5rem; }
@@ -760,7 +762,7 @@
   "headline": "I built a news monitor for an employee at the Danish Prime Minister's Office",
   "inLanguage": "en",
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-14",
+  "dateModified": "2026-07-20",
   "mainEntityOfPage": "https://jonathanfribert.github.io/nyhedsmonitor-case/en.html",
   "image": "https://jonathanfribert.github.io/nyhedsmonitor-case/og-image-en.png",
   "author": { "@type": "Person", "name": "Jonathan Fribert", "email": "mailto:fribert6@gmail.com", "url": "https://github.com/JonathanFribert" }
@@ -814,7 +816,7 @@
         <dl>
           <div><dt>User</dt><dd>An employee at the Danish Prime Minister's Office</dd></div>
           <div><dt>Period</dt><dd>One demanding week on standby</dd></div>
-          <div><dt>Status</dt><dd>In operation since 11 July 2026; limited to the project week <b class="status-stamp" aria-hidden="true">LIVE</b></dd></div>
+          <div><dt>Status</dt><dd>Completed as planned on 20 July 2026; live 11–20 July <b class="status-stamp" aria-hidden="true">COMPLETED</b></dd></div>
           <div><dt>Focus</dt><dd>The United States and the Kingdom of Denmark</dd></div>
           <div><dt>Need</dt><dd>Quick detection without having to monitor the news continuously</dd></div>
         </dl>
@@ -1152,6 +1154,10 @@
           <p class="fix"><b>Solution:</b> GDELT was disabled instead of being presented as a fallback that was not actually available. The Danish and international Google News searches continued alongside the targeted NATO search.</p>
         </article>
       </div>
+      <figure class="driftlog">
+        <img src="koersel-log.png" alt="Terminal output of the GitHub Actions run log (labels in Danish): all 14 runs on the shutdown day show the result success, and the summary line shows 533 runs with 524 successes for the whole period 11 to 20 July." loading="lazy" width="1104" height="546">
+        <figcaption class="diagram-caption">The run log from the shutdown day on 20 July, reproduced from <code>gh run list</code> with the actual run ids from GitHub Actions: all 14 runs that day completed without errors.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1172,10 +1178,9 @@
   <section class="section soft" id="efterskrift">
     <div class="shell">
       <div class="section-heading compact">
-        <div><p class="section-label">Postscript · updated 14 July 2026</p><h2>Status after the first three days in operation</h2></div>
+        <div><p class="section-label">Postscript · concluded 20 July 2026</p><h2>How the week ended</h2></div>
         <div class="intro delivery-intro">
-          <p>Since deployment on 11 July, the monitor has completed 145 runs, 141 of them without errors. All four failures were of the same kind: two runs tried to save the system's memory at the same time, and the save failed. The monitoring and the emails were never affected. The only source change is that the GDELT news database has been disabled. A manual review of the content filtered out on 12–13 July found no missed relevant stories.</p>
-          <p>This postscript will be updated with the full week's figures once the standby period ends.</p>
+          <p>The standby period ended on 20 July, and the monitor was retired as planned. From deployment on 11 July it completed 533 runs, 524 of them without errors. All four failures were of the same kind: two runs tried to save the system's memory at the same time. The problem was fixed on 14 July and never recurred; five night-time runs on 20 July were cancelled as queued duplicates while a single slow run finished. The monitoring and the emails were never affected. The week itself was quiet: only a handful of findings were judged relevant and delivered, including one high-severity finding that triggered an urgent alert on the morning of 15 July. The manual reviews of the filtered-out content continued through the week and found no missed relevant stories; the audit log ended at 1,623 entries.</p>
         </div>
       </div>
     </div>
